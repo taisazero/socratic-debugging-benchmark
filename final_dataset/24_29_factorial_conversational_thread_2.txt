@@ -1,0 +1,82 @@
+<problem>
+Write a function `factorial(n:int) -> int` that computes the factorial n! of a natural number n, which is defined mathematically as:
+
+$0! = 1$
+$n! = n \times (n - 1)!$
+
+Additionally, if the input integer n is negative the function should return 0.
+
+## Example Cases:
+```
+factorial(-1) => 0
+factorial(0) => 1
+factorial(1) => 1
+factorial(2) => 2
+factorial(3) => 6
+factorial(4) => 24
+factorial(5) => 120
+```
+</problem>
+<bug_code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                fact = fact * i
+7.        return fact
+</bug_code>
+<bug_desc>
+On line 6, `fact` is multiplied with 0 in the first iteration of the for loop. Consequently, at every iteration fact stays equal with 0 instead of being updated to be equal with factorial of `(i + 1)`. Therefore, the function will return 0, irrespective of n
+</bug_desc>
+<bug_fixes>
+Replace `i` with `(i + 1)` in line 6.
+Replace `range(n)` with `range(1, n + 1)` in line 5.
+</bug_fixes>
+<unit_tests>
+assert factorial(-1) == 0
+assert factorial(0) == 1
+assert factorial(1) == 1
+assert factorial(2) == 2
+assert factorial(3) == 6
+assert factorial(4) == 24
+assert factorial(5) == 120
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I implemented the factorial function but it doesn’t work and I do not know why. Can you help?
+Assistant: Sure. Can you tell me for what values of `n` it fails and what values it returns in those cases?
+User: For n = 1 or larger it returns the same value, 0.
+Assistant: Let’s see what happens when `n` is 1. What is the first value that is assigned to variable `i` in line 5?
+	<alt>Let’s see what happens when `n` is 1. Before line 6 is evaluated in the first iteration of the for loop, what are the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. Can you insert a new line between lines 5 and 6 that prints the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. What does `range(n)` do when `n` is 1?
+	<alt>Can you tell me what `range(n)` does?
+User: Oh! `i` is not declared before the for loop is created, maybe that causes this issue.
+Assistant: Let's examine what happens in this case. Open the Python shell and type `[i for i in range(1)]`. What do you see?
+	<alt>Let's investigate this further. Open the Python shell and type `for i in range(1): print(i)`. Press `Enter` twice to execute. What do you see?
+User: I see that `i` is not declared before the for loop is created. Yet the list comprehension `[i for i in range(1)]` returns `[0]`. So the issue is not with initializing `i` before the for loop.
+	<alt>I see a `[0]` in the list comprehension `[i for i in range(1)]`. So the issue is not with initializing `i` before the for loop but rather with the first value of `i` in the for loop. It is not 1 but 0 so `fact` will always be 0.
+Assistant: Good. Let's take a closer look. What is the first value of `i` in the for loop?
+	<alt>Correct. What do you notice about the first value of `i` in the for loop?
+	<alt>Notice that the value of `i` in the first iteration of the for loop is 0. How do you think this affects the value of `fact`?
+User: I see. The value of `i` in the first iteration of the for loop is 0. So `fact` will always be 0 because the first value of `fact = 1 * 0` is 0. Then, `fact` will be `0 * 1` in the second iteration of the for loop, and so on.
+Assistant: Good! How can we fix this issue?
+	<alt>Good. Now, what does a correct factorial sequence look like for `n=4`?
+User: I think we can fix this by changing the range of `i` to `range(1, n + 1)`.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(1, n + 1):
+6.                fact = fact * i
+7.        return fact
+</code>
+Assistant: Good! Let's test it. What is the factorial of 5?
+User: The factorial of 5 is 120. It works!
+Assistant: I am glad I could help. If you have any other questions, feel free to ask me.
+User: Thank you!
+</dialogue>

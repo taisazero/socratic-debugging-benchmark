@@ -1,0 +1,86 @@
+<problem>
+The four compass points can be abbreviated by single-letter strings as “N”, “E”, “S”, and “W”. Write a function `turn_clockwise (compass_point:str)` that takes one of these four compass points as its parameter, and returns the next compass point in the clockwise direction. If `compass_point` has another value that's distinct from the four compass points listed earlier, return the value None.
+
+## Example Cases:
+```
+turn_clockwise("N") => "E"
+turn_clockwise("W") => "N"
+turn_clockwise("S") => "W"
+turn_clockwise("E") => "S"
+turn_clockwise(42) => None
+turn_clockwise("rubbish") => None
+```
+</problem>
+<bug_code>
+1. def turn_clockwise(compass_point):
+2.    if compass_point = "N":
+3.        return "E"
+4.    elif compass_point = "E":
+5.        return "S"
+6.    elif compass_point = "S":
+7.        return "W"
+8.    elif compass_point = "W":
+9.        return "N"
+10.    else:
+11.        return None
+</bug_code>
+<bug_desc>
+There are syntax errors on lines 2, 4, 6, and 8.
+</bug_desc>
+<bug_fixes>
+Replace `=` with `==` on lines 2, 4, 6, and 8.
+</bug_fixes>
+<unit_tests>
+assert turn_clockwise("N") == "E"
+assert turn_clockwise("W") == "N" 
+assert turn_clockwise("S") == "W"
+assert turn_clockwise("E") == "S"
+assert turn_clockwise(42) == None
+assert turn_clockwise("rubbish") == None
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I am having trouble with the code can you help me? It's throwing an error.
+Assistant: What is the error that you observe?
+	<alt>Let's start with a warm-up exercise. How do you assign the value "N" to a variable `compass_point`?
+	<alt>Can you describe what your code is trying to do?
+User: I have a syntax error on line 2. I'm not sure why.
+	<alt>The terminal says "SyntaxError: invalid syntax"
+Assistant: Can you describe what you are trying to do on line 2?
+	<alt>Ah. Can you show me how you would assign the value "N" to a variable `compass_point`?
+	<alt>What operator do you use to assign a value?
+	<alt>What operator do you use to check for equality?
+	<alt>Can you show me how you would assign the value 1 to a variable `x`?
+User: I am trying to check if `compass_point` is equal to "N"
+Assistant: What operator do you use to check for equality?
+	<alt>Ah. Can you show me how you would assign the value "N" to a variable `compass_point`?
+	<alt>What operator do you use to assign a value?
+User: I use the `=` operator to check for equality.
+	<alt>Oh! I should be using `==` instead of `=` to check equality
+Assistant: Ah. Can you show me how you would assign the value "N" to a variable `compass_point`?
+	<alt>Can you show me how you would assign the value 1 to a variable `x`?
+	<alt>What operator do you use to assign a value?
+User: I would use `compass_point = "N"`
+	<alt>Oh! I should be using `==` instead of `=` to check equality
+Assistant: Are you sure that you can use the same operator `=` for assignment and to check for equality?
+User: Oh! I checked the documentation. I should be using `==` instead of `=` to check equality. Let me edit my code.
+	<alt>What operator should I use?
+<code>
+1. def turn_clockwise(compass_point):
+2.    if compass_point == "N":
+3.        return "E"
+4.    elif compass_point == "E":
+5.        return "S"
+6.    elif compass_point == "S":
+7.        return "W"
+8.    elif compass_point == "W":
+9.        return "N"
+10.   else:
+11.        return None
+
+</code>
+Assistant: Good. Let me know if you have any other questions!
+User: Thank you so much for your help!
+</dialogue>

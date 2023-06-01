@@ -1,0 +1,79 @@
+<problem>
+Create a function `fibonacci(n:int)` that takes in a parameter `n`, an integer representing the number of terms in the Fibonacci sequence to generate, and returns:
+-  'OOPS', if `n` is less than or equal to 0 
+- `1`  if `n` is equal to `1`
+- `1` if `n` is equal to `2`
+- Otherwise, return the nth term of the Fibonacci sequence. A Fibonacci sequence is a sequence in which every number is the sum of the previous two numbers in the sequence. Example Fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ....
+## Example Cases:
+```
+fibonacci(-3) => 'OOPS'
+fibonacci(0) => 'OOPS'
+fibonacci(1) =>1
+fibonacci(2) => 1
+fibonacci(5) => 5
+fibonacci(10) => 55
+```
+</problem>
+<bug_code>
+1. def fibonacci(n):
+2.    if n <= 0:
+3.        return "OOPS"
+4.    elif n == 1 or n == 2:
+5.        return 1
+6.    else:
+7.        return fibonacci(n) + fibonacci(n-1)
+</bug_code>
+<bug_desc>
+`fibonacci(n)` calls `fibonacci(n)` on line 7 with the same argument `n` which leads to infinite recursion and consequently a runtime error is thrown.
+</bug_desc>
+<bug_fixes>
+Replace `fibonacci(n) + fibonacci(n-1)` with `fibonacci(n-1) + fibonacci(n-2)` on line 7.
+</bug_fixes>
+<unit_tests>
+assert fibonacci(0) == 'OOPS'
+assert fibonacci(1) == 1
+assert fibonacci(2) == 1
+assert fibonacci(5) == 5
+assert fibonacci(-3) == 'OOPS'
+assert fibonacci(10) == 55
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My code returns a runtime error about infinite recursion, whenever I give it an input number greater than 2. Can you help?
+Assistant: According to the problem description, the nth number in the Fibonacci sequence should be equal to the sum of Fibonacci numbers at what positions?
+	<alt>I assume this means you tried it with values 1 and 2 for the input `n` and it worked. Given this, which line in the code do you think is responsible for the runtime error?
+	<alt>According to the definition of Fibonacci numbers given in the problem description, how is the number at position `n` computed?
+	<alt>Can you explain what infinite recursion means?
+	<alt>Assume that the input `n` is 3. Can you tell me what the code does in this case, by going over it line by line?
+	<alt>Given the error is about 'infinite recursion', can you tell me where recursion happens in your code?
+	<alt>Can you explain what a recursive function is? When do we call a function recursive?
+	<alt>According to the problem description, every Fibonacci number is the sum of the previous two numbers in the sequence. Therefore, what Fibonacci number do you get if you add the numbers at positions `n` and `n - 1`?
+User: The previous two positions.
+	<alt>The numbers at positions n - 1 and n - 2.
+	<alt>The numbers at positions n - 1 and n - 2. Ah, now I see, I made a mistake on line 7, I used the wrong positions there. Let me fix it... It works now, thank you!
+<code>
+1. def fibonacci(n):
+2.    if n <= 0:
+3.        return "OOPS"
+4.    elif n == 1 or n == 2:
+5.        return 1
+6.    else:
+7.        return fibonacci(n-1) + fibonacci(n-2)
+
+</code>
+Assistant: Correct. Since the current position is `n`, what are the previous two positions?
+	<alt>That is correct. Looking at your code, does it really add the Fibonacci numbers at the previous two positions?
+User: Ah, now I see what the problem is. The code on line 7 adds the number at the current position, instead of positions `n - 1` and `n - 2`. Let me fix that... it works! Thank you!
+<code>
+1. def fibonacci(n):
+2.    if n <= 0:
+3.        return "OOPS"
+4.    elif n == 1 or n == 2:
+5.        return 1
+6.    else:
+7.        return fibonacci(n - 1) + fibonacci(n - 2)
+</code>
+Assistant: You are welcome, happy to help.
+</dialogue>

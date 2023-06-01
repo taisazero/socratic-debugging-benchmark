@@ -1,0 +1,75 @@
+<problem>
+Create a method `toxNGLXSH(sen:str) -> str` that converts an English sentence to xNGLXSH in which every lowercase vowel is replaced with 'X', each uppercase vowel is replaced with 'x', every lowercase consonant is replaced with its uppercase version, and every uppercase consonant is replaced with its lowercase version.
+
+## Example Cases:
+```
+toxNGLXSH('English') => 'xNGLXSH'
+toxNGLXSH('hello there!') => 'HXLLX THXRX!'
+toxNGLXSH("My name is John!") => 'mY NXMX XS jXHN!'
+toxNGLXSH('To be or not to be!') => 'tX BX XR NXT TX BX!'
+toxNGLXSH('The quick brown fox jumped over the lazy rabbit.') => 'tHX QXXCK BRXWN FXX JXMPXD XVXR THX LXZY RXBBXT.'
+```
+</problem>
+<bug_code>
+1. def toxNGLXSH(sen):
+2.  vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+3.  for i in vowels:
+4.      if i.islower():
+5.           sen.replace(i, "x")
+6.      else:
+7.           sen.replace(i, "X")
+8.  sen.swapcase()
+9.  return sen
+</bug_code>
+<bug_desc>
+On lines 5, 7, and 8, the calls `sen.replace` and `sen.swapcase` leave `sen` unchanged, because strings are immutable in Python. Consequently, the function returns `sen` as it is.
+</bug_desc>
+<bug_fixes>
+Replace `sen.swapcase()` with `sen = sen.swapcase()` on line 8 and on lines 5 and 7 change `sen.replace` to `sen = sen.replace`.
+</bug_fixes>
+<unit_tests>
+assert toxNGLXSH('English') == 'xNGLXSH'
+assert toxNGLXSH('hello there!') == 'HXLLX THXRX!'
+assert toxNGLXSH("My name is John!") == 'mY NXMX XS jXHN!'
+assert toxNGLXSH('To be or not to be!') == 'tX BX XR NXT TX BX!'
+assert toxNGLXSH('The quick brown fox jumped over the lazy rabbit.') == 'tHX QXXCK BRXWN FXX JXMPXD XVXR THX LXZY RXBBXT.'
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I wrote a lot of code and nothing is working.
+Assistant: I'm here to help. Can you describe the problem you are having?
+     <alt>Can you walk me through your code line by line?
+     <alt>Let's start with a simple example. What is the output of your code when you run it with the input "English"?
+     <alt>What does the `.replace()` method do?
+     <alt>What does the `.swapcase()` method do?
+User: I wrote a lot of code that makes sense, but my input sentence isn't changing at all. It is the same sentence that I started with. What do I do?
+Assistant: What are some reasons it could be staying the same?
+     <alt>What does the `.replace()` method do and does it modify the original string?
+     <alt>What does the `.swapcase()` method do and does it modify the original string?
+User: If I was using the string methods incorrectly or if I was using the wrong ones, it might not work.
+	<alt>I could have an issue in the for loop or the control flow where somehow none of the methods are actually being called. Otherwise, there might be an issue with the methods I'm using.
+Assistant: Let's open up the Python terminal and try running `sen = "To"` and then `sen.replace("o", "X")`. What do you observe?
+     <alt>Let's open up the Python terminal and try running `sen = "English"` and then `sen.swapcase()`. What do you observe?
+User: Ok, I tried that, and it looks like it returns the modified string I expect `TX`.
+     <alt>Ok, I tried that, and it looks like it returns the modified string I want `x` when I run it but after that when I print `sen` after that it shows `To` again. Maybe this means that the change is being applied, but not stored anywhere. I will assign the output of the string methods to `sen`.
+Assistant: Good. Now let's try running `sen = sen.replace("o", "X")` and then `print(sen)`. What do you observe?
+     <alt>Good. Now let's try running `sen = sen.swapcase()` and then `print(sen)`. What do you observe?
+User: Ah. It looks like the string methods don't modify the original string. They return a new string with the changes applied. I need to assign the output of the string methods to `sen` so that the changes are saved. Let me try that.
+<code>
+def toxNGLXSH(sen):
+  vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+  for i in vowels:
+      if i.islower():
+           sen = sen.replace(i, "x")
+      else:
+           sen = sen.replace(i, "X")
+  sen = sen.swapcase()
+  return sen
+
+</code>
+Assistant: That looks good! Why do you think it worked?
+User: It looks like applying the method to a variable doesn't save the output anywhere. I guess they create new strings instead of modifying the original string. We need to assign it to the original variable so that the new output is saved.
+Assistant: Good work!
+</dialogue>

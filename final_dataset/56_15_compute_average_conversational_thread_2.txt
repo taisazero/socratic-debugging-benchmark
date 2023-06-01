@@ -1,0 +1,71 @@
+<problem>
+Write a function `calculate_average(x: float, y: float) -> float` that takes in two integers `x` and `y` and returns their average as a float.
+
+## Example Cases:
+```
+calculate_average(0, 0) => 0.0
+calculate_average(1, 3) => 2.0
+calculate_average(-1, 1) => 0.0
+calculate_average(-5, -2) => -3.5
+calculate_average(5.5, 7.5) => 6.5
+calculate_average(405, 135) => 270.0
+```
+</problem>
+<bug_code>
+1. def calculate_average(x, y):
+2.    return x + y / 2
+</bug_code>
+<bug_desc>
+On line 2, using operator precedence rules the function first computes the quotient of `y/2` and then the sum of `x` and `y/2`. Consequently, the function does not return the average of x and y which is `x + y` that is then divided by 2.
+</bug_desc>
+<bug_fixes>
+Replace `x + y` with `(x + y)` on line 2.
+</bug_fixes>
+<unit_tests>
+assert calculate_average(0, 0) == 0.0
+assert calculate_average(1, 3) == 2.0
+assert calculate_average(-1, 1) == 0.0
+assert calculate_average(-5, -2) == -3.5
+assert calculate_average(5.5, 7.5) == 6.5
+assert calculate_average(405, 135) == 270.0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: I am calculating the average of two numbers and it is not working. I don't know why. Could you take a look and guide me, please?
+Assistant: Sure. Let's take a look. Try running `calculate_average (2, 4)`. What does the function return?
+	<alt>Can you describe what happens when you run your code using one of the example cases?
+	<alt>Given `x = 2` and `y = 4`, can you explain how line 2 works?
+User: I should get a 3, but I am getting a 4.
+Assistant:   Why do you think it returns 4 instead of 3?
+	<alt>Can you describe what line 2 is doing when `x` is 2 and `y` is 4?
+User: I am not sure why it is returning 4.
+Assistant: Can you describe what line 2 is doing when `x` is 2 and `y` is 4?
+	<alt>Let’s solve this step by step `2 + 4 / 2`. Which operation do we evaluate first `2 + 4` or `4 / 2`?
+	<alt>Do you recall what the order of operations is when evaluating a mathematical expression?
+User: The code should sum up `2 + 4` which evaluates to `6` and then it should divide `6 by `2`.
+Assistant: Let’s suppose that’s true, the function should return `3` in that case but it returns `4`. Let’s solve this step by step `2 + 4 / 2`. Which operation do we evaluate first `2 + 4` or `4 / 2`?
+	<alt>Do you recall the order of operations when evaluating a mathematical expression? Do we evaluate `+` or `/` first?
+User: Hm… I thought we would evaluate `2 + 4` first but that is inconsistent with the output we observe. So it must be `4 / 2` first.
+	<alt>Ohhh. We evaluate `4 / 2` first. I see. It is the order of precedence. I need to add parentheses around `(x + y)` to enforce addition to be completed first.
+	<alt>I think we would evaluate `2 + 4` first since the order of operations is from left to right all the time. 
+Instructor: Good. How can you modify the expression so that it evaluates `2 + 4` before `4 / 2`?
+	<alt>Good. Why do you think it is evaluating `4 / 2` first?
+	<alt>Good. What do you think might be missing from the expression so that it evaluates `2 + 4` before `4 / 2`?
+	<alt>Let's recall the order of operations. Can you list which operations take precedence over division and multiplication?
+User: I think I need to add parentheses around `(2 + 4)` to enforce addition to be done first.
+Assistant: Good. Let’s try it in the Python terminal. Type `(2 + 4) / 2` and press enter. What does it return?
+	<alt>Now, what changes would you need to make to your code on line 2?
+	<alt>Now, what changes would you need to make to your code to fix the bug?
+User: I typed `(2 + 4) / 2` evaluates to 3. Let me try it in my code.
+	<alt>I typed `(2 + 4) / 2` evaluates to 3.
+<code>
+1. def calculate_average(x, y):
+2.    return (x + y) / 2
+</code>
+Assistant: Very good! Does it pass all the test cases?
+User: Yes it does! Thank you so much for your help!
+Assistant: You’re welcome please let me know if you have any questions.
+User: Thank you will do!
+</dialogue>

@@ -1,0 +1,96 @@
+<problem>
+Create a method `countdown(start: int, end: int) -> List[int]` that takes two positive integers and returns a list of all the numbers between the integers, including the start and end values. You begin counting from `start`, and end counting on `end`. If `start` is smaller than `end`, then you perform a "countup" operation where you return a list of the numbers from the smaller number to the bigger number. If the user enters a bigger number as `start` you perform a "countdown" operation where you return a list of all the numbers from the bigger number to the smaller number.
+
+## Example Cases:
+```
+countdown(0, 3) => [0, 1, 2, 3]
+countdown(1, 1) => [1]
+countdown(7, 5) => [7, 6, 5]
+countdown(100, 95) => [100, 99, 98, 97, 96, 95]
+countdown(12, 10) => [12, 11, 10]
+countdown(14, 20) => [14, 15, 16, 17, 18, 19, 20]
+```
+</problem>
+<bug_code>
+1. def countdown(start, end):
+2.    l = []
+3.    if(start >= end):
+4.        i = start 
+5.        while i > end:
+6.            l.append(i)
+7.            i -= 1
+8.    else:
+9.        i = start
+10.        while i < end:
+11.            l.append(i)
+12.            i += 1
+13.    
+14.    return l
+</bug_code>
+<bug_desc>
+On lines 5 and 10, there is an off by one error. The while loop ranges are inclusive of `start` but exclusive of `end`. Consequently, the function returns a list that includes all the numbers from `start` to `end - 1` instead of `end`.
+</bug_desc>
+<bug_fixes>
+Replace `>` with `>=` on line 5 and `<` with `<=` on line 10.
+</bug_fixes>
+<unit_tests>
+assert countdown(0, 3) == [0, 1, 2, 3]
+assert countdown(1, 1) == [1]
+assert countdown(7, 5) == [7, 6, 5]
+assert countdown(100, 95) == [100, 99, 98, 97, 96, 95]
+assert countdown(14, 20) == [14, 15, 16, 17, 18, 19, 20]
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi I need to fix my code, I am not getting the expected output.
+Assistant: Sure, let's walk through your code. When you provide the first test input `countdown(0, 3)` what are the values in your output list `l`?
+	<alt>Here to help! Let's go through your code, and the expected output together. Can you track each variable when you try `countdown(0, 3)`?
+	<alt>Let's take a look at your code, can you test what happens when you run `countdown(0, 3)`? What do you notice?
+	<alt>Let's go through code, and focus on what happens when you try the first test case - `countdown(0, 3)`. Which lines reflect the code that runs in this case?
+	<alt>Can you tell me what happens when you enter `(0, 3)`as the input? Which lines execute and what is stored in the variables?
+User: When the `start` is 0, and `end` is 3, the else condition on lines 9 to 12 executes. This means that the while loop executes when `i` is 0, 1, 2. Ah I see that when `i` is 3, the while loop does not execute and that means `l` does not contain 3. I will update this.
+	<alt>I think that in lines 9 to 12, the while condition completes execution before it reaches the end value.
+<code>
+1. def countdown(start, end):
+2.    l = []
+3.    if(start >= end):
+4.        i = start 
+5.        while i > end:
+6.            l.append(i)
+7.            i -= 1
+8.    else:
+9.        i = start
+10.        while i <= end:
+11.            l.append(i)
+12.            i += 1
+13.    
+14.    return l
+
+</code>
+Assistant: For completeness, let's test another test case. What happens when you run `(1, 1)` as input?
+	<alt>Let's consider another case. If we try `countdown(1, 1)` which lines execute in your code?
+	<alt>Could you also try the next test case, `(1, 1)`, and observe the output?
+User: I don't get the correct output for the next test case `(1, 1)`. I think this is because of the same issue as before, but in the if portion since `start` = `end`. I also need to update line 5.
+	<alt>It looks like I also need to fix the `if` portion of the code which has a similar issue as before.
+<code>
+1. def countdown(start, end):
+2.    l = []
+3.    if(start >= end):
+4.        i = start 
+5.        while i >= end:
+6.            l.append(i)
+7.            i -= 1
+8.    else:
+9.        i = start
+10.        while i <= end:
+11.            l.append(i)
+12.            i += 1
+13.    
+14.    return l
+
+</code>
+Assistant: Sounds good, let's check all the test cases and check how it goes!
+User: Everything is running as expected now, thanks!
+</dialogue>

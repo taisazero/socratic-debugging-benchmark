@@ -1,0 +1,73 @@
+<problem>
+Write a function called `is_palindrome(string:str) -> bool` that returns True if the string is a palindrome and False otherwise. A palindrome is a string that is the same when read forwards and backwards.
+## Example Cases:
+```
+is_palindrome("racecar") => True
+is_palindrome("hello") => False
+is_palindrome("hannah") => True
+is_palindrome("firetruck") => False
+is_palindrome("nice") => False
+is_palindrome("") => True
+```
+</problem>
+<bug_code>
+1. def is_palindrome(string):
+2.  rev_string = ''
+3.  for i in string:
+4.    rev_string = i + rev_string
+5.  if rev_string = string:
+6.    return True
+7.  else:
+8.    return False
+</bug_code>
+<bug_desc>
+On line 5, the function throws a syntax error.
+</bug_desc>
+<bug_fixes>
+Replace `=` with `==` on line 5.
+</bug_fixes>
+<unit_tests>
+assert is_palindrome("racecar") == True
+assert is_palindrome("hello") == False
+assert is_palindrome("hannah") == True
+assert is_palindrome("firetruck") == False
+assert is_palindrome("nice") == False
+assert is_palindrome("") == True
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hey! I have a compiler error here.
+Assistant: Ok, what error do you see?
+	<alt>Let's start with a warm-up exercise. How do you assign a value of 1 to a variable `x`?
+	<alt>What line is the compiler error pointing towards?
+User: It's giving me an error on my equality operator use.
+Assistant: I see. How do you assign a value of 1 to a variable `x`?
+	<alt>How do you assign an empty string to the variable `rev_string`?
+	<alt>How would you check if two  variables `x` and `y` are equivalent?
+	<alt>Can you recall what the assignment operator is?
+User: I use the `=` operator.
+Assistant: What are you trying to do in line 5?
+	<alt>How would you check if  two variables `x` and `y` are equivalent?
+User: I am trying to check if `rev_string` is equal to `string`
+	<alt>Ah I see so I should use `==` instead of equals to check for equality. Let me edit my code.
+Assistant: You used `=` for variable assignment. Shouldn't there be a different operator for equality?
+	<alt>Let's check the documentation. What is the operator for equality?
+	<alt>Are you sure that `=` checks for equality? How can we verify that?
+	<alt>If we were to assume that `=` checks for equality, would that be consistent with the error you noticed?
+User: I thought that they were for both purposes but after checking, I think the `==` operator is used to check for equality in Python.
+<code>
+1. def is_palindrome(string):
+2.  rev_string = ''
+3.  for i in string:
+4.    rev_string = i + rev_string
+5.  if rev_string == string:
+6.    return True
+7.  else:
+8.    return False
+
+</code>
+Assistant: Looks good!
+User: Thank you so much!
+</dialogue>

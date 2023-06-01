@@ -1,0 +1,54 @@
+<problem>
+Write a function `search(x: int, seq: List[int]) -> int` that returns the index of the first occurrence of `x` in `seq`. If `x` is not in `seq`, return the index where `x` should be inserted to keep `seq` sorted. Assume that `seq` is sorted in ascending order.
+## Example Cases:
+```
+search(5, [-1, 5, 8, 10, 12]) => 1
+search(-2, [-1, 57, 65]) => 0
+search(0, [-120, 60, 78, 100]) => 1
+search(77, [-100, -50, 5, 44, 66, 76, 99]) => 6
+search(55, [-99, -2, 0]) => 3
+```
+</problem>
+<bug_code>
+1. def search(x, seq):
+2.  for i in range(len(seq)):
+3.    if x < seq[i]:
+4.      return i
+5.  return len(seq)
+</bug_code>
+<bug_desc>
+On line 3, the function only checks if `x` is less than `seq[i]` and then returns the index `i` where `x` should be inserted. When `x` is in `seq` at position `i`, the function returns the next index `i + 1` instead of the current index `i`.
+</bug_desc>
+<bug_fixes>
+Replace `<` with `<=` on line 3
+</bug_fixes>
+<unit_tests>
+assert search(5, [-1, 5, 8, 10, 12]) == 1
+assert search(-2, [-1, 57, 65]) == 0
+assert search(0, [-120, 60, 78, 100]) == 1
+assert search(77, [-100, -50, 5, 44, 66, 76, 99] ) == 6
+assert search(55, [-99, -2, 0]) == 3
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My code passes all tests but the first one, and I cannot figure out what's wrong. Can you help?
+Assistant: Sure. In the first test case, can you explain why the correct returned value should be 1?
+	<alt>Sure. Can you tell me if you notice any difference between the first test case and the other test cases?
+	<alt>Sure. In the first test case, the input `x` is an element in the list `seq`. According to the problem description, what needs to be returned when `x` is an element of `seq`?
+	<alt>Sure. Let's consider the first test case, when the input `x` is 5 and the list `seq` has the value `[-1, 5, 8, 10, 12]`. When `i` takes the value 1 in line 2, what is the value of `seq[i],` and what happens when we run through `if` on line 3?
+User: The correct answer is 1 because 5 is found at position 1 in the input list.
+Assistant: Good. So the input element `x = 5` is present at some position `i = 1` in the list `seq`. Does your code check for this?
+	<alt>Good. What does your code do when position `i = 1`?
+User: Ah, I see now. I should also check if `seq[i]` is equal to `x`. Let me do that... It works now, thank you!
+<code>
+1. def search(x, seq):
+2.  for i in range(len(seq)):
+3.    if x <= seq[i]:
+4.      return i
+5.  return len(seq)
+
+</code>
+Assistant: You're welcome, glad I could help.
+</dialogue>

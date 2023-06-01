@@ -1,0 +1,110 @@
+<problem>
+Write a function `substr_len(s: str, t: str) -> int` that takes as input a string `s` and a non-empty string `t` and returns the length of the longest substring of `s` that does not contain `t`. For example, if `s = "abracadabra"` and `t = "ca"`, then the longest substring of `s` that does not contain `t` is `"dabra"`, so the function should return 5.
+## Example Cases:
+```
+substr_len("abracadabra", "ca") => 5
+substr_len("I love Python", "Py") => 7
+substr_len("contest", "test") => 3
+substr_len("icey ice", "ice") => 2
+substr_len("icey ice cream", "ice") => 6
+substr_len("abracadabra", "abba") => 11
+```
+</problem>
+<bug_code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        crt_len = len(crt_str)
+8.        if crt_len > max_len:
+9.            max_len = crt_len
+10.        start = pos + len(t)
+11.        pos = s.find(t, start)
+12.    return max_len
+</bug_code>
+<bug_desc>
+The code does not check for the case when the longest substring is at the end of the string, therefore it fails on test examples 1 and 5.
+</bug_desc>
+<bug_fixes>
+After line 11, insert the following outside the while loop scope:
+```py
+last_str = s[start:]
+last_len = len(last_str)
+if last_len > max_len:
+       max_len = last_len
+```
+</bug_fixes>
+<unit_tests>
+assert substr_len("abracadabra", "ca") == 5
+assert substr_len("I love Python", "Py") == 7
+assert substr_len("contest", "test") == 3
+assert substr_len("icey ice", "ice") == 2
+assert substr_len("icey ice cream", "ice") == 6
+assert substr_len("abracadabra", "abba") == 11
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I need help with my code, it does not work on some test examples such as the first one, and I do not understand why. Can you help?
+Assistant: Sure. Looking at the first test example, what is the longest substring your code finds and what is the correct substring?
+	<alt>Sure. Using the input for the first test example, can you go through your code line by line and show the values calculated for each variable?
+	<alt>I would be happy to. First, can you walk me through your code and explain what each variable is supposed to do?
+	<alt>Sure. Can you list all the correct longest substrings for the test examples and see if you notice anything special about test examples 1 and 5 on which your code returns the wrong result?
+	<alt>Sure. Inside the while block, right after line 6, can you include a print statement `print('crt_str = ', crt_str)`, run your code on the first test example, and see if you notice anything useful or missing about the strings extracted by your code?
+	<alt>Sure. Do you notice anything different about test examples 1 and 5 on which your code does not work?
+	<alt>Sure. Looking at the first test example, what is the correct longest substring and is there any variable in your code that stores that string at some point during its execution?
+User: I don't know what the code finds as the longest substring, how can I determine that?
+	<alt>The longest substring is 'dabra' and I think this is also what my code finds.
+Assistant: Inside the while block, right after line 6, can you include a print statement `print('crt_str = ', crt_str)` and run your code on the first test example?
+	<alt>Can you add a new variable `max_str` that is updated with `crt_str` every time the `max_len` is updated in the if clause? Then print its value right before returning from the function.
+User: OK ... I did that. The code finds only the substring `abra`. Ah, now I see what the problem is, the maximum substring should be 'dabra'.
+<code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        print('crt_str = ', crt_str)
+8.        crt_len = len(crt_str)
+9.        if crt_len > max_len:
+10.            max_len = crt_len
+11.        start = pos + len(t)
+12.        pos = s.find(t, start)
+13.    return max_len
+14.
+15.substr_len("abracadabra", "ca")
+
+</code>
+Assistant: That's correct. What variable in your code stores the position where 'dabra' starts in `s`, and where does it end?
+	<alt>That's correct. Can you now change your code so that is also considers the substring 'dabra'?
+User: I think it is the variable `start`, right before `pos` becomes -1. It should end where `s` ends.
+	<alt>I don't know, how can I find that?
+Assistant: Great. Now that you know where it starts and where it ends, can you add code that extracts this substring and looks at its length too?
+User: I did that, and it works now! Thank you!
+<code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        crt_len = len(crt_str)
+8.        if crt_len > max_len:
+9.            max_len = crt_len
+10.        start = pos + len(t)
+11.        pos = s.find(t, start)
+12.        
+13.    last_str = s[start:]
+14.    last_len = len(last_str)
+15.    if last_len > max_len:
+16.        max_len = last_len
+17.
+18.    return max_len
+
+</code>
+Assistant: You're welcome, happy to help!
+</dialogue>

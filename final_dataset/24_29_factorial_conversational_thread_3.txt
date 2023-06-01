@@ -1,0 +1,166 @@
+<problem>
+Write a function `factorial(n:int) -> int` that computes the factorial n! of a natural number n, which is defined mathematically as:
+
+$0! = 1$
+$n! = n \times (n - 1)!$
+
+Additionally, if the input integer n is negative the function should return 0.
+
+## Example Cases:
+```
+factorial(-1) => 0
+factorial(0) => 1
+factorial(1) => 1
+factorial(2) => 2
+factorial(3) => 6
+factorial(4) => 24
+factorial(5) => 120
+```
+</problem>
+<bug_code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                fact = fact * i
+7.        return fact
+</bug_code>
+<bug_desc>
+On line 6, `fact` is multiplied with 0 in the first iteration of the for loop. Consequently, at every iteration fact stays equal with 0 instead of being updated to be equal with factorial of `(i + 1)`. Therefore, the function will return 0, irrespective of n
+
+</bug_desc>
+<bug_fixes>
+Replace `i` with `(i + 1)` in line 6.
+Replace `range(n)` with `range(1, n + 1)` in line 5.
+</bug_fixes>
+<unit_tests>
+assert factorial(-1) == 0
+assert factorial(0) == 1
+assert factorial(1) == 1
+assert factorial(2) == 2
+assert factorial(3) == 6
+assert factorial(4) == 24
+assert factorial(5) == 120
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I implemented the factorial function but it doesn’t work and I do not know why. Can you help?
+Assistant: Sure. Can you tell me for what values of n it fails and what values it returns in those cases?
+User: For n = 1 or larger it returns the same value, 0.
+Assistant: Let’s see what happens when `n` is 1. What is the first value that is assigned to variable `i` in line 5?
+	<alt>Let’s see what happens when `n` is 1. Before line 6 is evaluated in the first iteration of the for loop, what are the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. Can you insert a new line between lines 5 and 6 that prints the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. What does `range(n)` do when `n` is 1?
+	<alt>Can you tell me what `range(n)` does?
+User: The first value assigned to `i` will be 1.
+	<alt>Aaah, I understand! The first value assigned to `i` will be 0, because `range` by default starts at 0.
+	<alt>Oh! `i` is not declared before the for loop is created maybe that causes this issue.
+Assistant: Are you sure about that? Can you verify that the first value assigned to `i` is 1?
+User: OK, let me print its value at each iteration. I see, the first value is 0, not 1!
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                print(i)
+7.                fact = fact * i
+8.        return fact
+
+</code>
+	<alt>OK, let me check in the Python documentation what range does. I see, the first value is 0, not 1!
+Assistant: How can you fix the code so that in the first iteration fact is multiplied with 1, not with 0?
+	<alt>Why do you think the first value is 0?
+User: I don’t know, can you help?
+	<alt>I will multiply fact with `i + 1`. Let me do that … It works! Thank you for your help!
+	<alt>I can change to `range(1,  n + 1)` so that it starts iterating at 1.
+	<alt>I can change to `range(1, n)` so that it starts iterating at 1.
+	<alt>I can change to `range(n) + 1`, so that the first value is 0 + 1.
+Assistant: How can you ensure that in the first iteration `fact` is multiplied with 1?
+User: I can add a line that sets `i` to 1 before the for loop.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        i = 1
+6.        for i in range(n):
+7.                print(i)
+8.                fact = fact * i
+9.        return fact
+
+</code>
+Assistant: Let’s see if that works. Can you try it for `n = 1`?
+	<alt>Ok! Let's run the code for `n = 2` and see what happens.
+User: Hm... It still returns 0.
+	<alt>It still returns 0. I think I need to change the for loop.
+Assistant: Do you know why it still returns 0?
+	<alt>What do you think `range(n)` is doing to `i`?
+	<alt>Let’s look at the terminal output. What value is `i` on line 7 when being printed?
+User: I think the problem is that `i` is still 0 in the first iteration of the for loop. It still prints 0. I think I can add an `if` statement to the for loop that checks if `i` is 0 and if so, sets it to 1.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        i = 1
+6.        for i in range(n):
+7.                if i == 0:
+8.                    i = 1
+9.                  print(i)
+10.                fact = fact * i
+11.        return fact
+
+</code>
+	<alt>It still prints 0. I think I need to make a change in the for loop.
+	<alt>I don't know. Can you help?
+Assistant: Let’s see if that works. Can you try it for `n = 1`?
+	<alt>Ok! Let's run the code for `n = 2` and see what happens.
+	<alt>Did you try it for `n >=2`?
+User: It works! Thank you for your help!
+Assistant: Good. Can you try it for `n = 2` and `n = 3`?
+	<alt>Ok! Let's run the code for `n = 3` and see what happens.
+	<alt>Did you try it for `n >=2`?
+User: Hm... it's incorrect for both `n = 2` and `n = 3`. I think I need to multiply `fact` starting from 1, then 2, then 3 instead of what I'm doing now 1, then 1, then 2.
+Assistant: Good. How can you change the for loop so that the iterator variable `i` is not equal to 0 in the first iteration of the for loop?
+	<alt>What do you think `range(n)` is doing to `i`?
+	<alt>How can you edit the code so that `fact` is multiplied with 1, then 2, then 3?
+	<alt>What do you think you can do to make sure that `fact` is multiplied with 1, then 2, then 3?
+	<alt>How can you change the for loop so that the iterator variable `i` iterates starting from 1?
+User: I think I am going to change `range` to `range(1, n + 1)` so that it starts iterating at 1.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        i = 1
+6.        for i in range(1, n + 1):
+7.                print(i)
+8.                fact = fact * i
+9.        return fact
+
+</code>
+	<alt>I think I am going to change `range` to `range(1, n)` so that it starts iterating at 1.
+	<alt>I think I am going to change `range` to `range(n) + 1` so that the first value is 0 + 1.
+Assistant: Sounds good, let's try it for `n = 2` and `n = 3` again.
+	<alt>Did you try it again for `n >=2`?
+User: It works! Thank you for your help!
+Assistant: Awesome. Don't forget to remove the print statement before you submit your code.
+	<alt>Good! I’m glad I could help. If you have any other questions, feel free to ask me again.
+User: Thank you! I will do that.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        i = 1
+6.        for i in range(1, n + 1):
+7.                fact = fact * i
+8.        return fact
+</code>
+Assistant: I’m glad I could help. If you have any other questions, feel free to ask me again.
+User: Thank you!
+</dialogue>

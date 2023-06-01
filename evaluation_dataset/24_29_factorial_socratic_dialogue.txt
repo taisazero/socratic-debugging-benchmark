@@ -1,0 +1,135 @@
+<problem>
+Write a function `factorial(n:int) -> int` that computes the factorial n! of a natural number n, which is defined mathematically as:
+
+$0! = 1$
+$n! = n \times (n - 1)!$
+
+Additionally, if the input integer n is negative the function should return 0.
+
+## Example Cases:
+```
+factorial(-1) => 0
+factorial(0) => 1
+factorial(1) => 1
+factorial(2) => 2
+factorial(3) => 6
+factorial(4) => 24
+factorial(5) => 120
+```
+</problem>
+<bug_code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                fact = fact * i
+7.        return fact
+</bug_code>
+<bug_desc>
+On line 6, `fact` is multiplied with 0 in the first iteration of the for loop. Consequently, at every iteration fact stays equal with 0 instead of being updated to be equal with factorial of `(i + 1)`. Therefore, the function will return 0, irrespective of n
+
+</bug_desc>
+<bug_fixes>
+Replace `i` with `(i + 1)` in line 6.
+Replace `range(n)` with `range(1, n + 1)` in line 5.
+</bug_fixes>
+<unit_tests>
+assert factorial(-1) == 0
+assert factorial(0) == 1
+assert factorial(1) == 1
+assert factorial(2) == 2
+assert factorial(3) == 6
+assert factorial(4) == 24
+assert factorial(5) == 120
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I implemented the factorial function but it doesn’t work and I do not know why. Can you help?
+Assistant: Sure. Can you tell me for what values of `n` it fails and what values it returns in those cases?
+User: For `n = 1` or larger it returns the same value, 0.
+Assistant: Let’s see what happens when `n` is 1. What is the first value that is assigned to variable `i` in line 5?
+	<alt>Let’s see what happens when `n` is 1. Before line 6 is evaluated in the first iteration of the for loop, what are the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. Can you insert a new line between lines 5 and 6 that prints the values of the variables `fact` and `i`?
+	<alt>Let’s see what happens when `n` is 1. What does `range(n)` do when `n` is 1?
+	<alt>Can you tell me what `range(n)` does?
+User: The first value assigned to `i` will be 1.
+	<alt>Aaah, I understand! The first value assigned to `i` will be 0, because range by default starts at 0.
+Assistant: Are you sure about that? Can you verify that indeed the first value assigned to `i` is 1?
+	<alt>Can you explain why `i` will be equal to 1 during the first iteration of the for loop?
+	<alt>Let’s assume that `i` is equal to 1 during the first iteration of the for loop. Given that `fact` is assigned the value 1 on line 4, how do you explain the function returning 0 when `n` is 1?
+User: I don’t know, how can I verify that?
+	<alt>OK, let me print its value at each iteration.
+	<alt>OK, let me check in the Python documentation what range does.
+Assistant: Can you edit the code to print the value of `i` at each iteration of the for loop?
+	<alt>Can you look in the Python documentation to see what is the first value computed by range, when used with only one argument?
+	<alt>Let’s consider this mathematically, `fact` is assigned the value of 1 on line 4. `fact` is multiplied by all values of `i` in a range. What value would `i` need to be for `fact` to be equal to 0 after the for loop?
+	<alt>Let’s try it out on the terminal. Open the Python terminal using the `python` command. Then, type in a for loop similar to yours with `n` being 2. Then, in your for loop body, add in a print statement that prints `i`. What do you observe?
+	<alt>Let’s open the debugger. Step through your code until you reach line 6 for the first time. What do you notice about the value of `i`?
+User: Sure … Aaah, I see, the first value is 0, not 1!
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                print(i)
+7.                fact = fact * i
+8.        return fact
+
+</code>
+	<alt>How do I do that?
+Assistant: How can you fix the code so that in the first iteration `fact` is multiplied with 1, not with 0?
+	<alt>Why do you think the first value is 0?
+	<alt>Good! Can you explain how that makes the function return 0 for n = 1 or larger?
+	<alt>Good! What can you do now to fix the issue?
+User: I will multiply fact with `i + 1`. Let me do that … It works! Thank you for your help!
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                print(i)
+7.                fact = fact * i + 1
+8.        return fact
+
+</code>
+	<alt>I can change it to `range(1, n + 1)` so that it starts iterating at 1.
+	<alt>I can change it to `range(1, n)` so that it starts iterating at 1.
+	<alt>I can change it to `range(n) + 1`, so that the first value is 0 + 1.
+	<alt>I don’t know, can you help?
+Assistant: Can you also try it with `n = 2` and `n = 3`?
+	<alt>Do you think your code will work for all values of `n`, for example `n = 3`?
+User: Hmm … it returns the correct value for `n = 2`, but for `n = 3` it returns 3, which is wrong.
+Assistant: The code you edited in line 7 was supposed to multiply `fact` with `i + 1`. Does that code really multiply `fact` with `i + 1`?
+	<alt>Why is the code giving an incorrect answer for n = 3?
+	<alt>What should the output of factorial(3) be?
+User: Aaaah, I see now, I should have used parentheses around `i + 1`. Let me do that … It works now! Thank you so much!
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                print(i)
+7.                fact = fact * (i + 1)
+8.        return fact
+
+</code>
+Assistant: You are welcome! Do not forget to remove the `print` statement and try it for other values of n as well.
+User: Yes, I forgot about that. Here it is … It works for all test cases! Thanks again.
+<code>
+1. def factorial(n):
+2.        if n < 0:
+3.                return 0
+4.        fact = 1
+5.        for i in range(n):
+6.                fact = fact * (i + 1)
+7.        return fact
+
+</code>
+Assistant: You are welcome!
+</dialogue>

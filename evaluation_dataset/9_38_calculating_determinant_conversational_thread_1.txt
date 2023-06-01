@@ -1,0 +1,71 @@
+<problem>
+Write a function `determinant(matrix:List[List [int]]) -> List[List[int]]` that calculates the determinant of a 3x3 matrix.
+## Example Cases:
+```
+determinant([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) => 0
+determinant([[4, -7, 9], [6, 0, 3], [-1, 7, 0]]) => 315
+determinant([[-6, 0, 5], [-8, -8, -5], [-10, 2, 8]]) => -156
+determinant([[2, -1, -8], [5,-1,-3], [-1,-9, 6]]) => 329
+```
+</problem>
+<bug_code>
+1. def det2d(matrix):
+2.    return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+3.
+4. def determinant(matrix):
+5.
+6.    subm1 = [val[1:3] for val in matrix[1:3]]
+7.    subm2 = [matrix[1][0], matrix[1][2], matrix[2][0], matrix[2][2]]
+8.    subm3 = [matrix[1][0], matrix[1][1]], [matrix[2][0], matrix[2][1]]
+9.
+10.    return matrix[0][0] * det2d(subm1) - matrix[0][1] * det2d(subm2) + matrix[0][2] * det2d(subm3)
+</bug_code>
+<bug_desc>
+On line 7, `subm2` is created as a one dimensional array. However, when line 10 evaluates `det2d(subm2)`, it assumes that it is a two dimensional array, which raises a TypeError exception.
+</bug_desc>
+<bug_fixes>
+Change line 7 to `subm2 = [[matrix[1][0], matrix[1][2]], [matrix[2][0], matrix[2][2]]]` and change line 8 with `subm3 = [[matrix[1][0], matrix[1][1]], [matrix[2][0], matrix[2][1]]]`.
+</bug_fixes>
+<unit_tests>
+assert determinant([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == 0
+assert determinant([[4, -7, 9], [6, 0, 3], [-1, 7, 0]]) == 315
+assert determinant([[-6, 0, 5], [-8, -8, -5], [-10, 2, 8]]) == -156
+assert determinant([[2, -1, -8], [5, -1, -3], [-1, -9, 6]]) == 329
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: I'm trying to write a function to calculate the determinant of a 3x3 matrix using submatrices, but I'm getting a strange `TypeError` in my helper function
+	<alt>I'm trying to write a function to calculate the determinant of a 3x3 matrix, and it's not going well. I want to calculate the determinant using the three 2x2 submatrices
+Assistant: Ok, let's start with your helper function `det2d` then. What are you trying to do there?
+	<alt>Can you describe the inputs and outputs of your helper function?
+	<alt>How does your `det2d` function work with the `determinant` function? How do they interact with each other?
+	<alt>Can you describe your code of the method `determinant` line by line to me?
+	<alt>Can you explain how you're creating the 2x2 submatrices that you're passing to the helper function `det2d`?
+	<alt>What does the error message `"'int' object is not subscriptable"` mean?
+User: I am using this function to calculate the determinant of a 2x2 submatrix. Then, I'll compute the determinant of the 3x3 matrix using those submatrix determinants.
+Assistant: Good. How can you verify that you are computing the determinant of a 2x2 matrix correctly?
+	<alt>What happens if you pass an array with the incorrect dimensions to this function?
+	<alt>What would happen if you passed in a 1x1 matrix as `matrix`?
+	<alt>How can you verify that `matrix` is a 2x2 matrix?
+	<alt>Let's open the Python interpreter and try running `[1, 2, 3][0][0]`. What happens?
+User: I looked through an online resource. My code matches the formula, and I tested it with some simple matrices. I use a 2x2 matrix represented as an array of arrays. The first index represents the row and the second index represents the column number. To access a specific value, I select a row array and then get the value from that array.
+Assistant: Ok. How can you verify that `matrix` is a 2x2 matrix?
+	<alt>What happens if you pass an array with the incorrect dimensions to the `det2d` function?
+	<alt>What would happen if you passed in a 1x1 matrix as `matrix`?
+	<alt>How can you verify that `matrix` is a 2x2 matrix?
+	<alt>Let's open the Python interpreter and try running `[1, 2, 3][0][0]`. What happens?
+User: I think that's the issue. It looks like I accidentally passed in my values as a 1D array. I'll add a set of brackets. It looks like `subm2` and `subm3` both have this issue
+<code>
+ def det2d(matrix):
+    return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+def determinant(matrix):
+    subm1 = [val[1:3] for val in matrix[1:3]]
+    subm2 = [[matrix[1][0], matrix[1][2]], [matrix[2][0], matrix[2][2]]]
+    subm3 = [[matrix[1][0], matrix[1][1]], [matrix[2][0], matrix[2][1]]]
+    return matrix[0][0] * det2d(subm1) - matrix[0][1] * det2d(subm2) + matrix[0][2] * det2d(subm3)
+
+</code>
+Assistant: It looks like your code works now!
+</dialogue>
