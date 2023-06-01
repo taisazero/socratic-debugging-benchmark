@@ -1,4 +1,4 @@
-# socratic-debugging-benchmark
+# Socratic Debugging Benchmark
 
 
 The repository contains the Socratic debugging dataset and accompanies the paper "Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations" submitted to the 18th Workshop on Innovative Use of NLP for Building Educational Application at ACL 2023.
@@ -9,4 +9,5 @@ There are 3 subfolders:
 * manual_evaluation_dialogues: Contains the dialogues used for manual evaluation of the dataset.
 
 TODO:
-[ ] Add the code used for inference and evaluation.
+
+- [ ] Add the code used for inference and evaluation.
