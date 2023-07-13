@@ -11,3 +11,7 @@ There are 3 subfolders:
 TODO:
 
 - [ ] Add the code used for inference and evaluation.
+- [ ] Add code for the annotation tool.
+- [ ] Add citation information
+- [ ] Add the paper link
+- [ ] Add Socratic debugging image
