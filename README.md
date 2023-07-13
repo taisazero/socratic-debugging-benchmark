@@ -25,15 +25,20 @@ The tool will open in a new browser window.
 
 The bugs used in this dataset along with some metadata can be found in `annotation_tool\bug_repo.xlsx`. The tool will automatically load the bugs from this file. If you want to add new bugs, you can add them to this file. The tool will automatically load the new bugs the next time it is run.
 
-## Running Expermiments
+## Running Experiments
 
-Run baseline experiments using the following command:
+Add your open ai key into the following file:
+```
+.streamlit\oai_key.txt
+```
+
+Then, run baseline experiments using the following command:
 ```
 bash launch_runs.sh
 ```
 The results will be saved in the `results` folder.
 
-# Citation
+## Citation
 If you use this dataset, please cite our [paper](https://aclanthology.org/2023.bea-1.57/):
 ```
 @inproceedings{al-hossami-etal-2023-socratic,
@@ -54,5 +59,3 @@ If you use this dataset, please cite our [paper](https://aclanthology.org/2023.b
     abstract = "Socratic questioning is a teaching strategy where the student is guided towards solving a problem on their own, instead of being given the solution directly. In this paper, we introduce a dataset of Socratic conversations where an instructor helps a novice programmer fix buggy solutions to simple computational problems. The dataset is then used for benchmarking the Socratic debugging abilities of GPT-based language models. While GPT-4 is observed to perform much better than GPT-3.5, its precision, and recall still fall short of human expert abilities, motivating further work in this area.",
 }
 ```
-
-
