@@ -36,6 +36,11 @@ bash launch_runs.sh
 ```
 The results will be saved in the `results` folder.
 
+## TODOs:
+- [x] Add version 2 of the dataset
+- [ ] Add code for fine-tuning FLAN-T5.
+- [ ] Add code for CoT experiments.
+- [ ] Update with SIGCSE paper link and citation.
 ## Citation
 If you use this dataset, please cite our papers: 
 * [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/):
