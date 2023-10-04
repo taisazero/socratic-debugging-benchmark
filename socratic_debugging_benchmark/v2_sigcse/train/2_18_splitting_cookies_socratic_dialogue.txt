@@ -1,0 +1,68 @@
+<problem>
+Write a method `split(cookies:int, people:int) -> Tuple[int,int, str]` that takes in a number of cookies and a number of people. The function should find if the cookies can be split evenly amongst all people. If so, return a `Tuple` containing how many cookies each person will get and the number of leftover cookies, which is `0` and a string saying "Cookies can be split evenly!". If the cookies cannot be split evenly, then calculate the minimum number of cookies that need to be purchased to split the cookies evenly. The function should return the total number of cookies after the purchase, how many cookies each person will get then, and a string saying "Cookies cannot be split evenly. Bought more cookies." Assume that `people` and `cookies` are positive integers.
+
+## Example Cases:
+```
+split(10, 2) => (5, 0, "Cookies can be split evenly!")
+split(10, 3) => (12, 4, "Cookies cannot be split evenly. Bought more cookies.")
+split(20, 4) => (5, 0, "Cookies can be split evenly!")
+split(10, 5) => (2, 0, "Cookies can be split evenly!")
+split(25, 10) => (30, 3, "Cookies cannot be split evenly. Bought more cookies.")
+```
+</problem>
+<bug_code>
+1. def split (cookies, people):
+2.  if cookies % people == 0:
+3.    return (cookies // people, 0, "Cookies can be split evenly!")
+4.  else:
+5.    newCookies = cookies - (cookies % people)
+6.    return (newCookies, newCookies // people, "Cookies cannot be split evenly. Bought more cookies.")
+</bug_code>
+<bug_desc>
+On line 5, `newCookies` computes the maximum subset of cookies that can be split evenly among the people, which are less than the given number of cookies. However, the problem description asks for more cookies to be purchased, so the total number of cookies that is returned should be larger than the given number of cookies.
+</bug_desc>
+<bug_fixes>
+Replace line 5 with `purchasedCookies = people - cookies % people` and then insert a line after that containing `newCookies = cookies + purchasedCookies`.
+Replace `cookies - (cookies % people)` with `people - cookies % people + cookies` on line 5.
+Remove line 5. Add then insert the following lines in its place`leftOverCookies = cookies % people` and  `newCookies = people - leftOverCookies + cookies`.
+</bug_fixes>
+<unit_tests>
+assert split(10, 2) == (5, 0, "Cookies can be split evenly!")
+assert split(10, 3) == (12, 4, "Cookies cannot be split evenly. Bought more cookies.")
+assert split(20, 4) == (5, 0, "Cookies can be split evenly!")
+assert split(10, 5) == (2, 0, "Cookies can be split evenly!")
+assert split(25, 10) == (30, 3, "Cookies cannot be split evenly. Bought more cookies.")
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello I need help with my code, it is not giving me the output I expect.
+Assistant: Let's look into what's going on. What happens when you try to run the sample test cases `split(10, 2)` and `split(10, 3)`?
+	<alt>Let's walk through your code. What is the output if your input is `(10, 2)` and `(10,3)`?
+	<alt>Sure, have you tried the test cases as inputs? What have you observed about the output?
+	<alt>Here to help! Let's track the values of the variables in your code as we step through it. How do they change when the input is `(10, 2)` vs when the input is `(10, 3)`?
+	<alt>Let's look at what happens when we go line by line. Can you tell me the values of `newCookies` for the different test inputs?
+	<alt>Let's look at one of the test examples. If we can only assign whole cookies to each person, then in which case would we need to buy more cookies?
+User: For `split(10, 2)`, I get the correct answer which is `(5, 0, "Cookies can be split evenly!")`. But with `split(10, 3)`, I get `(9, 3, 'Cookies cannot be split evenly. Bought more cookies.')` which is not the correct answer. It seems like the answer is only correct when the number of `cookies` is divisible by the number of `people`.
+	<alt>My code gives the wrong output for inputs where the `cookies` are not divisible by the `people`.
+	<alt>I get the wrong answer for any case where the `cookies` are more or less than multiples of the `people`.
+	<alt>I need `cookies` to be a multiple of the `people` to get the right answer.
+Assistant: Let's look at the problem statement once again. When we do not have enough cookies for everyone, what should our code do?
+	<alt>Looks like we also need to make sure the `cookies` are sufficient for everyone. How could we do that?
+	<alt>How can we ensure that we give everyone the same amount of `cookies` when we can purchase more cookies?
+User: So we need to ensure that everyone gets the same amount of cookies, and if there are any leftovers, we instead buy more cookies so everyone has the same amount. Let me update my code to reflect this as well
+	<alt>Ah I need to also ensure that everyone gets the same amount with buying more cookies if needed! Making this change now
+<code>
+1. def split (cookies, people):
+2.  if cookies % people == 0:
+3.    return (cookies // people, 0, "Cookies can be split evenly!")
+4.  else:
+5.    leftOverCookies = cookies % people
+6.    newCookies = people - leftOverCookies + cookies
+7.    return (newCookies, newCookies // people, "Cookies cannot be split evenly. Bought more cookies.")
+
+</code>
+Assistant: Sounds good! Let me know if you need any more help.
+User: Thanks!
+</dialogue>

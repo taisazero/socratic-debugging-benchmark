@@ -1,0 +1,101 @@
+<problem>
+Write a function called `LastIndexOf(value:int, array:list) -> int` which is passed two inputs: a value to search for, and a list of integers in which to search. This function should return the index position of the last occurrence (i.e. the rightmost occurrence) of the value being searched for. If the value being searched for does not exist in the array, then the function should return -1.
+
+## Example Cases:
+```
+LastIndexOf(1, [1,1,1,1]) => 3
+LastIndexOf(2, [2,0,1,2])  => 3
+LastIndexOf(3, [1,1,1,1]) => -1
+LastIndexOf(4, [4,1,1,1]) => 0
+```
+</problem>
+<bug_code>
+1. def LastIndexOf(value, array):
+2.	index = -1
+3.	for i in range(1, len(array)):
+4.		if(value == array[i]):
+5.			index = i
+6.	return index
+</bug_code>
+<bug_desc>
+On line 3, the loop iterates `array - 1` times instead of `array` times. Consequently, the function does not access all elements in the `array` list and always skips the first element in the `array`.
+</bug_desc>
+<bug_fixes>
+Replace `1` with `0` in the `range` call on line 3.
+</bug_fixes>
+<unit_tests>
+assert LastIndexOf(1, [1,1,1,1]) == 3
+assert LastIndexOf(2, [2,0,1,2]) == 3
+assert LastIndexOf(3, [1,1,1,1]) == -1
+assert LastIndexOf(4, [4,1,1,1]) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck!
+Assistant: Okay, where do you think the problem is?
+	<alt>Does the first test case pass?
+	<alt>Which line has the first failing test case?
+	<alt>Have you read the instructions carefully to check if your code does everything it needs to?
+User: I don't know.
+Assistant: Which line has the first part of the body of your function on it?
+	<alt>Does the first test case pass?
+	<alt>Which line has the first failing test case?
+	<alt>What is your function supposed to do?
+User: Line 2.
+Assistant: What does line 2 do?
+	<alt>Let's look at the loop, what line does it start on?
+	<alt>Can we add some print statements to figure out what is going on?
+	<alt>Where in the function do you think the problem is?
+User: Line 2 sets the a variable called index to -1.
+Assistant: Let's look at the loop next, what line does it start on?
+	<alt>Can we add some print statements to figure out what is going on?
+	<alt>Where in the function do you think the problem is?
+User: The loop starts on line 3.
+Assistant: Is there somewhere we could add a print statement to help us figure out what is going on?
+	<alt>Does everything look correct in the values for the loop?
+	<alt>What is the index of the first place in the array that we should check?
+User: We could add a print statement in the loop to check the values.
+Assistant: Where should we put it?
+	<alt>What should we print?
+User: We should add it after line 3.
+Assistant: What should we print?
+	<alt>What are the important values at that spot to help us understand what's wrong?
+	<alt>How would we print the index at that spot?
+	<alt>How would we print the value in the array at that index?
+User: We should print what's in the array at the current index.
+<code>
+1. def LastIndexOf(value, array):
+2.	index = -1
+3.	for i in range(1, len(array)):
+4.		print(array[i])
+5.		if(value == array[i]):
+6.			index = i
+7.	return index
+</code>
+Assistant: Compare what prints to the test cases, what do you notice?
+	<alt>Is it skipping any values?
+	<alt>What does this tell you about your loop?
+User: It's skipping the first value in all the arrays.
+Assistant: What does that tell you about your loop?
+	<alt>Can you use that to help you find the problem?
+	<alt>Do you have any new ideas about why the test cases are failing?
+User: My loop is wrong, it's not starting at the beginning.
+	<alt>I don't know.
+	<alt>I see! I need to start my loop at zero!
+Assistant: What value in your loop do you need to change to have your loop start in the right place?
+	<alt>What controls where a loop starts?
+	<alt>What are you setting i to?
+User: I need to change the first value in range. It's 1, and it should be 0!
+Assistant: Very good, try that. Does it work now?
+<code>
+1. def LastIndexOf(value, array):
+2.	index = -1
+3.	for i in range(0, len(array)):
+4.		if(value == array[i]):
+5.			index = i
+6.	return index
+</code>
+User: Yes! I removed the print statement and it works now! Thanks.
+</dialogue>

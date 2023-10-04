@@ -1,0 +1,107 @@
+<problem>
+Write a method `split_apples(apples:int, children:int) ->int` that takes in an amount of apples and a number of children. The function should distribute `apples` evenly across all `children`. The function should return the whole number of apples each child will get after distributing the apples evenly. Assume that both `apples` and `children` are positive whole numbers.
+
+## Example Cases:
+```
+split_apples(10, 2) => 5
+split_apples(7, 2) => 3
+split_apples(100, 100) => 1
+split_apples(1, 2) => 0
+```
+</problem>
+<bug_code>
+1. def split_apples(apples, children):
+2.    return apples / children
+</bug_code>
+<bug_desc>
+The function returns a float instead of the largest possible integer after distributing the apples evenly. 
+</bug_desc>
+<bug_fixes>
+Replace `/` with `//` on line 2.
+</bug_fixes>
+<unit_tests>
+assert split_apples(10, 2) == 5
+assert split_apples(7, 2) == 3
+assert split_apples(100, 100) == 1
+assert split_apples(1, 2) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help, I'm stuck!
+Assistant: Where do you think the problem is?
+	<alt>Have you read your code carefully?
+	<alt>Which test cases are passing?
+	<alt>Have you read the prompt carefully?
+User: I don't know.
+	<alt>I think the math is wrong.
+Assistant: Look at the test cases, does the first test case pass?
+	<alt>Look at the test cases, what is the first test case to fail?
+	<alt>Have you read your code carefully?
+	<alt>Have you read the prompt carefully?
+User: Yes, the first test case passes, but the second one fails.
+Assistant: What is the correct answer for case 2?
+	<alt>What is the correct answer for case 1?
+	<alt>Does case 1 require rounding?
+	<alt>Does case 2 require rounding?
+	<alt>Think about division in Python, what does `/` indicate?
+	<alt>Think about division in Python, how does it handle remainders?
+User: It should output 3.
+Assistant: Would there be a remainder?
+	<alt>What is the correct answer for case 1?
+	<alt>Does case 2 require rounding?
+	<alt>Think about division in Python, what does `/` indicate?
+	<alt>Think about division in Python, how does it handle remainders?
+User: Yes, there would be a remainder of 1.
+	<alt>Oh! I see, the problem is the remainder!
+Assistant: Is there a way you can see what the result is?
+	<alt>Think about division in Python, how does it handle remainders?
+	<alt>Think about division in Python, what does `/` indicate?
+	<alt>Trace the code, what would the output of line 2 be with 7 and 2?
+	<alt>How can you test the output of line 2?
+User: I can add a print statement before the return.
+<code>
+1. def split_apples(apples, children):
+2.    print(apples / children)
+3.    return apples / children
+
+</code>
+Assistant: Try running the code, what is the result of dividing 7 by 2?
+	<alt>Try running the code, what is the result of dividing 10 by 2?
+	<alt>Look at the prompt, what are you dividing?
+	<alt>Look at the prompt, do you see anything you have forgotten?
+User: It's returning 3.5 for 7 divided by 2.
+Assistant: What should the output be?
+	<alt>Look at the prompt, what are you dividing?
+	<alt>Look at the prompt, do you see anything you have forgotten?
+	<alt>Look at the prompt, is there anything special about the format of the numbers?
+	<alt>Think about division in Python, how does it handle remainders?
+	<alt>Think about division in Python, what does `/` indicate?
+	<alt>What do you need to change to make the output a whole number?
+User: It should be 3.
+Assistant: Look at the Python documentation on operators, are you using the correct one to round down?
+	<alt>Are you using the correct operator?
+	<alt>Is there a specific operator you should use when dividing whole numbers?
+	<alt>Is there a specific operator you should use when you need to round down?
+	<alt>Think about division in Python, what does `/` indicate?
+	<alt>How can you make it round down?
+User: No! I need to use // instead.
+<code>
+1. def split_apples(apples, children):
+2.    print(apples // children)
+3.    return apples // children
+
+</code>
+Assistant: Run it again, does it output correctly?
+	<alt>Run it now, do all the test cases pass?
+User: Yes, it works! I'll remove the extra print statement. 
+<code>
+1. def split_apples(apples, children):
+2.    return apples // children
+
+</code>
+Assistant: Run it one more time, do all the test cases pass?
+	<alt>Run it again, does it output correctly?
+User: Yes! It works, thank you!
+</dialogue>

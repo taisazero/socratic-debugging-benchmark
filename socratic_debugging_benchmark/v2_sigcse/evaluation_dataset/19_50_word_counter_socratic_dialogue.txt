@@ -1,0 +1,77 @@
+<problem>
+Write a function `count_words(sentence: str) -> int` that returns the number of words in the sentence. A word is a maximal sequence of characters that does not contain spaces. For example, `count_words(" This is a sentence ")` returns 4. 
+## Example Cases:
+```
+count_words("hello world") => 2
+count_words("hello    world") => 2
+count_words("This is a sentence") => 4
+count_words("I love Python") => 3
+count_words("") => 0
+count_words(" ") => 0
+```
+</problem>
+<bug_code>
+1. def count_words(sentence):
+2.    words = 0
+3.    space_mode = True
+4.    for c in sentence:
+5.        if c == ' ':
+6.            if not space_mode:
+7.                words += 1
+8.            space_mode = True
+9.        else:
+10.            space_mode = False
+11.    return words
+</bug_code>
+<bug_desc>
+There is an off-by-one error where the last word in `sentence` is not counted when `sentence` ends with a non-space token.
+</bug_desc>
+<bug_fixes>
+Insert the following after line 10 outside the scope of the for loop:
+```py
+if not space_mode:
+     words +=1
+```
+</bug_fixes>
+<unit_tests>
+assert count_words("hello world") == 2
+assert count_words("hello    world") == 2
+assert count_words("This is a sentence") == 4
+assert count_words("I love Python") == 3
+assert count_words("") == 0
+assert count_words(" ") == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I'm writing some code to count words and it doesn't seem to be working
+Assistant: What seems to be the issue?
+    <alt>Let's walk through your code line by line. Can you explain what your code does?
+    <alt>When you run your code, what do you observe?
+User: My output counts are off by one.
+Assistant: Hm, ok. Can you walk me through your code? 
+	<alt>Does this happen with all inputs?
+    <alt>Can you give me an example input where this happens? Include what you expect and what you get.
+User: Sure! Essentially, I walk through each character in the sentence. I only want to count a word when the characters change from spaces to letters, so I keep a `space_mode` boolean to keep track of when we are in between words.
+Assistant: Ok. What happens when you reach the end of the sentence?
+    <alt>Does your loop count the last word in the sentence?
+User: Oh. I think I see the issue. I'm not counting the last word in the sentence. The for loop always ends on the last letter in the sentence which typically is not a space, so I never count the last word. `space_mode` is typically false at the end of the sentence, so I never increment `words`. I'll update my code to account for this.
+<code>
+ def count_words(sentence):
+    words = 0
+    space_mode = True
+    for c in sentence:
+        if c == ' ':
+            if not space_mode:
+                words += 1
+            space_mode = True
+        else:
+            space_mode = False
+    if not space_mode:
+        words +=1
+    return words
+</code>
+Assistant: Great! Let me know if you have any other questions.
+User: Thank you so much for your help!
+</dialogue>

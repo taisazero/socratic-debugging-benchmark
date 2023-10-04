@@ -1,0 +1,162 @@
+<problem>
+Create a method `calculateGrade(hw:float, exams: float, projects: float, att:float) -> Tuple[str, int]` that takes in four float parameters between 0 and 100 representing a student's grades in four different categories: Homework (`hw`) which is worth 20% of the final grade, Exams (`exams`) worth 40% of the final grade, Projects (`projects`) worth 30%, and Attendance (`att`), worth 10%. The function should calculate the final grade a student is getting and return a tuple containing the final letter grade and the final numeric grade rounded up to the nearest whole number.
+
+The letter grade should be determined based on the following scale:
+
+* A for a final rounded grade between 90 and 100 (inclusive)
+* B for a final rounded grade between 80 and 89 (inclusive)
+* C for a final rounded grade between 70 and 79 (inclusive)
+* D for a final rounded  grade between 60 and 69 (inclusive)
+* F for a final rounded grade below 60.
+
+For example, if you enter `calculateGrade(75, 60, 73, 87)`, the function should return `('C', 70)` because the final raw score is `69.6` which rounds up to `70` and corresponds to a letter grade of `C`.
+
+## Example Cases:
+```
+calculateGrade(100, 100, 100, 100) => ('A', 100)
+calculateGrade(100, 89, 85, 90) => ('A', 90)
+calculateGrade(72, 96, 74, 98) => ('B', 85)
+calculateGrade(100, 82, 68, 94) => ('B', 83)
+calculateGrade(75, 60, 73, 100) => ('C', 71)
+calculateGrade(75, 60, 73, 87) => ('C', 70)
+calculateGrade(70, 60, 65, 70) => ('D', 64)
+calculateGrade(12, 14, 23, 10) => ('F', 16)
+calculateGrade(0, 0, 0, 0) => ('F', 0)
+```
+</problem>
+<bug_code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    hw = hw * 0.2
+3.    exams = exams * 0.4
+4.    projects = projects * 0.30
+5.    att = att * 0.10
+6.
+7.    finalScore = hw + exams + projects + att
+8.    roundedScore = round(finalScore)
+9.
+10.    if finalScore >= 90:
+11.        letterGrade = "A"
+12.    elif finalScore >= 80:
+13.        letterGrade = "B"
+14.    elif finalScore >= 70:
+15.        letterGrade = "C"
+16.    elif finalScore >= 60:
+17.        letterGrade = "D"
+18.    else:
+19.        letterGrade = "F"
+20.    return letterGrade, roundedScore
+</bug_code>
+<bug_desc>
+On lines 10, 12, 14, and 16 the function uses `finalScore`, which is not rounded to the nearest integer, to determine the `letterGrade`.  Consequently, the function returns the incorrect `letterGrade` on edge cases where the closest integer is in a new category.
+</bug_desc>
+<bug_fixes>
+Replace `finalScore` with `roundedScore` on lines 10, 12, 14, and 16.
+</bug_fixes>
+<unit_tests>
+assert calculateGrade(100, 100, 100, 100) == ('A', 100)
+assert calculateGrade(100, 89, 85, 90) == ('A', 90)
+assert calculateGrade(72, 96, 74, 98) == ('B', 85)
+assert calculateGrade(100, 82, 68, 94) == ('B', 83)
+assert calculateGrade(75, 60, 73, 100) == ('C', 71)
+assert calculateGrade(75, 60, 73, 87) == ('C', 70)
+assert calculateGrade(70, 60, 65, 70) == ('D', 64)
+assert calculateGrade(12, 14, 23, 10) == ('F', 16)
+assert calculateGrade(0, 0, 0, 0) == ('F', 0)
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I implemented the `calculateGrade` function, but I am having some problems. Can you help me?
+Assistant: I would love to! What kind of problems are you having?
+User: I am returning ('D', 70) for test 4 and I don't know why.
+Assistant: Let's walk through that test input then. Can you tell me what is the value assigned `finalScore` on line 7 for the inputs provided?
+	<alt>Can you explain the differences between `finalScore` and `roundedScore`?
+User: The value assigned to `finalScore` is 69.6.
+	<alt>The value would be 70, right?
+Assistant: What is the truth value of the boolean expression on line 14?
+User:  It would be true, 70=70.
+Assistant: Is that true? Can you verify that?
+	<alt>What does the boolean expression on line 14 evaluate to?
+	<alt>Can you explain the differences between `finalScore` and `roundedScore`?
+	<alt>Is that true? Can you print the value of `finalScore >= 70`?
+	<alt>Correct. Which block of the if-elif-else statement is executed?
+User: Yes, I'll use a print statement to do that.
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    hw = hw * 0.2
+3.    exams = exams * 0.4
+4.    projects = projects * 0.30
+5.    att = att * 0.10
+6.
+7.    finalScore = hw + exams + projects + att
+8.    roundedScore = round(finalScore)
+9.    
+10.    print(finalScore >= 70)
+11.
+12.    if finalScore >= 90:
+13.        letterGrade = "A"
+14.    elif finalScore >= 80:
+15.        letterGrade = "B"
+16.    elif finalScore >= 70:
+17.        letterGrade = "C"
+18.    elif finalScore >= 60:
+19.        letterGrade = "D"
+20.    else:
+21.        letterGrade = "F"
+22.    return letterGrade, roundedScore
+
+</code>
+Assistant: And what does it print for test 4?
+User: It prints `False` but I don't know why.
+	<alt>Oh, it prints `False` because it's 69.6, not 70. I need to use `roundedScore` instead. That makes it work, thank you!
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    hw = hw * 0.2
+3.    exams = exams * 0.4
+4.    projects = projects * 0.30
+5.    att = att * 0.10
+6.
+7.    finalScore = hw + exams + projects + att
+8.    roundedScore = round(finalScore)
+9.
+10.    if roundedScore >= 90:
+11.        letterGrade = "A"
+12.    elif roundedScore >= 80:
+13.        letterGrade = "B"
+14.    elif roundedScore >= 70:
+15.        letterGrade = "C"
+16.    elif roundedScore >= 60:
+17.        letterGrade = "D"
+18.    else:
+19.        letterGrade = "F"
+20.    return letterGrade, roundedScore
+
+</code>
+Assistant: And what is the value of `finalScore` when you use it on line 10?
+	<alt>How does the value of `finalScore` affect the truth value of the boolean expression on line 10?
+User: Oh! I was using the wrong variable. After switching `finalScore` to `roundedScore` in the comparisons it worked. Thank you!
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    hw = hw * 0.2
+3.    exams = exams * 0.4
+4.    projects = projects * 0.30
+5.    att = att * 0.10
+6.
+7.    finalScore = hw + exams + projects + att
+8.    roundedScore = round(finalScore)
+9.
+10.    if roundedScore >= 90:
+11.        letterGrade = "A"
+12.    elif roundedScore >= 80:
+13.        letterGrade = "B"
+14.    elif roundedScore >= 70:
+15.        letterGrade = "C"
+16.    elif roundedScore >= 60:
+17.        letterGrade = "D"
+18.    else:
+19.        letterGrade = "F"
+20.    return letterGrade, roundedScore
+
+</code>
+</dialogue>

@@ -1,0 +1,88 @@
+<problem>
+Write a function `spellchecker(words: List[str], words_to_check: List[str]) -> Iterable[str]` that takes in a list of words and a list of words to check. The function should return an iterable of strings that indicate whether or not each word in `words_to_check` are spelled properly. A word is spelled properly if it is in the `words` list. If a word is spelled properly, the string should say "[word] is spelled properly!". If a word is misspelled, the string should say "[word] is misspelled!". The order of the strings in the returned list should be the same as the order of the words in `words_to_check`.
+## Example Cases:
+```
+list(spellchecker(["dog", "cat", "giraffe", "horse", "dragon"], ["dogz", "cet", "giraffe", "horsee", "dragon"])) => ["dogz is misspelled!", "cet is misspelled!", "giraffe is spelled properly!", "horsee is misspelled!", "dragon is spelled properly!"]
+list(spellchecker(["apple", "banana", "orange", "pear", "grape"], ["apple", "baana", "orange", "pier", "grayp"])) => ["apple is spelled properly!", "baana is misspelled!", "orange is spelled properly!", "pier is misspelled!", "grayp is misspelled!"]
+list(spellchecker(['bubbles', 'cup', 'food'], ['bubbles', 'cup', 'food', 'bubbles', 'cup', 'food'])) => ['bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!', 'bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!']
+list(spellchecker([], ['bubbles', 'cup', 'food'])) => ['bubbles is misspelled!', 'cup is misspelled!', 'food is misspelled!']
+```
+</problem>
+<bug_code>
+1. def spellchecker(words, words_to_check):
+2.    result = []
+3.    for word in words_to_check:
+4.        if word in words:
+5.            result.append(word + " is spelled properly!")
+6.        else:
+7.            result.append(word + " is misspelled!")
+</bug_code>
+<bug_desc>
+The function returns `None` instead of an iterable of strings.
+</bug_desc>
+<bug_fixes>
+After line 7, insert `return result` with one indentation level.
+</bug_fixes>
+<unit_tests>
+assert list(spellchecker(["dog", "cat", "giraffe", "horse", "dragon"], ["dogz", "cet", "giraffe", "horsee", "dragon"])) == ["dogz is misspelled!", "cet is misspelled!", "giraffe is spelled properly!", "horsee is misspelled!", "dragon is spelled properly!"]
+assert list(spellchecker(["apple", "banana", "orange", "pear", "grape"], ["apple", "baana", "orange", "pier", "grayp"])) == ["apple is spelled properly!", "baana is misspelled!", "orange is spelled properly!", "pier is misspelled!", "grayp is misspelled!"]
+assert list(spellchecker(['bubbles', 'cup', 'food'], ['bubbles', 'cup', 'food', 'bubbles', 'cup', 'food'])) == ['bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!', 'bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!']
+assert list(spellchecker([], ['bubbles', 'cup', 'food'])) == ['bubbles is misspelled!', 'cup is misspelled!', 'food is misspelled!']
+
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm really stuck.
+Assistant: Okay, where do you think the problem is?
+	<alt>Are any of the test cases passing?
+	<alt>Have you completed all the steps in the instructions?
+	<alt>Let's look at your function, can you explain what it is supposed to do?
+User: I don't know.
+Assistant: Can you explain what your function is supposed to do?
+	<alt>Do any of the test cases pass?
+	<alt>Have you skipped any steps in the instructions?
+User: My function takes in one list of words and compares it to another list.
+	<alt>My function compares two lists of words and then returns information about them.
+	<alt>I followed the prompt.
+Assistant: Is that everything it is supposed to do according to the prompt?
+	<alt>Does it do anything else?
+	<alt>Okay, on what line of code does it take in those lists of words?
+	<alt>Let's look at the first line of the function on line 1, does it take in two lists of words?
+User: I think so.
+Assistant: Let's take a more detailed look at the output. What does that part say?
+	<alt>Let's look at the first line of the function on line 1, does it take in two lists of words?
+	<alt>How would that information be sent out of the function?
+	<alt>What information is supposed to be returned from the function?
+User: It says there is a TypeError and that NoneType objects aren't iterable.
+Assistant: Okay, so let's break that down. Let's focus on the NoneType part, what is a NoneType?
+	<alt>Okay, so let's break that down. What does it mean when something is iterable?
+	<alt>Why could your function be returning a NoneType object?
+User: A that's an object that doesn't have a value.
+	<alt>I'm not sure.
+Assistant: So why would there be an object that doesn't have a value there?
+	<alt>Let's look at the second part, what does it mean when something is iterable?
+	<alt>Why could your function be returning a NoneType object?
+User: I don't know.
+	<alt>My function doesn't return anything!
+Assistant: Where could a NoneType be coming from?
+	<alt>Why could your function be returning a NoneType object?
+	<alt>Check the python documentation, why do functions return NoneType objects?
+User: My function.
+Assistant: Why could it be returning something with no value?
+	<alt>Check the python documentation, why do functions return NoneType objects?
+User: I forgot the return statement!
+<code>
+1. def spellchecker(words, words_to_check):
+2.    result = []
+3.    for word in words_to_check:
+4.        if word in words:
+5.            result.append(word + " is spelled properly!")
+6.        else:
+7.            result.append(word + " is misspelled!")
+8.    return result
+</code>
+Assistant: Does it run correctly now?
+User: Yes! Thanks!
+</dialogue>

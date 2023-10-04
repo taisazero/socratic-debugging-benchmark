@@ -1,0 +1,183 @@
+<problem>
+Create a method `calculateGrade(hw:float, exams: float, projects: float, att:float) -> Tuple[str, int]` that takes in four float parameters between 0 and 100 representing a student's grades in four different categories: Homework (`hw`) which is worth 20% of the final grade, Exams (`exams`) worth 40% of the final grade, Projects (`projects`) worth 30%, and Attendance (`att`), worth 10%. The function should calculate the final grade a student is getting and return a tuple containing the final letter grade and the final numeric grade rounded up to the nearest whole number.
+
+The letter grade should be determined based on the following scale:
+
+* A for a final rounded grade between 90 and 100 (inclusive)
+* B for a final rounded grade between 80 and 89 (inclusive)
+* C for a final rounded grade between 70 and 79 (inclusive)
+* D for a final rounded  grade between 60 and 69 (inclusive)
+* F for a final rounded grade below 60.
+
+For example, if you enter `calculateGrade(75, 60, 73, 87)`, the function should return `('C', 70)` because the final raw score is `69.6` which rounds up to `70` and corresponds to a letter grade of `C`.
+
+## Example Cases:
+```
+calculateGrade(0, 0, 0, 0) => ('F', 0)
+calculateGrade(70, 60, 65, 70) => ('D', 64)
+calculateGrade(75, 60, 73, 100) => ('C', 71)
+calculateGrade(75, 60, 73, 87) => ('C', 70)
+calculateGrade(100, 89, 85, 90) == ('A', 90)
+calculateGrade(100, 100, 100, 100) => ('A', 100)
+```
+</problem>
+<bug_code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    weights = [0.1, 0.3, 0.4, 0.2]
+3.    grades = [hw, exams, projects, att]
+4.    final_grade = 0
+5.    for i in range(len(weights)):
+6.        final_grade += weights[i] * grades[i]
+7.    final_grade = round(final_grade)
+8.    
+9.    if final_grade >= 90:
+10.        return ('A', final_grade)
+11.    elif final_grade >= 80:
+12.        return ('B', final_grade)
+13.    elif final_grade >= 70:
+14.        return ('C', final_grade)
+15.    elif final_grade >= 60:
+16.        return ('D', final_grade)
+17.    else:
+18.        return ('F', final_grade)
+</bug_code>
+<bug_desc>
+On lines 2 and 3, the `weights` and `grades` are not parallel arrays. Consequently, the function will return an incorrect weighted sum of the final grade.
+</bug_desc>
+<bug_fixes>
+On line 2 replace `[0.1, 0.3, 0.4, 0.2]` with `[0.2, 0.4, 0.3, 0.1]`.
+On line 3 replace `[hw, exams, projects, att]` with  ` [att, projects, exams, hw]`.
+</bug_fixes>
+<unit_tests>
+assert calculateGrade(100, 100, 100, 100) == ('A', 100)
+assert calculateGrade(100, 89, 85, 90) == ('A', 90)
+assert calculateGrade(75, 60, 73, 100) == ('C', 71)
+assert calculateGrade(75, 60, 73, 87) == ('C', 70)
+assert calculateGrade(70, 60, 65, 70) == ('D', 64)
+assert calculateGrade(0, 0, 0, 0) == ('F', 0)
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck
+Assistant: Okay, what do you think the problem is?
+	<alt>Can you tell me what test cases are failing?
+	<alt>Have you thought about the problem?
+User: It isn't calculating correctly.
+	<alt>It's failing the second test case.
+Assistant: How is the calculation made in the function?
+	<alt>Can you tell me what test cases are failing?
+	<alt>Where do you think the problem is?
+	<alt>Start with line 1, do you see any problems with the method header?
+	<alt>Look at the second test case, how is it different from the first test case?
+User: The scores are multiplied with the weights and summed up.
+	<alt>Pass in the scores, put them in an array, multiply those values with the weights, and add them with a for-loop.
+Assistant: So, is it working for the first test case?
+	<alt>Do you see any problems adding the scores on the assignments to the grades array?
+	<alt>Do you see any problems with the loop?
+	<alt>Do you see any problems with the weights?
+	<alt>Check the instructions, do you see anything you aren't doing?
+	<alt> Why is it working on the first test case and not the second?
+	<alt> Check the loop, are all the values being considered?
+User: Yes, the first test case is correct, but the second one is wrong.
+Assistant: How are the two test cases different?
+	<alt>Do you see any problems with the weights?
+	<alt>Do you see any problems with passing in the grades?
+	<alt>Check the instructions, do you see anything you aren't doing?
+	<alt>Do you see any differences in the numbers between the two test cases?
+User: The first test case has all the values the same, and the second test case has different values.
+	<alt>The first test case has all 100s, but different numbers for the second case.
+	<alt>I'm not sure.
+Assistant: Does the order of the input parameters matter?
+	<alt>Why does the order matter?
+	<alt>Are any specific lines of code impacted by the order of the values?
+	<alt>What type of grade does the first value being passed in represent?
+	<alt>Which parameter represents homework?
+User: Yes, the order of inputs does matter.
+Assistant: Why?
+	<alt>Which lines are impacted by the order of the values?
+	<alt>What type of grade does the first value being passed in represent?
+	<alt>Look back at the instructions, what should the weight be for the first value?
+User: Because that determines which value is associated with the different grade categories.
+Assistant: Why does that change the calculation?
+	<alt>What is the correct weight for the homework?
+	<alt>On what line of code are those values assigned?
+	<alt>Are those values passed into the array in the proper order?
+User: The type of grade changes the weight for the calculation.
+Assistant: What is the correct weight for homework?
+	<alt>Look at the grades array, does it match the order the parameters are passed in?
+	<alt>Look at the weights array, does that match the order for the categories?
+	<alt>What do you think is causing the problem here?
+User: Homework should have a weight of 20%.
+Assistant: How is that set in the code?
+	<alt>What weight should exams have?
+	<alt>Look at the weights array, does that match the order for the categories?
+User: It's set in the weights array.
+	<alt>I see, the weights array is wrong!
+Assistant: Check the weights array, does the first item match the correct weight for homework?
+	<alt>How does the weights array interact with the grades array?
+	<alt>Which item in the weights array should correspond with homework?
+	<alt>Are the arrays parallel?
+User: No, the first item is 0.1, that's the weight for attendance.
+	<alt>It's in the wrong order.
+Assistant: What should you change the weights array to?
+	<alt>Should the first item in the weights array go with the first item in the grades array?
+	<alt>Should the arrays be parallel?
+	<alt>Are the arrays parallel?
+User: I'll switch the attendance and homework weights on line 2.
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    weights = [0.2, 0.3, 0.4, 0.1]
+3.    grades = [hw, exams, projects, att]
+4.    final_grade = 0
+5.    for i in range(len(weights)):
+6.        final_grade += weights[i] * grades[i]
+7.    final_grade = round(final_grade)
+8.    
+9.    if final_grade >= 90:
+10.        return ('A', final_grade)
+11.    elif final_grade >= 80:
+12.        return ('B', final_grade)
+13.    elif final_grade >= 70:
+14.        return ('C', final_grade)
+15.    elif final_grade >= 60:
+16.        return ('D', final_grade)
+17.    else:
+18.        return ('F', final_grade)
+
+</code>
+Assistant: Did that fix it?
+	<alt>Is that everything?
+	<alt>Did you check the other weights?
+User: No, it still doesn't work.
+Assistant: Keep looking, do you see any other problems with the weights array?
+	<alt>Did which test cases pass change?
+	<alt>Does the first test case still pass?
+	<alt>What about the second item in the grades array, does it match with the second item in the weights array?
+	<alt>What is the correct weight for exams?
+User: Yes, exams and projects are flipped too!
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    weights = [0.2, 0.4, 0.3, 0.1]
+3.    grades = [hw, exams, projects, att]
+4.    final_grade = 0
+5.    for i in range(len(weights)):
+6.        final_grade += weights[i] * grades[i]
+7.    final_grade = round(final_grade)
+8.    
+9.    if final_grade >= 90:
+10.        return ('A', final_grade)
+11.    elif final_grade >= 80:
+12.        return ('B', final_grade)
+13.    elif final_grade >= 70:
+14.        return ('C', final_grade)
+15.    elif final_grade >= 60:
+16.        return ('D', final_grade)
+17.    else:
+18.        return ('F', final_grade)
+
+</code>
+Assistant: Does it pass now?
+User: Yes, all the test cases pass. Thank you!
+</dialogue>

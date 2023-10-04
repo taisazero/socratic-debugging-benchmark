@@ -1,0 +1,113 @@
+<problem>
+The four compass points can be abbreviated by single-letter strings as “N”, “E”, “S”, and “W”. Write a function `turn_clockwise (compass_point:str)` that takes one of these four compass points as its parameter, and returns the next compass point in the clockwise direction. If `compass_point` has another value that's distinct from the four compass points listed earlier, return the value `None`.
+
+
+## Example Cases:
+```
+turn_clockwise("N") => "E"
+turn_clockwise("W") => "N"
+turn_clockwise("S") => "W"
+turn_clockwise("E") => "S"
+turn_clockwise(42) => None
+turn_clockwise("rubbish") => None
+```
+</problem>
+<bug_code>
+1. def turn_clockwise(compass_point):
+2.    if compass_point == "N":
+3.        print ("E")
+4.    elif compass_point == "E":
+5.        print ("S")
+6.    elif compass_point == "S":
+7.        print ("W")
+8.    elif compass_point == "W":
+9.        print ("N")
+10.    else:
+11.        print ("None")
+</bug_code>
+<bug_desc>
+The function prints the strings "N", "E", "S", "W", and "None". Consequently, the function returns `None` for all cases of `compass_point` instead of returning the appropriate strings.
+</bug_desc>
+<bug_fixes>
+Replace all the print statements `print ("E")`, `print ("S")`, `print ("W")`, `print ("N")`, `print("None")` with the return statements `return "E"`, `return "S"`, `return "W"`, `return "N"`, `return "None"` on lines 3, 5, 7, 9, and 11 respectively.
+</bug_fixes>
+<unit_tests>
+assert turn_clockwise("N") == "E"
+assert turn_clockwise("W") == "N" 
+assert turn_clockwise("S") == "W"
+assert turn_clockwise("E") == "S"
+assert turn_clockwise(42) == None
+assert turn_clockwise("rubbish") == None
+</unit_tests>
+<stu_desc>
+
+
+</stu_desc>
+<dialogue>
+User: Hi! I have a problem. My code does not generate the right result and I cannot figure that out.
+Assistant:  I see. Let’s run your code with the function call `store = turn_clockwise("N")` then print `store` and observe the output in the terminal. What do you see? 
+	<alt>Hi! What makes you think that your program is not working properly?
+	<alt>Can you give me an example where your code does not return the correct result?
+	<alt>Hi! Let's take a look at your code. Could you explain how your code works?
+	<alt>I see. Suppose we run your code with the function call `store = turn_clockwise("N")`. What do you think the value of `store` will be after execution?
+User: When I pass in `"N"` as `compass_point`. I see `"E"` printed in the terminal. But the value of 'store' is shown as `"None"`. I am confused as my code and `if` statement seem to be correct. 
+Assistant: Let's think about it differently. Suppose that you are using a vending machine and you already have inserted the money and selected the item you want. What will happen next?
+User: I should receive the item I want since the machine will vend it.
+Assistant: What is the equivalent of the machine vending into the dispenser in your code?
+User: I think the `print` statement is doing the job, isn't it?
+Assistant: Let's assume that the `print` statement is doing the job. How do you explain your program failing all the tests?
+	<alt>Let’s run your code again with the function call `store = print(turn_clockwise("N"))` then print `store` and observe the output in the terminal. What do you see?
+User: I think you might be right. The `print` is printing the correct values, but something is missing here.
+Assistant: So, does the `print` statement in Python return any values?
+    <alt>Let’s run your code again with the function call `store = print(turn_clockwise("N"))` then print `store` and observe the output in the terminal. What do you see?
+User: When I `google` it, it says "It doesn't return any value; returns None ."
+Assistant: Ok. So, what statement needs to be used to actually "return" the value you want from your function?
+	<alt>Let me think. Isn't it the `return` statement?
+Assistant: Do you know how to try it?
+User: I will just replace all `print` statements to `return`. Let me make the changes and try it.
+<code>
+def turn_clockwise(compass_point):
+    if compass_point == "N":
+        return ("E")
+    elif compass_point == "E":
+        return ("S")
+    elif compass_point == "S":
+        return ("W")
+    elif compass_point == "W":
+        return ("N")
+    else:
+        return "None"
+
+</code>
+Assistant: Very good. Did you try your code again for all test cases?
+	<alt>Very good. Could you further simplify your code and follow best practices?
+User: It's working very well. Thank you so much!
+Assistant: Let's try it for the test case `turn_clockwise("rubbish")`. What do you observe?
+User: Ah. It's failing. Why is that?
+Assistant: Let's refer to the problem description. What value should be returned for the case `turn_clockwise("rubbish")`?
+    <alt>Let's open the Python terminal and try `turn_clockwise("rubbish") == "None"`. What do you observe?
+User: It should return `None`.
+    <alt>It should return `"None"`.
+Assistant: What value is being returned by your code?
+User: It's returning `"None"`.
+Assistant: Are `"None"` and `None` the same?
+    <alt>Let's open the Python terminal and try `None == "None"`. What do you observe?
+User: Ah! No. They are not the same. I think I need to change the return statement to `return None`.
+<code>
+def turn_clockwise(compass_point):
+    if compass_point == "N":
+        return ("E")
+    elif compass_point == "E":
+        return ("S")
+    elif compass_point == "S":
+        return ("W")
+    elif compass_point == "W":
+        return ("N")
+    else:
+        return None
+
+</code>
+Assistant: Very good. Did you try your code again for all test cases?
+    <alt>Very good. Could you further simplify your code and follow best practices?
+User: It's working well now! Thank you so much!
+</dialogue>

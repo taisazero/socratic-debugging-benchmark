@@ -1,0 +1,56 @@
+<problem>
+Define a function called `Largest(a:int, b:int, c:int) -> int` which takes three integer inputs: a, b and c. The function should return the largest of these three values.
+
+## Example Cases:
+```
+Largest(1,2,3) => 3
+Largest(3,2,1) => 3
+Largest(2,2,1) => 2
+Largest(1,1,1) => 1
+```
+</problem>
+<bug_code>
+1. def Largest(a, b, c):
+2.	if(a > b and a > c):
+3.		return a
+4.	elif(b > a and b > c):
+5.		return b
+6.	else:
+7.		return c
+</bug_code>
+<bug_desc>
+When `a` and `b` are equal, `c` is returned regardless of its comparison to `a` or `b`. For example: `Largest(2,2,1)` returns 1.
+</bug_desc>
+<bug_fixes>
+Change the > to >= in all the conditions.
+</bug_fixes>
+<unit_tests>
+assert Largest(1,2,3) == 3
+assert Largest(3,2,1) == 3
+assert Largest(2,2,1) == 2
+assert Largest(1,1,1) == 1
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I've been working on the `Largest()` function for a while and I can't tell why it's not working. From what I understand it is working, but then it isn't passing the `assert` statements.
+Assistant: Hello! Can you explain how your function works step by step?
+User: Yes, I can. My `Largest()` function first checks if the first input is the largest, then if the second input is the largest, and if neither of those is the largest, then the function assumes the last input is the largest since neither the first nor the second is the largest.
+Assistant: Okay, you have an understanding of the control flow of this program. However, why would you be able to assume that the final input is the largest if the first is not the greatest and the second is not the greatest?
+User: Because one of the values has to be the greatest, so if it is neither of the first two, then it would have to be the last value, right?
+Assistant: Think about a case where the first and second inputs are greater than the final input but equal to each other. Which input is the greatest input?
+	<alt>What about when `Largest(2,2,1)` is ran? What will be returned?
+User: Oh! I would have to pick from one of the two, but it doesn't matter which since I'm returning the value, which input is the highest. That makes a lot more sense, I've made some alterations to my code and it works now. Thank you!
+<code>
+1. def Largest(a, b, c):
+2.	if(a >= b and a >= c):
+3.		return a
+4.	elif(b >= a and b >= c):
+5.		return b
+6.	else:
+7.		return c
+</code>
+Assistant: I'm happy that I could help! Is there anything else that I could help you with today?
+User: No, that's all for now. Thank you!
+</dialogue>

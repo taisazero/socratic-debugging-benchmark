@@ -1,0 +1,65 @@
+<problem>
+Create a method `removeEven(nums:List[int]) -> List[int]` that accepts a list `nums`. Remove all even numbers from `nums` and return a list without any even numbers.
+
+## Example Cases:
+```
+removeEven([1,2,3,4,5,6,7,8,9]) => [1,3,5,7,9]
+removeEven([2,4,6,8,10]) => []
+removeEven([1,3,5,7,9]) => [1,3,5,7,9]
+removeEven([-10,-8,-6,-4,-2,0,2,4,6,8,10]) => []
+```
+</problem>
+<bug_code>
+1. def removeEven(nums):
+2.  newNums = []
+3.  for i in nums
+4.    if i % 2 != 0:
+5.      newNums.append(i)
+6.  return newNums
+</bug_code>
+<bug_desc>
+There is a syntax error on line 3. The for loop syntax is incorrect.
+</bug_desc>
+<bug_fixes>
+Add `:` after `nums` on line 3.
+</bug_fixes>
+<unit_tests>
+assert removeEven([1,2,3,4,5,6,7,8,9]) == [1,3,5,7,9]
+assert removeEven([2,4,6,8,10]) == []
+assert removeEven([1,3,5,7,9]) == [1,3,5,7,9]
+assert removeEven([-10,-8,-6,-4,-2,0,2,4,6,8,10]) == []
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi, I am not sure why my program for removing even numbers is not running. Can you please help?
+	<alt>Hi, my program for removing even numbers is throwing an error. Can you help me understand the error?
+Assistant: Hi, Sure! It looks like your program has a syntax error on line 3, do you know what that means?
+	<alt>Hi, Sure! Do you know why it is throwing a syntax error on line 3?
+User: I am not sure what that error means
+	<alt>Does it mean that my expression on line 3 is not following the rules on how the for loop should be written?
+Assistant: It means there is a mistake in your code, with the spelling or punctuation or usage of wrong names, etc. The caret in the output shows where this mistake might be. Do you see what the caret is pointing at?
+User: Yes, it looks like the caret is pointing towards the end of line 3.
+Assistant: Correct, what do you think is wrong with the end of the line 3?
+	<alt>Correct, what do you think is missing towards the end of line 3?
+User: I am not sure, is it a punctuation mark?
+	<alt>Is it missing a colon?
+Assistant: Yes, can you find the correct syntax using the documentation?
+	<alt>Yes, where can you find the correct syntax of a for loop?
+User: What is the documentation?
+	<alt>Yes, is it supposed to have a colon at the end?
+Assistant: Documentation of a language, like python tells you what the code does and how to use it. You can find it at docs.python.org
+User: After going through the python documentation, I think this is what my code is supposed to look like this.
+<code>
+1. def removeEven(nums):
+2.  newNums = []
+3.  for i in nums:
+4.    if i % 2 != 0:
+5.      newNums.append(i)
+6.  return newNums
+</code>
+Assistant: Correct, you can always come back to the documentation if you ever run into a syntax error.
+User: My program works now, thank you for helping me resolve that error!
+Assistant: You are welcome!
+</dialogue>

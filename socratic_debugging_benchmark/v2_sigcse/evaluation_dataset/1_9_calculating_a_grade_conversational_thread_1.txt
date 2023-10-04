@@ -1,0 +1,112 @@
+<problem>
+Create a method `calculateGrade(hw:float, exams: float, projects: float, att:float) -> Tuple[str, int]` that takes in four float parameters between 0 and 100 representing a student's grades in four different categories: Homework (`hw`) which is worth 20% of the final grade, Exams (`exams`) worth 40% of the final grade, Projects (`projects`) worth 30%, and Attendance (`att`), worth 10%. The function should calculate the final grade a student is getting and return a tuple containing the final letter grade and the final numeric grade rounded up to the nearest whole number.
+
+The letter grade should be determined based on the following scale:
+
+* A for a final rounded grade between 90 and 100 (inclusive)
+* B for a final rounded grade between 80 and 89 (inclusive)
+* C for a final rounded grade between 70 and 79 (inclusive)
+* D for a final rounded  grade between 60 and 69 (inclusive)
+* F for a final rounded grade below 60.
+
+For example, if you enter `calculateGrade(75, 60, 73, 87)`, the function should return `('C', 70)` because the final raw score is `69.6` which rounds up to `70` and corresponds to a letter grade of `C`.
+
+## Example Cases:
+```
+calculateGrade(0, 0, 0, 0) => ('F', 0)
+calculateGrade(70, 60, 65, 70) => ('D', 64)
+calculateGrade(75, 60, 73, 100) => ('C', 71)
+calculateGrade(75, 60, 73, 87) => ('C', 70)
+calculateGrade(100, 89, 85, 90) == ('A', 90)
+calculateGrade(100, 100, 100, 100) => ('A', 100)
+```
+</problem>
+<bug_code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    if finalScore >= 90:
+4.        letterGrade = "A"
+5.    elif finalScore >= 80:
+6.        letterGrade = "B"
+7.    elif finalScore >= 70:
+8.        letterGrade = "C"
+9.    elif finalScore >= 60:
+10.        letterGrade = "D"
+11.    else:
+12.        letterGrade = "F"
+13.    return letterGrade, finalScore
+</bug_code>
+<bug_desc>
+The function does not round `finalScore` to the nearest whole number. Consequently, when `finalScore` is `69.6` the function will return `D` instead of `C` as `letterGrade`. The function also returns a float `finalScore` instead of an integer.
+</bug_desc>
+<bug_fixes>
+After line 2, add a new line with the following snippet `finalScore = round(finalScore)`.
+</bug_fixes>
+<unit_tests>
+assert calculateGrade(100, 100, 100, 100) == ('A', 100)
+assert calculateGrade(100, 89, 85, 90) == ('A', 90)
+assert calculateGrade(75, 60, 73, 100) == ('C', 71)
+assert calculateGrade(75, 60, 73, 87) == ('C', 70)
+assert calculateGrade(70, 60, 65, 70) == ('D', 64)
+assert calculateGrade(0, 0, 0, 0) == ('F', 0)
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: My code doesn't work. When the `finalScore` is 69.6, the function returns D instead of C.
+Assistant: Where, in your code, do you think this problem is happening?
+	<alt>Why do you expect the output of 69.6 to return D?
+	<alt>What do you think we can do to figure out where our problem is?
+User: I think it's happening in the calculation of the `finalScore`. I'm not getting a rounded number.
+	<alt>I think that the test cases may be glitched.
+	<alt>Maybe I misunderstood the instructions.
+Assistant: What do you think could be missing in your calculation?
+	<alt>Did you expect to get a rounded number from your equation here?
+	<alt>Do you know any method that can give you a rounded number?
+	<alt>Python has a lot of documentation that can help you solve specific problems. Do you think it would help to look for your solution there?
+User: I see that I don't actually have any rounding mechanism. I could use the round() method.
+	<alt>I don't have any rounding mechanism, but I don't know how to round.
+	<alt>I don't think anything is missing. I get 69.6. But I just need to get rid of the .6 somehow.
+	<alt>Maybe I'm writing my calculations wrong, though I don't know where.
+Assistant: That's a good point! We can use methods in Python to help us solve problems. How could you apply the round() method to your code?
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    finalScore.round()
+4.    if finalScore >= 90:
+5.        letterGrade = "A"
+6.    elif finalScore >= 80:
+7.        letterGrade = "B"
+8.    elif finalScore >= 70:
+9.        letterGrade = "C"
+10.    elif finalScore >= 60:
+11.        letterGrade = "D"
+12.    else:
+13.        letterGrade = "F"
+14.    return letterGrade, finalScore
+</code>
+User: I am getting an error...What's going on?
+	<alt>Oh, I didn't apply that correctly. I need to do `round(finalScore)`.
+Assistant: If you are getting a new error, do you think that means the way you applied the round() method could be causing you problems? Are you sure that you applied it correctly?
+	<alt>If you received a new error from your addition, what do you think that means?
+	<alt>When you look in the Python documentation for this method, do you see any difference between your application and their application?
+	<alt>Which part of your code do you think is causing the error?
+	<alt>Try using a debugger to step through your code to find where your problem is.
+User: OK, I guess I didn't apply it correctly. I just looked it up and it says I need to put the variable inside the parenthesis. So, I changed it to this, but I don't think it's working still. It's giving me the original error.
+	<alt>Yeah, I'm sure I applied it correctly. That's how you call methods, isn't it?
+	<alt>I'm assuming I didn't do it correctly. Can you show me how to call this method?
+	<alt>Oh, I didn't apply that correctly. I need to do `round(finalScore)`.
+Assistant: To help us understand what's going on, let's take a look at how you calculated `finalScore`. You created a mathematical equation and you stored it into the variable `finalScore`. Why did you store it into a variable?
+	<alt>Try to compare what you wrote to a practical application in the Python documentation. Do you notice anything different between your answer and theirs?
+	<alt>We need to find out what part of your code has the problem. What can you do to figure out whether your rounding method is giving you the rounded answer or not?
+User: I stored it in a variable because you can't use that answer otherwise. If you just did the calculation, you wouldn't be able to check it in the if-statements.
+	<alt>I stored it in a variable because that's how the syntax of the language works. You can't just write calculations right in the IDE.
+Assistant: That makes sense. You need to store the answer somewhere. Notice how you wrote the round() method. Based on our discussion, do you think something is missing?
+User: Oh! I see. I am not storing the result of the rounding calculation anywhere. I need to save it back to the original variable.
+	<alt>I'm not sure I understand how the problems are related.
+	<alt>Am I not storing the rounded number anywhere? I thought that using the Python method would be enough.
+	<alt>Instead of using the `finalScore` variable, I should just put the equation directly into the round() method.
+User: It works now! Thanks for the help.
+Assistant: Great! Let me know if you have any other questions.
+</dialogue>

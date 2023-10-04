@@ -1,0 +1,83 @@
+<problem>
+Write a function `isTwice(string:str, char:str) -> bool` that returns `True` if the character `char` appears exactly twice in the string `string`. Otherwise, it returns `False`.
+## Example Cases:
+```
+isTwice("hello", "l") => True
+isTwice("hello", "o") => False
+isTwice("hello", "h") => False
+isTwice("", "e") => False
+isTwice("I'm a string!", " ") => True
+isTwice("Hey, I'm a string!", " ") => False
+```
+</problem>
+<bug_code>
+1. def isTwice(str, chr):
+2.  count = 0
+3.  for i in str:
+4.    if i == chr:
+5.      count+=1
+6.
+7.  if count >= 2:
+8.    return true
+9.  else:
+10.    return false
+</bug_code>
+<bug_desc>
+On line 8, the function throws a NameError since `true` is not a boolean value.
+</bug_desc>
+<bug_fixes>
+Replace `true` with `True` and `false` with `False` on lines 8 and 10.
+</bug_fixes>
+<unit_tests>
+assert isTwice("hello", "l") == True
+assert isTwice("hello", "o") == False
+assert isTwice("hello", "h") == False
+assert isTwice("", "e") == False
+assert isTwice("I'm a string!", " ") == True
+assert isTwice("Hey, I'm a string!", " ") == False
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I wrote this code and it isn't working. can you help me?
+Assistant: First, let's analyze how your program is behaving and why. Can you describe the issue that you are facing?
+	<alt>It seems that you have a `NameError` error in your code. Are you able to find where this error is?
+	<alt>Let's talk about boolean variables. Can you explain the difference between a boolean variable with the value of `False` versus a string variable with the value `"False"` is?
+	<alt>Let's start with a warm-up question. What are the two possible values of a boolean variable in Python?
+User: I have a syntax error. My code won't even compile.
+	<alt>I think it's a runtime error because it just stopped running.
+	<alt>Can you tell me what the different types of errors are? I don't remember.
+	<alt>It's a logic error, I think. That's the one that is the result of a grammatical error, right?
+Assistant: I see! Let's try to solve a simpler problem. Can you write a code snippet of assigning `True` to a boolean variable called 'var'?
+	<alt>Can you write a code snippet of assigning `False` to a boolean variable called 'var'?
+	<alt>Where is the syntax error located in your code? You look for the line number.
+	<alt>How do you know that it is a syntax error? What are the different types of errors?
+User: `var = True`
+	<alt>`var = true`
+	<alt>var = 1
+	<alt>var = "True"
+Assistant: That's right. Is this what you wrote in your code on line 8?
+	<alt>That's right. Can you look back at where you use boolean variables and see if you used the correct syntax?
+	<alt>Can you point out in your code where you use boolean variables?
+User: No it isn't. I see. Well... the is not a boolean variable anymore. The value you assign to the code determines what kind of data type it is. Since I did not write 'True' in this exact format, I imagine that the program had interpreted the value as a variable that hasn't been initialized instead.
+	<alt>The code would get a syntax error and it wouldn't run.
+	<alt>I'm not sure what you are asking.
+Assistant: That's right! How can you modify your `isTwice` function now to fix this error?
+User: Oh! I found it! I was returning all lowercase True and False values! I will fix it.
+<code>
+1. def isTwice(str, chr):
+2.  count = 0
+3.  for i in str:
+4.    if i == chr:
+5.      count+=1
+6.
+7.  if count >= 2:
+8.    return True
+9.  else:
+10.    return False
+
+</code>
+Assistant: Looks like it works now. Good job!
+User: Thanks!
+</dialogue>

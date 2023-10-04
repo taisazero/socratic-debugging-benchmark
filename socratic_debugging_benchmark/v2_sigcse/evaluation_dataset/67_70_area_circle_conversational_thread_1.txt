@@ -1,0 +1,104 @@
+<problem>
+Write a function that computes the area of a circle. You will name your function `area_circle(radius: float) -> float`. It has one parameter, the radius of the circle, radius. `The area_circle` function will return the area of the circle.
+
+## Example Cases:
+```
+area_circle(1.0) => 3.141
+area_circle(2.5) => 19.634
+area_circle(3.6) => 40.715
+area_circle(4.1) => 52.810
+area_circle(7.0) => 153.938
+area_circle(-2.0) => 0
+```
+</problem>
+<bug_code>
+1. import math
+2.def area_circle(radius):
+3.    if radius < 0:
+4.        return 0
+5.    return math.pi * radius ** radius
+</bug_code>
+<bug_desc>
+On line 3, the function raises the radius to the power of the radius instead of squaring it. As a result, the function does not compute the circle area correctly.
+</bug_desc>
+<bug_fixes>
+Change the return statement on line 4 to `math.pi * radius * radius`
+Change the return statement on line 4 to `math.pi * radius **2`
+</bug_fixes>
+<unit_tests>
+import math
+assert math.isclose(area_circle(1.0), 3.141, abs_tol=0.001)
+assert math.isclose(area_circle(2.5), 19.634, abs_tol=0.001)
+assert math.isclose(area_circle(3.6), 40.715, abs_tol=0.001)
+assert math.isclose(area_circle(4.1), 52.810, abs_tol=0.001)
+assert math.isclose(area_circle(7.0), 153.938, abs_tol=0.001)
+assert math.isclose(area_circle(-2.0), 0, abs_tol=0.001)
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck!
+Assistant: Okay, do you have any ideas what the problem is?
+	<alt>Are any of the test cases passing?
+	<alt>Recheck the instructions, do you think anything is missing?
+User: No, I don't know what's wrong.
+	<alt>The first test case is passing, but the second one is failing.
+Assistant: Okay, let's start by looking at the test cases, does the one on line 8 pass?
+	<alt>Check the instructions, did you skip any steps?
+	<alt>What exactly is this function designed to do?
+User: Yes, the first test case passes, but the second one fails.
+Assistant: What is the radius of the circle in the first test case that is passing?
+	<alt>That's interesting, why do you think the first test case is passing?
+	<alt>Okay, the code is running, so let's start by looking at your function. Which line do you do your calculations on?
+	<alt>What is the radius of the circle in the first test case that is failing?
+	<alt>What is the formula for calculating the area of a circle?
+	<alt>Look at the if-statement on line 3, do you see any problems with it?
+User: The radius of the first test case that is passing is one.
+Assistant: What is the radius of the first test case that is failing?
+	<alt>What is the formula for calculating the area of a circle?
+	<alt>That's interesting, why do you think the first test case is passing?
+	<alt>Okay, the code is running, so let's start by looking at your function. Which line do you do your calculations on?
+User: It's 2.5.
+Assistant: What is the formula for calculating the area of a circle?
+	<alt>That's interesting, do you think there is anything significant about those numbers?
+	<alt>Okay, let's look at your function now, what line do you do your calculation of area on?
+User: It's Pi times the radius squared.
+Assistant: Let's think about those two different values for the radius. Do they act differently when they are squared?
+	<alt>Okay, let's look at your function now, what line do you do your calculation of area on?
+	<alt>What happens when you square 1?
+	<alt>What is the Python operator for squaring a number?
+User: Yes, 1 squared doesn't change it's still 1, and 2.5 squared is 6.25.
+	<alt>I think made a mistake on the squaring part.
+Assistant: Okay, since it works for 1 but not for 2.5, let's look at the code that does the squaring. Where is that code?
+	<alt>Does 1 have any special properties when you multiply it that might make it act differently?
+	<alt>What is the Python operator for squaring a number?
+User: That's on line 5.
+Assistant: What is the expression that is doing the squaring?
+	<alt>What operator does the squaring?
+User: It is the radius ** radius part.
+Assistant: What does it mean to square a number?
+	<alt>How do you raise a variable to a power?
+	<alt>Look back at the Python documentation, how do you raise a variable to a specific value?
+	<alt>What does ** mean?
+User: It means you multiply it times itself.
+Assistant: Okay, so what does ** mean?
+	<alt>What does * mean?
+	<alt>Look back at the Python documentation, how do you raise a variable to a specific value?
+	<alt>Is there a difference between the operators for multiplying and raising to a power?
+User: It means to raise to a power.
+	<alt>Oh! I'm raising the radius to itself instead of squaring it!
+Assistant: What should you be doing to the radius?
+	<alt>What does * mean?
+	<alt>Is there a difference between the operators for multiplying and raising to a power?
+User: I'm supposed to multiply it by itself, not raise it to itself!
+<code>
+1. import math
+2.def area_circle(radius):
+3.    if radius < 0:
+4.        return 0
+5.    return math.pi * radius * radius
+</code>
+Assistant: Does it pass the test cases now?
+User: Yes! It passes, thank you!
+</dialogue>

@@ -1,0 +1,64 @@
+<problem>
+Write a function `fToC(temp: float) -> str` that takes in a temperature in Fahrenheit and returns a string that indicates whether or not the temperature is below freezing. If the temperature in Celcius is less than or equal to 0, the string should say "Freezing!". If the temperature in Celsius is above 0, the string should say "It's not freezing!". The formula for converting Fahrenheit to Celsius is $C = (F - 32) * \frac{5}{9}$. Note that the function should return a string, not a float.
+## Example Cases:
+```
+fToC(32.0) => "Freezing!"
+fToC(0.5) => "Freezing!"
+fToC(45.0) => "It's not freezing!"
+fToC(-5.4) == "Freezing!"
+```
+</problem>
+<bug_code>
+1. def fToC(temp):
+2.  c = (temp - 32) * (5/9)
+3.  if c < 0:
+4.    return "Freezing!"
+5.  else:
+6.    return "It's not freezing!"
+</bug_code>
+<bug_desc>
+If `temp` is equal to 32, the function returns "It's not freezing!" rather than "Freezing!"
+</bug_desc>
+<bug_fixes>
+On line 3, change `<` to `<=`.
+</bug_fixes>
+<unit_tests>
+assert fToC(32.0) == "Freezing!"
+assert fToC(0.5) == "Below freezing!"
+assert fToC(45.0) == "It's not freezing!"
+assert fToC(-5.4) == "Freezing!"
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: There is an issue with my code.
+Assistant: Can you describe the issue to me?
+	<alt>Let's assume that `temp` is 32. Can you explain your code to me line by line?
+User: My code works for most cases, but when I write 32, which should give me "Freezing!", it gives me "It's not freezing!" Why is that happening?
+Assistant: Let's take a look at the if-statement block. Do you remember what the "<" operator does?
+	<alt>Let's take a look at the if-statement block in line 3. What happens if `c` is equal to 0?
+User: That is the "less than" operator. It compares `c` to 0.
+	<alt>That is the "less than" operator. It returns true if `c` is less than 0 and false otherwise.
+Assistant: Could you explain that more clearly? What is returned by `c < 0` when `c` is 1 and what is returned when `c` is -1?
+	<alt>Can you explain that a bit more, what is returned by `c < 0` when `c` is equal to 0?
+	<alt>Can you explain what the "<=" operator does?
+User: When `c` is 1, `c < 0` returns False. When `c` is -1, `c < 0` returns True.
+Assistant: Good. Could you explain what happens when `c` is equal to 0 on line 3?
+	<alt>Good. Now, what operator should you use on line 3 if you want to return "Freezing!" when `c` is equal to 0?
+	<alt>Good. Now on line 3, what should your function return if `c` is equal to 0?
+User: The function returns "It's not freezing!" when `c` is equal to 0, but I want it to return "Freezing!".
+	<alt>Oh... I see the problem now. I don't want to return "It's not freezing!" when `c` is equal to 0, I want to return "Freezing!". I should change the "<" to "<=".
+Assistant: Which operator should you use on line 3 if you want to return "Freezing!" when `c` is equal to 0?
+	<alt>Let's check the Python documentation for an operator that checks if two numbers are less than or equal to each other.
+User: I should use the "<=" operator! Let me try that.
+<code>
+1. def fToC(temp):
+2.  c = (temp - 32) * (5/9)
+3.  if c <= 0:
+4.    return "Freezing!"
+5.  else:
+6.    return "It's not freezing!"
+</code>
+Assistant: Good work!
+</dialogue>

@@ -1,0 +1,109 @@
+<problem>
+Write a function called `LastIndexOf(value:int, array:list) -> int` which is passed two inputs: a value to search for, and a list of integers in which to search. This function should return the index position of the last occurrence (i.e. the rightmost occurrence) of the value being searched for. If the value being searched for does not exist in the array, then the function should return -1.
+
+## Example Cases:
+```
+LastIndexOf(1, [1,1,1,1]) => 3
+LastIndexOf(2, [2,0,1,2])  => 3
+LastIndexOf(3, [1,1,1,1]) => -1
+LastIndexOf(4, [4,1,1,1]) => 0
+```
+</problem>
+<bug_code>
+1. def LastIndexOf(value, array):
+2.    index = -1
+3.    for i in range(len(array)-1, -1):
+4.        if(array[i] == value):
+5.            index = i
+6.            break
+7.    return index
+</bug_code>
+<bug_desc>
+On line 3, the range is from `len(array)-1` to `-1`. The `range` function does not iterate when the start is greater than the stop. Consequently, the for loop is not executed and the function always returns -1.
+</bug_desc>
+<bug_fixes>
+Change the `range` function on line 3 to `range(len(array)-1, -1, -1)` to iterate backwards from `len(array)-1 to -1`.
+</bug_fixes>
+<unit_tests>
+assert LastIndexOf(1, [1,1,1,1]) == 3
+assert LastIndexOf(2, [2,0,1,2]) == 3
+assert LastIndexOf(3, [1,1,1,1]) == -1
+assert LastIndexOf(4, [4,1,1,1]) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck!
+Assistant: Okay, let's go over the code. Does the first test case pass?
+	<alt>Where do you think the problem is?
+	<alt>Have you completed all parts of the instructions?
+User: No, it doesn't pass.
+Assistant: Let's start by going over the first line of your function, what does line 1 do?
+	<alt>Let's start with your function. What do you think is the most complicated part?
+	<alt>Can you describe what your function does?
+User: It takes in the array and the value we are looking for.
+Assistant: Very good, does line 1 take in both of those things?
+	<alt>Very good, let's move on to the next area, what does line 2 do?
+	<alt>Very good, what can you explain what else your function is supposed to do?
+	<alt>What do you think is the most complicated part of your function?
+User: Yes, line 1 does.
+Assistant: Let's check the most complex part of the function for problems next, where would you say that is?
+	<alt>What is the next thing your function needs to do?
+	<alt> Okay, let's move on to the next area, what does line 2 do?
+	<alt>Let's make sure your function ends correctly, what value is it returning?
+User: That's probably the loop.
+Assistant: Let's explore the loop a bit. Can you add some print statements to see what's happening?
+	<alt>What variable controls the loop?
+	<alt>What determines how many times the loop will run?
+	<alt>Let's check that loop carefully, how should we move through the list?
+	<alt>Is there anything special about how we are moving through the list?
+User: I don't know, where would I put them?
+Assistant: What's a piece of information that would be useful to check what the loop is doing?
+	<alt>What are some important variables in the loop?
+	<alt>How could you check if the loop was starting at all?
+User: I need to know about i and index.
+<code>
+1. def LastIndexOf(value, array):
+2.    index = -1
+3.    for i in range(len(array)-1, -1):
+4.        print(i)
+5.        print(index)
+6.        if(array[i] == value):
+7.            index = i
+8.            break
+9.    return index
+</code>
+Assistant: What happens when you run it?
+User: Nothing prints.
+Assistant: What does that tell you about the loop?
+	<alt>What does that mean about the loop conditions?
+	<alt>Why would a statement not print?
+	<alt>Why would a loop not run?
+User: It means we don't start looping.
+Assistant: Why would a loop not run?
+	<alt>What does that mean about the loop conditions?
+User: There is something wrong with the loop conditions.
+Assistant: Let's check the loop conditions, what controls if the loop loops?
+	<alt>What number is the loop supposed to start on?
+	<alt>What number is the loop supposed to stop on?
+	<alt>What variable are we monitoring?
+	<alt>What are the parameters for range?
+User: It runs if i is between the last index minus 1 of the array and -1.
+Assistant: What is the default step for loops in Python?
+	<alt>What sets i?
+	<alt>Check the Python documentation, what direction do loops move through in Python?
+	<alt>What is the default increment for a range in Python?
+User: Oh! The default step is 1, and I want my number to decrease! It should be -1!
+<code>
+1. def LastIndexOf(value, array):
+2.    index = -1
+3.    for i in range(len(array)-1,-1,-1):
+4.        if(array[i] == value):
+5.            index = i
+6.            break
+7.    return index
+</code>
+Assistant: Try it now, does it work?
+User: Yes! Thank you!
+</dialogue>

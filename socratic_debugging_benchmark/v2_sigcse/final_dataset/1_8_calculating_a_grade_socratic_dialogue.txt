@@ -1,0 +1,179 @@
+<problem>
+Create a method `calculateGrade(hw:float, exams: float, projects: float, att:float) -> Tuple[str, int]` that takes in four float parameters between 0 and 100 representing a student's grades in four different categories: Homework (`hw`) which is worth 20% of the final grade, Exams (`exams`) worth 40% of the final grade, Projects (`projects`) worth 30%, and Attendance (`att`), worth 10%. The function should calculate the final grade a student is getting and return a tuple containing the final letter grade and the final numeric grade rounded up to the nearest whole number.
+
+The letter grade should be determined based on the following scale:
+
+* A for a final rounded grade between 90 and 100 (inclusive)
+* B for a final rounded grade between 80 and 89 (inclusive)
+* C for a final rounded grade between 70 and 79 (inclusive)
+* D for a final rounded  grade between 60 and 69 (inclusive)
+* F for a final rounded grade below 60.
+
+For example, if you enter `calculateGrade(75, 60, 73, 87)`, the function should return `('C', 70)` because the final raw score is `69.6` which rounds up to `70` and corresponds to a letter grade of `C`.
+
+## Example Cases:
+```
+calculateGrade(100, 100, 100, 100) => ('A', 100)
+calculateGrade(100, 89, 85, 90) => ('A', 90)
+calculateGrade(72, 96, 74, 98) => ('B', 85)
+calculateGrade(100, 82, 68, 94) => ('B', 83)
+calculateGrade(75, 60, 73, 100) => ('C', 71)
+calculateGrade(75, 60, 73, 87) => ('C', 70)
+calculateGrade(70, 60, 65, 70) => ('D', 64)
+calculateGrade(12, 14, 23, 10) => ('F', 16)
+calculateGrade(0, 0, 0, 0) => ('F', 0)
+```
+</problem>
+<bug_code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    roundedScore = round(finalScore)
+4.    if roundedScore > 90:
+5.        letterGrade = "A"
+6.    elif roundedScore >= 80:
+7.        letterGrade = "B"
+8.    elif roundedScore >= 70:
+9.        letterGrade = "C"
+10.    elif roundedScore >= 60:
+11.        letterGrade = "D"
+12.    else:
+13.        letterGrade = "F"
+14.    return letterGrade, roundedScore
+</bug_code>
+<bug_desc>
+When `roundedScore` is `90` the if statement on line 4 evaluates to False, since `90` is not strictly greater than `90`.  Consequently, the function assigns `B` to `letterGrade` which is incorrect.
+</bug_desc>
+<bug_fixes>
+Replace `roundedScore > 90` with `roundedScore >= 90` on line 4.
+</bug_fixes>
+<unit_tests>
+assert calculateGrade(100, 100, 100, 100) == ('A', 100)
+assert calculateGrade(100, 89, 85, 90) == ('A', 90)
+assert calculateGrade(72, 96, 74, 98) == ('B', 85)
+assert calculateGrade(100, 82, 68, 94) == ('B', 83)
+assert calculateGrade(75, 60, 73, 100) == ('C', 71)
+assert calculateGrade(75, 60, 73, 87) == ('C', 70)
+assert calculateGrade(70, 60, 65, 70) == ('D', 64)
+assert calculateGrade(12, 14, 23, 10) == ('F', 16)
+assert calculateGrade(0, 0, 0, 0) == ('F', 0)
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck.
+Assistant: Okay, where do you think the problem is?
+	<alt>What test cases are passing?
+	<alt>What test cases are failing?
+	<alt>Have you reread the prompt?
+	<alt>Have you checked the calculation for the grade?
+	<alt>Have you checked the if-statement?
+User: I don't know.
+Assistant: Let's go through your function line by line, how can you check the calculation on line 2?
+	<alt>Let's start by looking at the test cases, what is the first one to fail?
+	<alt>Let's start by looking at the test cases, does the first one pass?
+User: I can add a print statement to check the number.
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    print(finalScore)
+4.    roundedScore = round(finalScore)
+5.    if roundedScore > 90:
+6.        letterGrade = "A"
+7.    elif roundedScore >= 80:
+8.        letterGrade = "B"
+9.    elif roundedScore >= 70:
+10.        letterGrade = "C"
+11.    elif roundedScore >= 60:
+12.        letterGrade = "D"
+13.    else:
+14.        letterGrade = "F"
+15.    return letterGrade, roundedScore
+
+</code>
+Assistant: Good, what is the first test case to fail?
+	<alt>Good, does the first test case succeed?
+	<alt>Good, is the first `finalScore` correct?
+	<alt>Good, what is the first incorrect `finalScore`?
+User: The second test case fails.
+Assistant: Is the `finalScore` correct for that test case?
+	<alt>Do you think it is a rounding error?
+	<alt>What do you think the error is?
+	<alt>Do you think it is a problem with matching the grade to the letter?
+	<alt>How can you check if it is a rounding error?
+User: Yes, the final score is correct for that test case.
+Assistant: How can you check if it is a rounding error?
+	<alt>What do you think the error is?
+	<alt>Do you think it is a problem with matching the grade to the letter?
+User: I can add another print statement after line 4 and check the rounding.
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    print(finalScore)
+4.    roundedScore = round(finalScore)
+5.    print(roundedScore)
+6.    if roundedScore > 90:
+7.        letterGrade = "A"
+8.    elif roundedScore >= 80:
+9.        letterGrade = "B"
+10.    elif roundedScore >= 70:
+11.        letterGrade = "C"
+12.    elif roundedScore >= 60:
+13.        letterGrade = "D"
+14.    else:
+15.        letterGrade = "F"
+16.    return letterGrade, roundedScore
+
+</code>
+Assistant: Very good. Do you think it is a rounding error?
+	<alt>What do you think the error is?
+	<alt>Do you think it is a problem matching the grade to the letter?
+User: No, I don't think so.
+Assistant: Now, let's look at the if-statement that matches letters to the grades. Can you tell me what the first statement checks?
+	<alt>What do you think the error is?
+	<alt>Do you think it is a problem matching the grade to the letter?
+User: It checks if the rounded score is greater than 90.
+	<alt>I see, it should be greater than or equal to!
+Assistant: Think about that carefully, would it return true or false if the grade was exactly 90?
+User: No, it wouldn't! That's wrong, it should be greater than or equal to!
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    print(finalScore)
+4.    roundedScore = round(finalScore)
+5.    print(roundedScore)
+6.    if roundedScore >= 90:
+7.        letterGrade = "A"
+8.    elif roundedScore >= 80:
+9.        letterGrade = "B"
+10.    elif roundedScore >= 70:
+11.        letterGrade = "C"
+12.    elif roundedScore >= 60:
+13.        letterGrade = "D"
+14.    else:
+15.        letterGrade = "F"
+16.    return letterGrade, roundedScore
+
+</code>
+Assistant: Try running it again, does it work now?
+User: Yes! It does. I'll remove the extra print statements.
+<code>
+1. def calculateGrade(hw, exams, projects, att):
+2.    finalScore = hw * 0.2 + exams * 0.4 + projects * 0.3 + att * 0.1
+3.    roundedScore = round(finalScore)
+4.    if roundedScore >= 90:
+5.        letterGrade = "A"
+6.    elif roundedScore >= 80:
+7.        letterGrade = "B"
+8.    elif roundedScore >= 70:
+9.        letterGrade = "C"
+10.    elif roundedScore >= 60:
+11.        letterGrade = "D"
+12.    else:
+13.        letterGrade = "F"
+14.    return letterGrade, roundedScore
+
+</code>
+Assistant: Very good.
+User: Thank you!
+</dialogue>

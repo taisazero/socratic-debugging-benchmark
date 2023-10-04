@@ -1,0 +1,100 @@
+<problem>
+Write a function `insert_after(head: Node, prev_data: int, new_data: int) -> None` that takes in the head of a linked list, the data of a node in the linked list, and some new data. The function should insert a new node with the new data after the node with the `prev_data`. If the `prev_data` is not in the linked list, the function should do nothing. The function should return None. Note that the function should modify the linked list in place.
+You are provided with a `Node` class that has a `data` attribute and a `next` attribute. The `next` attribute points to the next node in the linked list. The `head` of the linked list is the first node in the linked list.
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+```
+## Example Cases:
+```py
+head = Node(data=1)
+head.next = Node(data=2)
+head.next.next = Node(data=3)
+head.next.next.next = Node(data=4)
+insert_after(head, 2, 5) => None
+head.data == 1
+head.next.data == 2
+head.next.next.data == 5
+head.next.next.next.data == 3
+head.next.next.next.next.data == 4
+insert_after(head, 8, 6) => "Previous node is not in linked list"
+```
+</problem>
+<bug_code>
+1. class Node:
+2.    def __init__(self, data=None, next=None):
+3.        self.data = data
+4.        self.next = next
+5.
+6. def insert_after(head, prev_data, new_data):
+7.    curr_head = head
+8.    while curr_head is not None:
+9.        if curr_head.data == prev_data:
+10.            new_node = Node(data=new_data)
+11.            curr_head.next = new_node
+12.            return
+13.        else:
+14.            curr_head = curr_head.next
+15.    
+16.    return "Previous node is not in linked list"
+</bug_code>
+<bug_desc>
+The function returns an incomplete linked list when inserting an element in a linked list. For example, upon inserting `5`, after `2` in the list: 1->2->3->4 , the returned list is 1->2->5 instead of 1->2->5->3->4.
+</bug_desc>
+<bug_fixes>
+After line 10, insert a line `new_node.next = curr_head.next`
+</bug_fixes>
+<unit_tests>
+head = Node(data=1)
+head.next = Node(data=2)
+head.next.next = Node(data=3)
+head.next.next.next = Node(data=4)
+assert insert_after(head, 2, 5) == None
+assert head.data == 1
+assert head.next.data == 2
+assert head.next.next.data == 5
+assert head.next.next.next.data == 3
+assert head.next.next.next.next.data == 4
+assert insert_after(head, 8, 6) == "Previous node is not in linked list"
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I implemented the `insert_after()` function, but it doesn’t work. Can you help?
+	<alt>Hi! I implemented the `insert_after()` function, but its execution stops at line 26 with an error. Can you help?
+Assistant: Sure. Let us first check your understanding of this problem itself. Assume that we have a linked list with four nodes: Node1 contains the data value 1 and the next attribute that refers to Node2, Node2 contains the data value 2 and the next attribute that refers to Node3, Node3 contains the data value 3 and the next attribute that refers to Node4, Node4 contains the data value 4 and the next attribute that refers to None (the end of the list). What should be the result after executing the `insert_after(Node1, 2, 5)` function? Please be advised that if the data value in a node uniquely represents this node, the linked list can be simply represented as `1 -> 2 -> 3 -> 4`.
+User: The results would be a linked list with five nodes: Node1 contains the data value 1 and the next attribute that refers to Node2, Node2 contains the data value 2 and the next attribute that refers to a new node, called Node5, Node5 contains the data value 5 and the next attribute that refers to Node3, Node3 contains the data value 3 and points the next attribute that refers to Node4, Node4 contains the data value 4 and the next attribute that refers to None (the end of the list).
+Assistant: Great job! Let's now look at what happens in `insert_after` in your code. Can you track execution line-by-line?
+	<alt>Let's now walk through the first test case. Can you tell what happens when we run lines 18 to 22?
+	<alt>Could you explain what is happening in the while loop of your ‘insert_after()’ function implementation keeping this in mind?
+	<alt>Let's look at what happens if we run `insert_after(Node1, 2, 5)` from your code - can you tell me what the value of each variable will be?
+User: If the `head` refers to Node1, `prev_data` is 2, and `new_data` is 5, the loop will run since `curr_head` will refer to Node1. Then since the `curr_head.data` is not 2, we will go to `curr_head` as Node2. Then the value will match, so we make a new Node5 with data 5 and update the `curr_head.next` to be Node5.
+Assistant: That's right! Could you now tell me what happens when we complete the test case checks?
+	<alt>That's right! Keep going forward with our check - do you think we will run into an error with any of the assertions?
+User: Yes, I think we run into an error when we reach check for the node with value 3 (Node3). It looks like we do not have that in the linked list anymore - I see that this is because the link from its previous node is broken. I think I need to make sure to update that link.
+	<alt>Yes, there's an error when we check Node3 which should come after Node5. I will assign the next node for Node5 (the new node) as Node3 to maintain the next order.
+	<alt>It seems that the new linked list is actually 1->2->5, after executing the function, `assert_after(head, 2, 5)`. The next attribute of Node5 should refers to Node3.
+<code>
+1. class Node:
+2.    def __init__(self, data=None, next=None):
+3.        self.data = data
+4.        self.next = next
+5.
+6.def insert_after(head, prev_data, new_data):
+7.    curr_head = head
+8.    while curr_head is not None:
+9.        if curr_head.data == prev_data:
+10.            new_node = Node(data=new_data)
+11.            new_node.next = curr_head.next
+12.            curr_head.next = new_node
+13.            return
+14.       else:
+15.           curr_head = curr_head.next
+16.    
+17.   return "Previous node is not in linked list"
+
+</code>
+Assistant: Great! Let me know if you need more help.
+</dialogue>

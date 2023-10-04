@@ -1,0 +1,67 @@
+<problem>
+Define a function called `Largest(a:int, b:int, c:int) -> int` which takes three integer inputs: a, b and c. The function should return the largest of these three values.
+
+## Example Cases:
+```
+Largest(1,2,3) => 3
+Largest(3,2,1) => 3
+Largest(2,2,1) => 2
+Largest(1,1,1) => 1
+```
+</problem>
+<bug_code>
+1. def Largest(a, b, c):
+2.	if(a > b and a > c):
+3.		return a
+4.	elif(b > a and b > c):
+5.		return b
+6.	else:
+7.		return c
+</bug_code>
+<bug_desc>
+When `a` and `b` are equal, `c` is returned regardless of its comparison to `a` or `b`. For example: `Largest(2,2,1)` returns 1.
+</bug_desc>
+<bug_fixes>
+Change the > to >= in all the conditions.
+</bug_fixes>
+<unit_tests>
+assert Largest(1,2,3) == 3
+assert Largest(3,2,1) == 3
+assert Largest(2,2,1) == 2
+assert Largest(1,1,1) == 1
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I've been working on the `Largest()` function for a while and I can't tell why it's not working. From what I understand it is working, but then it isn't passing the `assert` statements.
+Assistant: Hello! Can you explain how your function works step by step?
+User: Yes, I can. My `Largest()` function first checks if the first input is the largest, then if the second input is the largest, and if neither of those is the largest, then assumes the last input is the largest since neither the first nor the second is the largest.
+Assistant: Okay, you definitely have an understanding of the control flow of this program. However, why would you be able to assume that the final input is the largest if the first is not the greatest and the second is not the greatest?
+User: Oh, I get that now. So if I made this change it would be correct, since I cannot make the assumption?
+<code>
+1. def Largest(a, b, c):
+2.	if(a > b and a > c):
+3.		return a
+4.	elif(b > a and b > c):
+5.		return b
+6.	elif(c > a and c > b):
+7.		return c
+</code>
+Assistant: This is still incorrect, but it has fixed one of the issues. What would happen if all of the inputs are equal? What would the function return?
+	<alt>Can you tell me about a situation where this function would now return `None`?
+User: That would return `None`, right? What should I do in this case, none of my conditions can catch that, do I need to add another case?
+Assistant: I don't think that is necessary, I think there is a way to modify your existing cases to make this work. How would you check if a number is either larger or the same as another number?
+User: Oh! I could use the `>=` operator. That makes it work as expected now, thank you so much!
+<code>
+1. def Largest(a, b, c):
+2.	if(a >= b and a >= c):
+3.		return a
+4.	elif(b >= a and b >= c):
+5.		return b
+6.	elif(c >= a and c >= b):
+7.		return c
+</code>
+Assistant: That is entirely correct! I'm glad I could be of assistance. Can I help you with anything else today?
+User: No, that's all for now. Thank you!
+</dialogue>

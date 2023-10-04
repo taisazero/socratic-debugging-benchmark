@@ -1,0 +1,78 @@
+<problem>
+The CS110Z course director, unfortunately, was tricked into purchasing a Disney Vacation Club timeshare. The good news about DVC is that it lets you reserve a room at any Disney Resort for one week! The downside, however, is that members have to pay an annual "maintenance fee" so that the mouse can keep the property looking good (EVEN when Disney World was closed due to COVID-19 . . . yay).
+
+This year, the maintenance was $623.00. If that isn't bad enough, your course director discovered that maintenance fees aren't fixed! On the contrary, it accues each year at a rate of approximately 1.5%.
+
+Write a Python function called `get_years_until(target_value: float) -> int` that takes a target value as a parameter, and returns the number of years (assuming a fixed interest rate) before the maintenance fee exceeds this value.
+
+## Example Cases:
+```
+get_years_until(624) => 1
+get_years_until(1000) => 32
+```
+
+</problem>
+<bug_code>
+1. def get_years_until(target_amount):
+2.    i=623
+3.    years=0
+4.    while i < target_amount:
+5.        years= years+1
+6.        i= 0.015*i
+7.    return years
+</bug_code>
+<bug_desc>
+On line 6, the new fee is calculated as 1.5% of the old fee, rather than increasing by 1.5%. As a result, the loop will not terminate.
+</bug_desc>
+<bug_fixes>
+On line 6, replace `i= 0.015*i` with `i= i + 0.015*i`
+</bug_fixes>
+<unit_tests>
+assert get_years_until(624) == 1
+assert get_years_until(1000) == 32
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm really stuck.
+Assistant: Okay, where do you think the problem is?
+	<alt>Are any of test cases passing?
+	<alt>What is your function supposed to do?
+	<alt>Let's start with the first part of your function, what happens on lines 2 and 3?
+	<alt>Let's start by examining your loop, what happens on line 4?
+User: I don't know.
+Assistant: Let's start with your function. What happens on lines 2 and 3?
+	<alt>Are any of test cases passing?
+	<alt>What is your function supposed to do?
+	<alt>Have you read the prompt carefully?
+	<alt>Let's start by examining your loop, what happens on line 4?
+User: I declare some variables for the starting amount and the years.
+Assistant: Very good, so let's look at the loop part now. What happens on line 4?
+	<alt>What should happen next?
+	<alt>Does your function return the correct variable?
+User: It checks if i is less than the target amount and keeps looping if that's true.
+Assistant: That makes sense, let's look at the calculation part inside the loop. How do we calculate the interest amount?
+	<alt>Is that what it is supposed to do?
+	<alt>What do we do on line 5?
+User: It's the current amount plus the interest rate times the current amount.
+	<alt>I don't know.
+Assistant: What line in your code would have that calculation?
+	<alt>Does that calculation match the one in your code?
+User: Line 6
+Assistant: Look carefully at that line, does it match the equation you just told me about?
+	<alt>Is there anything wrong with that line?
+	<alt>What would 623 times 0.015 be?
+User: No! It doesn't match, I forgot to add back the initial amount!
+<code>
+1. def get_years_until(target_amount):
+2.    i=623
+3.    years=0
+4.    while i < target_amount:
+5.        years= years+1
+6.        i= i+0.015*i
+7.    return years
+</code>
+Assistant: Try running the code here, what happens?
+User: It works! Thanks!
+</dialogue>

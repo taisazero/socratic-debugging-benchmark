@@ -1,0 +1,101 @@
+<problem>
+The CS110Z course director, unfortunately, was tricked into purchasing a Disney Vacation Club timeshare. The good news about DVC is that it lets you reserve a room at any Disney Resort for one week! The downside, however, is that members have to pay an annual "maintenance fee" so that the mouse can keep the property looking good (EVEN when Disney World was closed due to COVID-19 . . . yay).
+
+This year, the maintenance was $623.00. If that isn't bad enough, your course director discovered that maintenance fees aren't fixed! On the contrary, it accues each year at a rate of approximately 1.5%.
+
+Write a Python function called `get_years_until(target_value: float) -> int` that takes a target value as a parameter, and returns the number of years (assuming a fixed interest rate) before the maintenance fee exceeds this value.
+
+## Example Cases:
+```
+get_years_until(624) => 1
+get_years_until(1000) => 32
+```
+
+</problem>
+<bug_code>
+1. def get_years_until(target_amount):
+2.
+3.    current_fee = 623.00
+4.    years = 0
+5.    total_fee = current_fee
+6.
+7.    while total_fee < target_amount:
+8.        total_fee = current_fee*(1.015**years)
+9.        years += 1
+10.
+11.    return years
+</bug_code>
+<bug_desc>
+On line 8, the new total fee is calculated before the number of years is incremented, so the final result will be 1 greater than the correct answer.
+</bug_desc>
+<bug_fixes>
+Move line 9 to be above line 8 and within the while loop.
+</bug_fixes>
+<unit_tests>
+assert get_years_until(624) == 1
+assert get_years_until(1000) == 32
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: I'm really stuck!
+Assistant: Let me help, do you have any idea what's wrong?
+	<alt>What test cases are passing?
+	<alt>Have you read the instructions and made sure you are doing everything?
+	<alt>Where do you think the problem is?
+User: I don't know. None of the test cases are passing.
+Assistant: Could we add some print statements to check the math?
+	<alt>Let's start by checking the math, what numbers do we start with?
+	<alt>How should the calculation work?
+	<alt>Okay, let's start with the first part of your function. What happens on lines 3, 4, and 5?
+User: Yes, we could add some to see what's happening, but I don't know where to put them.
+	<alt>I could add one in the loop to see what's happening with the fee.
+Assistant: Okay, look at the code, what are some important variables in your calculations?
+	<alt>How would you print the number of years to see how far off the answer is from the test case?
+User: Well, years is important, and so is total fee and current fee.
+Assistant: Let's print those, where should we put the print statements?
+User: We could put them after line 7 in the loop.
+	<alt>I don't know.
+<code>
+1. def get_years_until(target_amount):
+2.
+3.    current_fee = 623.00
+4.    years = 0
+5.    total_fee = current_fee
+6.
+7.    while total_fee < target_amount:
+8.        print(years)
+9.        print(total_fee)
+10.        print(current_fee)
+11.        total_fee = current_fee*(1.015**years)
+12.        years += 1
+13.
+14.    return years
+</code>
+Assistant: Look at the printed output, do you see anything odd?
+	<alt>Look at the printed output, what is the value for years?
+	<alt>Look at the printed output, why do you think it is repeating?
+User: It's doing zero years first. That isn't right, it's supposed to start at 1.
+Assistant: What line determines that?
+	<alt>Where is years incremented?
+User: Line 12.
+Assistant: What should you do with line 12?
+	<alt>Is that line where it should be?
+User: I see! I'll move it up above the calculation.
+<code>
+1. def get_years_until(target_amount):
+2.
+3.    current_fee = 623.00
+4.    years = 0
+5.    total_fee = current_fee
+6.
+7.    while total_fee < target_amount:
+8.        years += 1
+9.        total_fee = current_fee*(1.015**years)
+10.
+11.    return years
+</code>
+Assistant: Try it now. Does it pass the test cases?
+User: Yes! It works, thanks!
+</dialogue>

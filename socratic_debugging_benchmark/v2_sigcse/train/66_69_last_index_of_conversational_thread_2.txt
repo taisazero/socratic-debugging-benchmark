@@ -1,0 +1,58 @@
+<problem>
+Write a function called `LastIndexOf(value:int, array:list) -> int` which is passed two inputs: a value to search for, and a list of integers in which to search. This function should return the index position of the last occurrence (i.e. the rightmost occurrence) of the value being searched for. If the value being searched for does not exist in the array, then the function should return -1.
+
+## Example Cases:
+```
+LastIndexOf(1, [1,1,1,1]) => 3
+LastIndexOf(2, [2,0,1,2])  => 3
+LastIndexOf(3, [1,1,1,1]) => -1
+LastIndexOf(4, [4,1,1,1]) => 0
+```
+</problem>
+<bug_code>
+1. def LastIndexOf(value, array):
+2.    index = -1
+3.    for i in range(len(array)-1, -1):
+4.        if(array[i] == value):
+5.            index = i
+6.            break
+7.    return index
+</bug_code>
+<bug_desc>
+On line 3, the range is from `len(array)-1` to `-1`. The `range` function does not iterate when the start is greater than the stop. Consequently, the for loop is not executed and the function always returns -1.
+</bug_desc>
+<bug_fixes>
+Change the `range` function on line 3 to `range(len(array)-1, -1, -1)` to iterate backwards from `len(array)-1 to -1`.
+</bug_fixes>
+<unit_tests>
+assert LastIndexOf(1, [1,1,1,1]) == 3
+assert LastIndexOf(2, [2,0,1,2]) == 3
+assert LastIndexOf(3, [1,1,1,1]) == -1
+assert LastIndexOf(4, [4,1,1,1]) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello, I was working on the `LastIndexOf()` function and it only responds with -1 each time and I cannot understand why.
+Assistant: Can you explain what your function does step by step?
+User: `index` is initialized to -1, then the entire list is iterated in reverse, checking if each element of `array` at index `i` is equivalent to `value`, and if it is setting index equal to that value.
+Assistant: What is important about counting backwards?
+User: We are looking for the greatest index of `value`, searching in reverse would make that faster.
+Assistant: How would you defend against changing the value of `index` when you have already found the last index of `value` in the list?
+User: Oh, I can put in `array[i] == value and i > index`, right?
+Assistant: But if speed was the goal of counting backwards, would you still not process every element of the list?
+	<alt>This would be correct, except there is one issue remaining with how you're using `range()`. Can you see a problem with the numbers you're using as input?
+User: Oh, that is true, I suppose it would be simpler to just count upwards rather than downwards. I made that change and my code is working as expected now.
+<code>
+1. def LastIndexOf(value, array):
+2.    index = -1
+3.    for i in range(0, len(array)-1):
+4.        if(array[i] == value):
+5.            index = i
+6.            break
+7.    return index
+</code>
+Assistant: I am glad I could be of assistance. Is there anything else I could help you with today?
+User: No, that's all for now. Thank you!
+</dialogue>

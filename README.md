@@ -1,16 +1,13 @@
 # Socratic Debugging Benchmark
 
-![Socrates and a student](annotation_tool/img/socratic_debugging.png)
 
-The repository contains the code and dataset for accompanying the paper [Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations"](https://aclanthology.org/2023.bea-1.57/) in proceedings of the 18th Workshop on Innovative Use of NLP for Building Educational Application at ACL 2023.
+<img src="annotation_tool/img/socratic_debugging.png" height="400">
 
-There are 3 subfolders:
-* evaluation_dataset: Contains all the dialogues used for evaluations in the paper. This subfolder excludes any dialogues with analogies that were not used for evaluations.
-* final_dataset: Contains all 86 dialogues curated for the dataset. This subfolder includes dialogues with analogy use.
-* manual_evaluation_dialogues: Contains the dialogues used for manual evaluation of the dataset.
+The repository contains the source code and dataset for the Socratic Debugging Benchmark accompanying the papers [Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations"](https://aclanthology.org/2023.bea-1.57/) in proceedings of the 18th Workshop on Innovative Use of NLP for Building Educational Application at ACL 2023 and SIGCSE'24 (TBD).
+
+There are 2 versions of the dataset available in this repository version 1 was submitted to BEA@ACL'24 and version 2 was submitted to SIGCSE'24. The main difference between the two versions is that version 2 contains more dialogues. The dataset is available in the `final_dataset` folder. The `evaluation_dataset` folder contains the dialogues used for evaluations in the paper. The only difference between the `final_dataset` and `evaluation_dataset` is that the `evaluation_dataset` excludes any dialogues with analogies that were not used for evaluations. The `manual_evaluation_dialogues` folder contains the dialogues used for manual evaluation of the dataset. `train` was used in the fine-tuning experiments while `test` was used for automatically evaluating the fine-tuned model.
 
 If you have any questions please contact [ealhossa@uncc.edu](mailto:ealhossa@uncc.edu).
-
 
 ## Running the Data Contribution Tool
 Create a new virtual Python environment called `socratic_env` using Anaconda or virtualenv. Then, activate the environment and install the required packages using the following command:
@@ -39,7 +36,9 @@ bash launch_runs.sh
 The results will be saved in the `results` folder.
 
 ## Citation
-If you use this dataset, please cite our [paper](https://aclanthology.org/2023.bea-1.57/):
+If you use this dataset, please cite our papers: 
+* [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/):
+* SIGCSE'24 (TBD)
 ```
 @inproceedings{al-hossami-etal-2023-socratic,
     title = "Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations",

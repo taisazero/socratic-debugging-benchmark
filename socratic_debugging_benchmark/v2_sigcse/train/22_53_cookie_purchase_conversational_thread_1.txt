@@ -1,0 +1,75 @@
+<problem>
+Write a function `cookiePurchase(cookies: float) -> dict` that takes in the number of cookies a customer wants to purchase and returns a dictionary with the total price of the cookies and the discount that the customer will receive. The price of a cookie is $1.75. If the customer purchases more than 10 cookies and the number of cookies is a multiple of 10, then the customer will receive a 10% discount. The function should return a dictionary with the keys `price` and `discount`. The `discount` key should map to the amount of the discount and the `price` key should map to the total price of the cookies after the discount is applied. Assume that the customer will always purchase a positive number of cookies.
+## Example Cases:
+```
+cookiePurchase(2) => {'discount': 0.0, 'price': 3.5}
+cookiePurchase(70) => {'discount': 12.25, 'price': 110.25}
+cookiePurchase(22) => {'discount': 0.0, 'price': 38.5}
+cookiePurchase(10) => {'discount': 0.0, 'price': 17.5}
+cookiePurchase(20) => {'discount': 3.5, 'price': 31.5}
+```
+</problem>
+<bug_code>
+1. def cookiePurchase(cookies):
+2.    price = cookies * 1.75
+3.    discount = 0
+4.    if cookies > 10 and cookies / 10 == 0:
+5.        discount = price * 0.1
+6.        price = price - discount
+7.    return {"discount": discount, "price": price}
+</bug_code>
+<bug_desc>
+On line 4, the function checks if the quotient `cookies` and 10 is 0 instead of checking whether `cookies` is a multiple of 10.
+</bug_desc>
+<bug_fixes>
+On line 4, replace `/` with `%` and on line 4.
+</bug_fixes>
+<unit_tests>
+assert cookiePurchase(2) == {'discount': 0, 'price': 3.5}
+assert cookiePurchase(70) == {'discount': 12.25, 'price': 110.25}
+assert cookiePurchase(22) == {'discount': 0, 'price': 38.5}
+assert cookiePurchase(10) == {'discount': 0, 'price': 17.5}
+assert cookiePurchase(20) == {'discount': 3.5, 'price': 31.5}
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I'm having a problem with my code
+	<alt>Hi! My code seems to sometimes give answers that are very off
+Assistant: What seems to be the issue?
+	<alt>Can you walk me through your function line by line?
+	<alt>Let's start with a simple warm-up question. How do you check if a number is even?
+	<alt>Let's start with a simple warm-up question. How do you check if a number is divisible by 10?
+User: My outputs seem to be wrong sometimes, but I don't notice anything wrong with my code
+Assistant: Okay. Let's try 70 for `cookies`. 70 is greater than 10 and divisible by 10, so what should the value of `discount` be after line 4?
+	<alt>Let's use a debugger to step through your code. Let's run `cookiePurchase(70)` and see what happens. Is `70` divisible by 10? and what is the value of `discount` after line 4?
+	<alt>Ok, let's assume that `cookies` is 70. Can you walk me through what your code does line by line?
+	<alt>Okay. Let's add a print statement to track the truth value of the condition on line 4. What is the value of `cookies / 10` when `cookies` is 70?
+User: I think there should be a discount of 10% but when I run `cookiePurchase(70)`, I get a discount of 0. I'm so lost.
+Assistant: Let's review the problem description again. What are the conditions for a discount and where in your code do you check for these conditions?
+	<alt>From the task description, you need to check whether the number of cookies is divisible by 10, and it looks like you fail on an input that is divisible by 10. Can you explain how you're checking whether 70 is divisible by 10?
+User: The task description tells me to check whether the number of `cookies` is greater than 10 and whether `cookies` is a multiple of 10, and I fail on 70 cookies, so maybe I'm not checking this properly.
+Assistant: Let's walk through your if statement on line 4 then. 70 > 10 is True, but what is the value of `cookies / 10` when `cookies` is 70?
+User: So, for 70, I first check if it is greater than 10, which it is, and then I check whether it is a multiple of 10. I do this by dividing by 10 and seeing if the output is 0. Wait, that's not right. 70 / 10 is 7, not 0.
+	<alt>So, for 70, I first check that it is greater than 10, and then I divide by 10 to check divisibility
+Assistant: Hm... Are you sure that dividing by 10 is the right way to check whether a number is a multiple of 10?
+	<alt>What operator should you use to check whether a number is a multiple of 10?
+	<alt>Where can you learn more about Python operators?
+User: Hm... I think `/` regular division does not check whether a number is a multiple of 10. I am not sure what operator I should use to check whether a number is a multiple of 10...
+Assistant: Where can you learn more about arithmetic operators in Python?
+	<alt>Let's take a look at the Python documentation to see if there is a different operator that does what you want.	
+User: Ah! The Python documentation would be good to look at right now. Looking at the documentation, I think I should be using the modulus operator. I'll try that.
+<code>
+ def cookiePurchase(cookies):
+    price = cookies * 1.75
+    discount = 0
+    if cookies > 10 and cookies % 10 == 0:
+        discount = price * 0.1
+        price = price - discount
+    return {"discount": discount, "price": price}
+
+</code>
+Assistant: Looks like it works!
+User: Yes it does for all the test cases! Thank you so much!
+</dialogue>

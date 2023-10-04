@@ -1,0 +1,84 @@
+<problem>
+Write a function `count_words(sentence: str) -> int` that returns the number of words in the sentence. A word is a maximal sequence of characters that does not contain spaces. For example, `count_words(" This is a sentence ")` returns 4. 
+## Example Cases:
+```
+count_words("hello world") => 2
+count_words("hello    world") => 2
+count_words("This is a sentence") => 4
+count_words("I love Python") => 3
+count_words("") => 0
+count_words(" ") => 0
+```
+</problem>
+<bug_code>
+1. def count_words(sentence):
+2.    words = 0
+3.    space_mode = True
+4.    for c in sentence:
+5.        if c == ' ':
+6.            if not space_mode:
+7.                words += 1
+8.            space_mode = True
+9.        else:
+10.            space_mode = False
+11.    return words
+</bug_code>
+<bug_desc>
+There is an off-by-one error where the last word in `sentence` is not counted when `sentence` ends with a non-space token.
+</bug_desc>
+<bug_fixes>
+Insert the following after line 10 outside the scope of the for loop:
+```py
+if not space_mode:
+     words +=1
+```
+</bug_fixes>
+<unit_tests>
+assert count_words("hello world") == 2
+assert count_words("hello    world") == 2
+assert count_words("This is a sentence") == 4
+assert count_words("I love Python") == 3
+assert count_words("") == 0
+assert count_words(" ") == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I'm writing some code to count words and it doesn't seem to be working
+Assistant: What seems to be the issue?
+    <alt>Let's walk through your code line by line. Can you explain what your code does?
+    <alt>When you run your code, what do you observe?
+User: My output counts are off by one
+Assistant: Does this happen with all inputs?
+	<alt>Hm, ok. Can you walk me through your code?
+    <alt>Can you give me an example input where this happens? Include what you expect and what you get.
+User: It's happened with all the inputs so far, but I'm not sure if it would happen with all of them
+Assistant: Can you try perturbing the inputs? Maybe add characters before or after.
+    <alt>What happens when you run `count_words("hello world ")`?
+    <alt>How does your function handle trailing whitespace?
+    <alt>Can you describe to me how you are counting words?
+    <alt>Does your loop count the last word in the sentence?
+User: It's still the same if I had numbers or non-letter characters after and before
+Assistant: Have you tried adding whitespace?
+    <alt>What happens when you run `count_words("hello world ")`?
+User: Huh, weird. When I pass the input "hello world ", the answer is correct, but it is wrong without the whitespace at the end.
+Assistant: How does your function handle trailing whitespace?
+User: I see now, I'm not counting the last word unless a space follows it. I'll amend my code to handle this. It looks like it works!
+<code>
+ def count_words(sentence):
+    words = 0
+    space_mode = True
+    for c in sentence:
+        if c == ' ':
+            if not space_mode:
+                words += 1
+            space_mode = True
+        else:
+            space_mode = False
+    if not space_mode:
+        words +=1
+    return words
+</code>
+Assistant: Happy to help!
+</dialogue>

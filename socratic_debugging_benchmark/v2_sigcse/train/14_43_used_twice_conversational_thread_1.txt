@@ -1,0 +1,87 @@
+<problem>
+Write a function `isTwice(string:str, char:str) -> bool` that returns `True` if the character `char` appears exactly twice in the string `string`. Otherwise, it returns `False`.
+## Example Cases:
+```
+isTwice("hello", "l") => True
+isTwice("hello", "o") => False
+isTwice("hello", "h") => False
+isTwice("", "e") => False
+isTwice("I'm a string!", " ") => True
+isTwice("Hey, I'm a string!", " ") => False
+```
+</problem>
+<bug_code>
+1. def isTwice(str, chr):
+2.  count = 0
+3.  for i in str:
+4.    if i == chr:
+5.      count+=1
+6.
+7.  if count >= 2:
+8.    return true
+9.  else:
+10.    return false
+</bug_code>
+<bug_desc>
+On line 8, the function throws a NameError since `true` is not a boolean value.
+</bug_desc>
+<bug_fixes>
+Replace `true` with `True` and `false` with `False` on lines 8 and 10.
+</bug_fixes>
+<unit_tests>
+assert isTwice("hello", "l") == True
+assert isTwice("hello", "o") == False
+assert isTwice("hello", "h") == False
+assert isTwice("", "e") == False
+assert isTwice("I'm a string!", " ") == True
+assert isTwice("Hey, I'm a string!", " ") == False
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! This code isn't working. Can you help?
+Assistant: Let's talk about boolean variables. Can you explain the difference between a boolean variable with the value of `False` versus a string variable with the value `"False"` is?
+	<alt>First, let's analyze how your program is behaving and why. Can you describe the issue that you are facing?
+	<alt>It seems that you have a `NameError` error in your code. Are you able to find where this error is?
+	<alt>Let's start with a warm-up question. What are the two possible values of a boolean variable in Python?
+User: Well, boolean and Strings are different data types. Booleans have a true or false value, and Strings are just written words.
+	<alt>a boolean true is written like `bool = True`, whereas a String variable is written as str = "True."
+	<alt>I don't think there is a difference. I think both boolean "true" and String "true" looks the same when you write the code. For example, str = true and bool = true.
+Assistant: Let's try an example. How would you declare a string variable "str" and initialize it to the value "true?"
+	<alt>What are the two possible values of a boolean variable in Python?
+User: String str = "true";
+	<alt>Wouldn't you want to use a boolean variable for that instead?
+	<alt>String str = true;
+	<alt>str = true
+	<alt>String str = True;
+Assistant: That's right! Now, how would you declare a boolean variable `bool` and initialize it to false?
+User: boolean bool = false;
+	<alt>boolean bool = False;
+	<alt>boolean bool = "False";
+	<alt>I don't see that we are using boolean variables in the code.
+Assistant: Programming languages are very sensitive to syntax. For example, String variables require the use of quotations around their input. Can you think of any similar constraints to boolean inputs?
+	<alt>Try looking at the Python documentation. Can you find the section where they describe the use of Boolean variables? How does it compare to what you wrote here?
+	<alt>Let's try that in the Python terminal. What happens when you type `bool = false`?
+User: Oh, I see. I was writing `bool = true` when I should have been writing `bool = True`. I am missing a capitalization.
+	<alt>I should be using 0 and 1 instead of false and true.
+	<alt>I can't think of any constraints.
+Assistant: Good! Can you find where you made this mistake in your code?
+	<alt>How can you edit your code to fix this error?
+User: Yes, I found it. I'm going to show you the changed code now.
+<code>
+1. def isTwice(str, chr):
+2.  count = 0
+3.  for i in str:
+4.    if i == chr:
+5.      count+=1
+6.
+7.  if count >= 2:
+8.    return True
+9.  else:
+10.    return False
+
+</code>
+Assistant: Good work! Looks like you did it.
+User: Thank you!
+</dialogue>

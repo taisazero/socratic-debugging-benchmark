@@ -1,0 +1,77 @@
+<problem>
+Write a function `substr_len(s: str, t: str) -> int` that takes as input a string `s` and a non-empty string `t` and returns the length of the longest substring of `s` that does not contain `t`. For example, if `s = "abracadabra"` and `t = "ca"`, then the longest substring of `s` that does not contain `t` is `"dabra"`, so the function should return 5.
+## Example Cases:
+```
+substr_len("abracadabra", "ca") => 5
+substr_len("I love Python", "Py") => 7
+substr_len("contest", "test") => 3
+substr_len("icey ice", "ice") => 2
+substr_len("icey ice cream", "ice") => 6
+substr_len("abracadabra", "abba") => 11
+```
+</problem>
+<bug_code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        max_len = max(len(crt_str), max_len)        
+8.
+9.        pos = s.find(t, start)
+10.    
+11.    last_str = s[start:]
+12.    max_len = max(len(last_str), max_len)
+13.
+14.    return max_len
+</bug_code>
+<bug_desc>
+The value of `start` never changes inside the while loop, thus `pos` which is computed based on `start` never changes either. Consequently, the while loop on line 5 never stops.
+</bug_desc>
+<bug_fixes>
+On line 8 insert the code `start = pos + len(t)`.
+</bug_fixes>
+On line 11 insert a new line with `ind += len(t)`.
+</bug_fixes>
+<unit_tests>
+assert substr_len("abracadabra", "ca") == 5
+assert substr_len("I love Python", "Py") == 7
+assert substr_len("contest", "test") == 3
+assert substr_len("icey ice", "ice") == 2
+assert substr_len("icey ice cream", "ice") == 6
+assert substr_len("abracadabra", "abba") == 11
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My code does not stop and I do not understand why, can you help?
+Assistant: Sure. Can you tell me the role of the variable `start`?
+	<alt>Sure. Can you explain to me what your code is supposed to do, line by line? Explain the role of each variable.
+	<alt>Sure. Let's assume the code runs on the first test example, can you run it manually for me line by line and show the value of each variable until you are done with one iteration of the while loop?
+User: `start` is supposed to indicate the position in `s` where we want to start searching for the next occurrence of `t`. Initially, we start searching from the start of the string, therefore it is initialized with 0.
+Assistant: OK. Does `start` ever change inside the while loop?
+	<alt>OK. So the first value of `start` is 0, what is the next value of `start`?
+	<alt>OK. So, after you find the first occurrence of `t` at position `pos` in `s`, where do you want to start searching for the next occurrence of `t`?
+	<alt>OK. Can you run your code manually on the first test example and tell me what are the values that `start` takes in each iteration of the while loop?
+User: Ah, it doesn't! It stays equal to 0, which means that `pos` does not change either. Let me fix that... it works! Thank you!
+<code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        max_len = max(len(crt_str), max_len)        
+8.        start = pos + len(t)
+9.        pos = s.find(t, start)
+10.    
+11.    last_str = s[start:]
+12.    max_len = max(len(last_str), max_len)
+13.
+14.    return max_len
+
+</code>
+Assistant: You are welcome!
+</dialogue>

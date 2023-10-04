@@ -1,0 +1,100 @@
+<problem>
+Write a function called `is_palindrome(string:str) -> bool` that returns True if the string is a palindrome and False otherwise. A palindrome is a string that is the same when read forwards and backwards.
+## Example Cases:
+```
+is_palindrome("racecar") => True
+is_palindrome("hello") => False
+is_palindrome("hannah") => True
+is_palindrome("firetruck") => False
+is_palindrome("nice") => False
+is_palindrome("") => True
+```
+</problem>
+<bug_code>
+1. def is_palindrome(string):
+2.  rev_string = ''
+3.  for i in string:
+4.    rev_string = i + rev_string
+5.  if rev_string = string:
+6.    return True
+7.  else:
+8.    return False
+</bug_code>
+<bug_desc>
+On line 5, the function throws a syntax error.
+</bug_desc>
+<bug_fixes>
+Replace `=` with `==` on line 5. 
+</bug_fixes>
+<unit_tests>
+assert is_palindrome("racecar") == True
+assert is_palindrome("hello") == False
+assert is_palindrome("hannah") == True
+assert is_palindrome("firetruck") == False
+assert is_palindrome("nice") == False
+assert is_palindrome("") == True
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm really stuck.
+Assistant: Okay, what do you think the problem is?
+	<alt>Are any of the test cases passing?
+	<alt>Is the code running?
+	<alt>Which part of the prompt are you working on?
+	<alt>Let's start with a warm-up exercise. How do you assign a value of 1 to a variable `x`?
+	<alt>What line is the compiler error pointing towards?
+User: I don't know, it isn't running!
+	<alt>The code won't compile, so it isn't doing any of the test cases.
+	<alt>I'm not sure why it won't run, I've done all the steps in the prompt.
+Assistant: Let's go through it step by step and figure out why it won't run. Do you see any problems on line 1?
+	<alt>Let's go through it step by step and figure out why it won't run. What is the most complicated part of the code?
+	<alt>Is there anything in the prompt that you haven't completed yet?
+	<alt>I see. How do you assign a value of 1 to a variable `x`?
+	<alt>How do you assign an empty string to the variable `rev_string`?
+	<alt>How would you check if two  variables `x` and `y` are equivalent?
+	<alt>Can you recall what the assignment operator is?
+User: No, I don't see any problems on line 1.
+Assistant: What does line 2 do?
+	<alt>Let's look at the loop on line 3, what does it do?
+	<alt>Examine the if statement on line 5, what happens during that part?
+User: Line 2 makes a variable called rev_string and sets it to an empty string.
+Assistant: Very good, let's look at the for loop next, do you see anything that would cause a problem running the code there?
+	<alt>Great, let's check the if-statement next, is there anything that could cause a problem there?
+	<alt>What operator indicates that is what is happening on line 2?
+User: I don't see any issues with the for-loop.
+Assistant: What does the for-loop do?
+	<alt>Okay, let's check the if-statement next, is there anything that could cause a problem there?
+	<alt>What is happening on the line inside the loop?
+User: It reverses the string by adding letters one at a time to an empty string.
+Assistant: Very good, let's look at the if-statement now. Do you see any problems with it?
+User: I don't see any problems.
+	<alt>Oh! I see it, I'm using the wrong operator on line 5!
+Assistant: Let's look at the first line of the if-statement, what is it supposed to be doing?
+	<alt>Let's look at the first line of the if-statement, what is being checked on this line?
+	<alt>Let's look at the first line of the if-statement, what operator is being used here?
+	<alt>Check the documentation, do you see any problems with your comparison?
+User: It's supposed to compare the input string with the reversed string.
+	<alt>Oh! I'm assigning string to rev_string!
+Assistant: Check that line carefully, what exactly is happening in line 5?
+	<alt>Let's look at the first line of the if-statement, what operator is being used here?
+	<alt>Check the documentation, do you see any problems with your comparison?
+	<alt>Check the documentation, what operator is used for comparison of two strings?
+User: Oh! I'm assigning string to rev_string instead of comparing them!
+Assistant: Very good, so what is the correct operator to use there?
+	<alt>What operator is used for comparison of two strings?
+<code>
+1. def is_palindrome(string):
+2.  rev_string = ''
+3.  for i in string:
+4.    rev_string = i + rev_string
+5.  if rev_string == string:
+6.    return True
+7.  else:
+8.    return False
+</code>
+User: I've fixed it!
+Assistant: Great, does it pass all test cases?
+User: Yes it does! Thank you.
+</dialogue>

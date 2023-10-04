@@ -1,0 +1,77 @@
+<problem>
+Write a function `count_words(sentence: str) -> int` that returns the number of words in the sentence. A word is a maximal sequence of characters that does not contain spaces. For example, `count_words(" This is a sentence ")` returns 4. 
+## Example Cases:
+```
+count_words("hello world") => 2
+count_words("hello    world") => 2
+count_words("This is a sentence") => 4
+count_words("I love Python") => 3
+count_words("") => 0
+count_words(" ") => 0
+```
+</problem>
+<bug_code>
+1. def count_words(sentence):
+2.    words = 0
+3.    space_mode = True
+4.    for i in range(1, len(sentence)):
+5.        if sentence[i] == ' ':
+6.            if not space_mode:
+7.                words += 1
+8.            space_mode = True
+9.        else:
+10.            space_mode = False
+11.    if not space_mode:
+12.        words +=1
+13.    return words
+</bug_code>
+<bug_desc>
+On line 4, the for loop skips over the first character in the string `sentence`. Consequently, the function can miss counting a word if the first character in `sentence` is a word.
+</bug_desc>
+<bug_fixes>
+On line 4, replace `(1, len(sentence))` with `(len(sentence)):`
+On line 4, replace `(1, len(sentence))` with `(0, len(sentence)):`
+</bug_fixes>
+<unit_tests>
+assert count_words("hello world") == 2
+assert count_words("hello    world") == 2
+assert count_words("This is a sentence") == 4
+assert count_words("I love Python") == 3
+assert count_words("") == 0
+assert count_words(" ") == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I am having a problem with this programming problem. My count seems off.
+Assistant: Did you try running your code? If so, is there a pattern you notice between the output of your code and what the answer should be?
+	<alt>Are there specific inputs that give you the wrong answer or is it always wrong?
+	<alt>Off in what way?
+User: Yes! My output seems to be 1 less than it should be.
+	<alt>My output is sometimes correct and sometimes lower than it should be
+Assistant: Does this happen with all inputs or just some inputs?
+User: I only seem to notice it on sentences that begin with "I" or "A", so I guess one-letter words.
+	<alt>It only happens with sentences that start with short words, it seems.
+	<alt>I thought it was working properly, but I just checked the sentence "I walked the dog" and the output was wrong.
+Assistant: Can you check how your function handles the beginning of the input? It seems like the issue might be there.
+	<alt>It only happens with sentences that start with short words, it seems.
+	<alt>Where do you count your first word?
+User: Oh, I see. I'm missing the first index when I loop. I guess I never put in the base case.
+<code>
+ def count_words(sentence):
+    words = 0
+    space_mode = True
+    for i in range(len(sentence)):
+        if sentence[i] == ' ':
+            if not space_mode:
+                words += 1
+            space_mode = True
+        else:
+            space_mode = False
+    if not space_mode:
+        words +=1
+    return words
+</code>
+Assistant: Great!
+</dialogue>

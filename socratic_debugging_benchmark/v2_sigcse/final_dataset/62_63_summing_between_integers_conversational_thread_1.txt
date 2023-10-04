@@ -1,0 +1,62 @@
+<problem>
+Define a function called `SumBetween(low:int, high:int) -> int` which takes two integer inputs, low and high. This function should calculate the sum of all integers between low and high inclusive.
+
+## Example Cases:
+```
+SumBetween(0,1) => 1
+SumBetween(0,2) => 3
+SumBetween(1,2) => 3
+SumBetween(3,5) => 12
+```
+</problem>
+<bug_code>
+1. def SumBetween(low, high):
+2.	num = 0
+3.	for i in range(low, high):
+4.		num += i
+5.	return num
+</bug_code>
+<bug_desc>
+The function returns the sum of numbers between `low` and `high`, but excludes the upper bound `high` instead of including both ends of the range. 
+</bug_desc>
+<bug_fixes>
+Replace `high` with `high + 1`.
+</bug_fixes>
+<unit_tests>
+assert SumBetween(0,1) == 1
+assert SumBetween(0,2) == 3
+assert SumBetween(1,2) == 3
+assert SumBetween(3,5) == 12
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I am having trouble with my `SumBetween()` function. It keeps producing values that are only a little bit wrong compared to the expected values, and I don't know why.
+Assistant: Hello! I think that your issue may be in your understanding of `range()`. What do you believe is returned from `range(0,1)`, for example?
+User: I'm not sure, I know that this is how we typically construct a `for` loop but I don't know what `range()` is returning for it to work.
+Assistant: `range(0,1)` is returning a value referred to as a list, specifically a list of integers from 0, inclusively, to 1, exclusively. Can you tell me what the elements of that list would be?
+User: That would just be 0, right?
+Assistant: Correct! The line `for i in range(0,1)` means it will, for every value in the list `range(0,1)`, set `i` equal to that value and then run an iteration of the loop. Can you see where your code would make a mistake when taking the sum between 0 and 1?
+User: Oh, 0 is an element of the list, but 1 isn't! How would I extend the range though, if I am only given `low` and `high`?
+Assistant: Let's approach that question from a different direction. If you wanted to include 1 as an element in the list, how would you change `range(0,1)`?
+	<alt>Let's abstract this a bit then. Let's say we have variables `x` and `y`, which are integers. What number is in `range(x,y+1)` that is not in `range(x,y)`?
+User: I would change `range(0,1)` to `range(0,2)` so that it would include 1. So I just need to add 1 every time to `high`?
+Assistant: Can you explain why you think that is the correct answer?
+User: Because since `range()` will return every integer in the range, not including the highest value, if we increase the highest value by 1, we would add the previous highest value as an element in the returned list.
+Assistant: That is entirely correct. Now how would you change your code to express this?
+User: Could I use a temporary variable to do that?
+Assistant: Yes, a temporary variable is entirely fine. Where would you include it?
+	<alt>Why do you feel a temporary variable is necessary?
+User: I created a variable `newHigh` and set it equal to `high+1` and then put that into `range()`'s second input and that fixed it. Thank you!
+<code>
+1. def SumBetween(low, high):
+2.	num = 0
+3.	newHigh = high+1
+4.	for i in range(low, newHigh):
+5.		num += i
+6.	return num
+</code>
+Assistant: I'm happy that I was of assistance. Is there anything else you wanted to ask about?
+User: No, that was all. Thank you again!
+</dialogue>

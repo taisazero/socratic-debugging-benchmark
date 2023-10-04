@@ -1,0 +1,53 @@
+<problem>
+Write a function called `LastIndexOf(value:int, array:list) -> int` which is passed two inputs: a value to search for, and a list of integers in which to search. This function should return the index position of the last occurrence (i.e. the rightmost occurrence) of the value being searched for. If the value being searched for does not exist in the array, then the function should return -1.
+
+## Example Cases:
+```
+LastIndexOf(1, [1,1,1,1]) => 3
+LastIndexOf(2, [2,0,1,2])  => 3
+LastIndexOf(3, [1,1,1,1]) => -1
+LastIndexOf(4, [4,1,1,1]) => 0
+```
+</problem>
+<bug_code>
+1. def LastIndexOf(value, array):
+2.	index = 0
+3.	for i in range(0, len(array)):
+4.		if(value == array[i]):
+5.			index = i
+6.	return index
+</bug_code>
+<bug_desc>
+The function returns 0 when `value` is not in `array` instead of returning -1.
+</bug_desc>
+<bug_fixes>
+Initialize `index` to -1 on line 2.
+</bug_fixes>
+<unit_tests>
+assert LastIndexOf(1, [1,1,1,1]) == 3
+assert LastIndexOf(2, [2,0,1,2]) == 3
+assert LastIndexOf(3, [1,1,1,1]) == -1
+assert LastIndexOf(4, [4,1,1,1]) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello, I was having an issue with my `LastIndexOf()` function and I was wondering if I could get some guidance as to where I am going wrong.
+Assistant: Hello! I am happy to help you. Can you explain what would happen in the case that the integer you are searching for is not in the list?
+User: `index` would start at 0, then since the `if` condition is never met, it will stay as 0 and then `index` will return.
+Assistant:  Can you explain the difference between that and if the first element is the last index of the value?
+User: Oh, that is true that there wouldn't be a difference between those two scenarios. How would someone differentiate between those scenarios?
+Assistant: There is a standard response of -1 for this kind of function, but it is further defined in the problem given.
+User: Oh, I suppose I misread that part of the problem. I made the change and it works correctly now, thank you!
+<code>
+1. def LastIndexOf(value, array):
+2.	index = -1
+3.	for i in range(0, len(array)):
+4.		if(value == array[i]):
+5.			index = i
+6.	return index
+</code>
+Assistant: I'm glad I could help, is there anything else I can do for you today?
+User: No, that's all for now. Thank you!
+</dialogue>

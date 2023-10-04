@@ -1,0 +1,68 @@
+<problem>
+Write a function `reverse_list(lst:List[any]) -> List[any]` that returns `lst` in reverse order.
+## Example Cases:
+```
+reverse_list([1, 2, 3]) => [3, 2, 1]
+reverse_list([1, 2, 3, 4, 5]) => [5, 4, 3, 2, 1]
+reverse_list([]) => []
+reverse_list(["Hi", "Hello", "Goodbye"]) => ["Goodbye", "Hello", "Hi"]
+```
+</problem>
+<bug_code>
+1. def reverse_list(lst):
+2.    return lst[-1:]
+</bug_code>
+<bug_desc>
+On line 2, the way the slice operator is used creates a list containing only the last element in `lst` instead of a list containing all the elements of `lst` in reverse order.
+</bug_desc>
+<bug_fixes>
+Replace `return lst[-1:]` with `return lst[::-1]` on line 2.
+</bug_fixes>
+<unit_tests>
+assert reverse_list([1, 2, 3]) == [3, 2, 1]
+assert reverse_list([1, 2, 3, 4, 5]) == [5, 4, 3, 2, 1]
+assert reverse_list([]) == []
+assert reverse_list(["Hi", "Hello", "Goodbye"]) == ["Goodbye", "Hello", "Hi"]
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: I'm trying to reverse the elements of a list but it's not working.
+Assistant: Can you describe how you're trying to reverse the list?
+	<alt>Can you describe the problem you're having in more detail?
+	<alt>Let's start with a simple example. What do you expect the output of `reverse_list([1, 2, 3])` to do?
+	<alt>Let's start with a warm-up question. What does the slicing operator `[-1:]` do?
+	<alt>What happens when you run `reverse_list([1, 2, 3])`? What do you observe?
+	<alt>Where can you learn more about how to reverse a list?
+User: Sure, I used the `[-1:]` slicing operator.
+Assistant: Can you describe what the `[-1:]` slicing operator does?
+	<alt>How do you think this reverses the list?
+	<alt>Do you notice a pattern in your function's outputs?
+	<alt>How does slicing work in Python?
+	<alt>What happens when you run `reverse_list([1, 2, 3])`? What do you observe?
+User: The `[-1:]` slicing operator should return a list in reverse order.
+	<alt>I think it should return a list in reverse order but it's returning the last element of the list instead.
+Assistant: What happens when you run `reverse_list([1, 2, 3])`? What do you observe?
+	<alt>Let's run your code through all the test cases. Do you notice a pattern in your function's outputs?
+	<alt>Let's open the terminal and run `[1, 2, 3][-1:]`. What do you observe?
+	<alt>Let's start with a simpler problem. How can you obtain the first element of the list `a = [1, 2, 3]`?
+User: It returns `[3]` instead of `[3, 2, 1]`. Hm... it seems to be returning the last element of the list instead of the whole list in reverse order.
+Assistant: Good. Say you have an array `a = [1, 2, 3]`. How can you obtain every other element? So, `[1, 3]`?
+	<alt>Let's start with a simple problem. How can you obtain the first element of the list `a = [1, 2, 3]`?
+	<alt>Good. So where can you learn more about how to reverse a list?
+	<alt>Good. Let's visit the Python documentation about slicing. Do you notice anything about reversing a list?
+User: For an input list `a`, we can get every other element by using `a[::2]`. So `a[::2]` should return `[1, 3]`.
+Assistant: Good. Given that `[-1:]` returns the last element in the list, how do we combine using `::` with `[-1:]` to get every element in reverse order?
+	<alt>Good. So where can you learn more about how to reverse a list?
+	<alt>Good. Let's visit the Python documentation about slicing. Do you notice anything about reversing a list?
+	<alt>Good. `::2` gives us every other element and `[-1:]` gives us the last element. How can we get every element in reverse order?
+User: Oh, I see. We can just get every element of the list in increments of -1. So `a[::-1]`. I'll update my code. It looks like it's working now
+<code>
+ def reverse_list(lst):
+    return lst[::-1]
+
+</code>
+Assistant: Great! Let me know if you run into any other problems!
+User: Thanks!
+</dialogue>

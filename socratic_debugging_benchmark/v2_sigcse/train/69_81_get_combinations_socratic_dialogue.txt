@@ -1,0 +1,87 @@
+<problem>
+Write a Python function called `get_combinations(my_list: list(str)) -> list(str)` that takes a list of distinct characters as a parameter, and returns a list containing all of the 2-letter combinations of said characters. The ordering of the elements in the list does not matter, so long as all of the 2-letter combinations are contained within the list.
+
+## Example Cases:
+```
+get_combinations(['a', 'b']) => ['aa', 'ba', 'ab', 'bb']
+get_combinations(['a', 'b', 'c']) => ['aa', 'ba', 'ca', 'ab', 'bb', 'cb', 'ac', 'bc', 'cc']
+get_combinations(['ta', 'er', 'c']) => ['tata', 'erta', 'cta', 'taer', 'erer', 'cer', 'tac', 'erc', 'cc']
+```
+</problem>
+<bug_code>
+1. def get_combinations(list_c):
+2.    ans=[]
+3.    for i in range(0,len(list_c)):
+4.        for j in range(i,len(list_c)):
+5.            ans.append(list_c[j]+list_c[i])
+6.    return ans
+</bug_code>
+<bug_desc>
+On line 4, the second for loop starts at `i` rather than at `0`, so it is missing combinations of the i-th character with characters that precede it. 
+</bug_desc>
+<bug_fixes>
+On line 4, change the for loop to `for j in range(len(list_c))`.
+
+</bug_fixes>
+<unit_tests>
+assert get_combinations(['a', 'b']) == ['aa', 'ba', 'ab', 'bb']
+assert get_combinations(['a', 'b', 'c']) == ['aa', 'ba', 'ca', 'ab', 'bb', 'cb', 'ac', 'bc', 'cc']
+assert get_combinations(['ta', 'er', 'c']) == ['tata', 'erta', 'cta', 'taer', 'erer', 'cer', 'tac', 'erc', 'cc']
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck.
+Assistant: Okay, let's look at the code. Tell me about what happens on line 2?
+	<alt>Okay, let's go over the code. Does the first test case pass?
+	<alt>Where do you think the problem is?
+	<alt>Have you completed all parts of the instructions?
+User: Line 2 makes an empty list that we are going to fill later.
+Assistant: Yes, now let's move on to the first part of the loop. What happens on line 3?
+	<alt>Where do you think the problem is?
+	<alt>Do you see any problems with line 2?
+User: Line 3 makes a for loop.
+Assistant: What is the variable name for the iterator made on line 3?
+	<alt>What controls the loop?
+	<alt>How many times does the loop iterate?
+	<alt>What is the role of range on line 3?
+User: The iterator is named i.
+Assistant: What value does i start on, and what value does it stop on?
+	<alt>What determines when that loop ends?
+	<alt>How many times does it iterate?
+	<alt>What is range for?
+User: i is supposed to start at 0 and end at the length of the list.
+Assistant: Look at range, does i start and stop where it should?
+	<alt>How many times does it iterate?
+	<alt>What determines that the loop runs the right number of times?
+User: Yes, that part looks right.
+Assistant: Let's check the second loop next. Where does it start?
+User: The loop starts on line 4.
+Assistant: What iterator is made on that line?
+	<alt>How many times should that loop iterate?
+	<alt>Where in the array list should we start for the second term?
+User: We make j on that line.
+Assistant: How many times should that loop iterate?
+	<alt>Where in the array list should we start for the second term?
+	<alt>Should we go through the whole array list for the second term in the combination?
+	<alt>What part of the code on that line controls the iteration of the loop?
+User: It should iterate once for every item in `list_c`.
+	<alt>Oh! It's starting at i not at 0!
+Assistant: What value should it start at to iterate once for every item in list_c?
+	<alt>What part of the code on that line controls the iteration of the loop?
+	<alt>Where in the array list should we start for the second term?
+User: It should start at the beginning of the list, at 0.
+Assistant: What piece of the code would control that?
+User: The values inside of range. Oh! I need to make it start at 0 not at i!
+<code>
+1. def get_combinations(list_c):
+2.    ans=[]
+3.    for i in range(0,len(list_c)):
+4.        for j in range(0,len(list_c)):
+5.            ans.append(list_c[j]+list_c[i])
+6.    return ans
+</code>
+Assistant: Great! Now let's run the code and see if it works.
+User: It works! Thank you!
+</dialogue>

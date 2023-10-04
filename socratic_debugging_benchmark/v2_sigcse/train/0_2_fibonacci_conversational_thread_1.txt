@@ -1,0 +1,91 @@
+<problem>
+Create a function `fibonacci(n:int)` that takes in a parameter `n`, an integer representing the number of terms in the Fibonacci sequence to generate, and returns:
+-  'OOPS', if `n` is less than or equal to 0 
+- `1`  if `n` is equal to `1`
+- `1` if `n` is equal to `2`
+- Otherwise, return the nth term of the Fibonacci sequence. A Fibonacci sequence is a sequence in which every number is the sum of the previous two numbers in the sequence. Example Fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ....
+## Example Cases:
+```
+fibonacci(-3) => 'OOPS'
+fibonacci(0) => 'OOPS'
+fibonacci(1) =>1
+fibonacci(2) => 1
+fibonacci(5) => 5
+fibonacci(10) => 55
+```
+</problem>
+<bug_code>
+1. def fibonacci(n):
+2.  if n < 0:
+3.    return "OOPS"
+4.  elif n == 1:
+5.    return 1
+6.  elif n == 2:
+7.    return 1
+8.  else:
+9.    a = 0
+10.    b = 1
+11.    for i in range(1, n):
+12.      temp = b 
+13.      b = a + b 
+14.      a = temp
+15.    return b
+</bug_code>
+<bug_desc>
+On line 2, the function only checks if `n` is less than `0` and then returns `OOPS`. When `n` is 0 the function returns `1` which is incorrect. The function should instead return `'OOPS'` when `n` is equal to `0`. 
+</bug_desc>
+<bug_fixes>
+Replace `if n < 0` with `if n <= 0` on line 2.
+</bug_fixes>
+<unit_tests>
+assert fibonacci(0) == 'OOPS'
+assert fibonacci(1) == 1
+assert fibonacci(2) == 1
+assert fibonacci(5) == 5
+assert fibonacci(-3) == 'OOPS'
+assert fibonacci(10) == 55
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello. I need help with my code.
+	<alt>Hello! I need help on this my code is failing the first test case.
+Assistant: Let's start with a warm-up question. Consider the statement `x = 0`. What is the value of `y` in the following statement: `y = 1 if x < 0 else 0`?
+	<alt>Can you walk me through your code step by step given that `n` is 0?
+	<alt>Do you observe anything different about the first test case that might cause your code to output an incorrect result when compared with the rest of the test cases?
+	<alt>Can you describe the issue you are facing? Is your code failing any test cases?
+	<alt>Let's look at the `fibonacci` problem description. Given that `n` is 0. What should the `fibonacci` function return?
+User: Hm... I've never seen assignment being done like this before. I presume it would be a compiler error?
+	<alt>I think the value of `y` will be 0 because `x` is 0 and 0 < 0 is `False` so `else 0` will execute.
+Assistant: Let's verify that. Can you open a Python terminal and type in `x = 0` then on a new line `y = 1 if x < 0 else 0`. What do you observe?
+User: Ah. It works! I learned something new today.
+Assistant: What do you think the value of `y` is?
+User: I think the value of `y` will be 0 because `x` is 0 and 0 < 0 is `False` so `else 0` will execute.
+Assistant: Good. Let's look at your `fibonacci` function. Given that `n` is 0. Can you walk me through your code step by step?
+	<alt>Let's verify that. Can you print `y`? What do you observe?
+	<alt>Good. Let's look at your `fibonacci` function. Given that `n` is 0. What does the if statement on line 2 evaluate to?
+	<alt>Good. Let's look at the `fibonacci` problem description. Given that `n` is 0. What should the `fibonacci` function return?
+User: On line 2 `n < 0` evaluates to `False`, additionally the if statement conditions evaluate to `False` on lines 4 and 6, so it goes to line 9 the for loop on line 11 does not execute. So it returns 1 instead of "OOPS". I see the issue is the condition on line 2. Let me fix it.
+<code>
+1. def fibonacci(n):
+2.  if n <= 0:
+3.    return "OOPS"
+4.  elif n == 1:
+5.    return 1
+6.  elif n == 2:
+7.    return 1
+8.  else:
+9.    a = 0
+10.    b = 1
+11.    for i in range(1, n):
+12.      temp = b 
+13.      b = a + b 
+14.      a = temp
+15.    return b
+
+</code>
+Assistant: Good. Did you try running your code through all the test cases?
+User: Yes. Thank you very much for your help!
+Assistant: You're welcome.
+</dialogue>

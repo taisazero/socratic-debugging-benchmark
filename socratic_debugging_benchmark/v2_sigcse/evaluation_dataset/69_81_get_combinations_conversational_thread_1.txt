@@ -1,0 +1,74 @@
+<problem>
+Write a Python function called `get_combinations(my_list: list(str)) -> list(str)` that takes a list of distinct characters as a parameter, and returns a list containing all of the 2-letter combinations of said characters. The ordering of the elements in the list does not matter, so long as all of the 2-letter combinations are contained within the list.
+
+## Example Cases:
+```
+get_combinations(['a', 'b']) => ['aa', 'ba', 'ab', 'bb']
+get_combinations(['a', 'b', 'c']) => ['aa', 'ba', 'ca', 'ab', 'bb', 'cb', 'ac', 'bc', 'cc']
+get_combinations(['ta', 'er', 'c']) => ['tata', 'erta', 'cta', 'taer', 'erer', 'cer', 'tac', 'erc', 'cc']
+```
+</problem>
+<bug_code>
+1. def get_combinations(list_c):
+2.    ans=[]
+3.    for i in range(0,len(list_c)):
+4.        for j in range(i,len(list_c)):
+5.            ans.append(list_c[j]+list_c[i])
+6.    return ans
+</bug_code>
+<bug_desc>
+On line 4, the second for loop starts at `i` rather than at `0`, so it is missing combinations of the i-th character with characters that precede it. 
+</bug_desc>
+<bug_fixes>
+On line 4, change the for loop to `for j in range(len(list_c))`.
+
+</bug_fixes>
+<unit_tests>
+assert get_combinations(['a', 'b']) == ['aa', 'ba', 'ab', 'bb']
+assert get_combinations(['a', 'b', 'c']) == ['aa', 'ba', 'ca', 'ab', 'bb', 'cb', 'ac', 'bc', 'cc']
+assert get_combinations(['ta', 'er', 'c']) == ['tata', 'erta', 'cta', 'taer', 'erer', 'cer', 'tac', 'erc', 'cc']
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm stuck.
+Assistant: Okay, let's look at the code. Tell me about what happens on line 2?
+	<alt>Okay, let's go over the code. Does the first test case pass?
+	<alt>Where do you think the problem is?
+	<alt>Have you completed all parts of the instructions?
+User: Line 2 makes an empty list that we are going to fill later.
+Assistant: Yes, now let's move on to the first part of the loop. What happens on line 3?
+	<alt>Where do you think the problem is?
+	<alt>Do you see any problems with line 2?
+User: Line 3 makes a for loop.
+Assistant: What controls the loop?
+	<alt>What is the variable name for the iterator made on line 3?
+	<alt>How many times does the loop iterate?
+	<alt>What is the role of range on line 3?
+User: Range determines the number of times the loop runs.
+Assistant: Now let's look at line 4, how many times will that loop run?
+	<alt>What iterator is made on line 4?
+	<alt>Where in the array list should we start for the second term?
+	<alt>Where could we add some print statements to better understand what is happening in those loops?
+User: It will start at i and run until the end of the list.
+	<alt>I'm supposed to start at 0 not i!
+Assistant: Where in the array list should we start for the second term?
+	<alt>Where could we add some print statements to better understand what is happening in those loops?
+User: We should start at the beginning.
+Assistant: Is it always at the beginning of the list?
+	<alt>Should we start at 0?
+	<alt>Are there any combinations we are trying to skip?
+	<alt>Where could we add some print statements to better understand what is happening in those loops?
+<code>
+1. def get_combinations(list_c):
+2.    ans=[]
+3.    for i in range(0,len(list_c)):
+4.        for j in range(0,len(list_c)):
+5.            ans.append(list_c[j]+list_c[i])
+6.    return ans
+</code>
+User: I see! I should have it start at 0, not i!
+Assistant: Does it run correctly now?
+User: Yes, it does! Thank you.
+</dialogue>

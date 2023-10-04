@@ -1,0 +1,95 @@
+<problem>
+Write a function `top_k(lst: List[int], k: int) -> List[int]` that returns the top k largest elements in the list. You can assume that k is always smaller than the length of the list.
+## Example Cases:
+```
+top_k([1, 2, 3, 4, 5], 3) => [5, 4, 3]
+top_k([-1, -2, -3, -4, -5], 3) => [-1, -2, -3]
+top_k([], 0) => []
+top_k([550, 750, 3000, 2000, 1000], 3) => [3000, 2000, 1000]
+top_k([555, 777, 555, -1, 0], 3) => [777, 555, 555]
+```
+</problem>
+<bug_code>
+1. def top_k(lst, k):
+2.    result = []
+3.    for i in range(k):
+4.        result.append(max(lst))
+5.        lst.pop(max(lst))
+6.    return result
+</bug_code>
+<bug_desc>
+The function removes the element at index `max(lst)` instead of removing an element equal to `max(lst)`. Consequently, the function throws an IndexError on line 5 when a removed value in `lst` is greater than the length of `lst`.
+</bug_desc>
+<bug_fixes>
+On line 5, replace `lst.pop(max(lst))` with `lst.remove(max(lst))`
+</bug_fixes>
+<unit_tests>
+assert top_k([1, 2, 3, 4, 5], 3) == [5, 4, 3]
+assert top_k([-1, -2, -3, -4, -5], 3) == [-1, -2, -3]
+assert top_k([], 0) == []
+assert top_k([550, 750, 3000, 2000, 1000], 3) == [3000, 2000, 1000]
+assert top_k([555, 777, 555, -1, 0], 3) == [777, 555, 555]
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi. I am confused. My code doesn’t seem to work. Can you help?
+Assistant: Hello. Sure, let's see. Do you know what might be the issue?
+User: I think the problem is with the `.pop()` method. It seems to have issues with indexing.
+	<alt>When I use the `.pop()` method, I get an IndexError on some inputs.
+	<alt>For some inputs, I get an error and other inputs don't produce the right answer.
+Assistant: Ok, no worries. Let's review your code line by line. Could you please explain it to me?
+	<alt>Let's start with a simple example. What is the output of the following code snippet: `top_k([1, 2, 3, 4, 5], 3)`?
+	<alt>Let's start with a warm-up question. What does the `.pop()` method do?
+	<alt>Let's start with a warm-up question. What do you think the output of the following code snippet will be: `[1, 5, 3, 4, 2].pop(5)`?
+	<alt>Could you please explain what line 5 in your code does?
+	<alt>Let’s look into the Python documentation. Can you describe what the `.pop()` method does?
+User: Sure. First, I create an empty list where I will save the numbers from the given list. Then I add a for-loop and set the number of iterations it makes to K, which is the number of values the output list must contain. After that, I search for the maximum value in the given list. Once the value is found, I add it to the empty list I created earlier and then remove the value from the given list.
+Assistant: Good. What can you do right now to debug your code and diagnose what might be causing the problem?
+User: Hm… The problem is in the `.pop()` method. I can try debugging it by printing the given list to see how it is affected and the `max(lst)` to see what the `.pop()` method receives as the input. So printing the `max(lst)` command results in the maximum value of the given list. When I try executing the `.pop()` method, it raises an error. I am not sure what I am doing wrong.
+	<alt>I could try a more simple input and print out the max and the full list to see how it is processed. When I use the input `[0, 1]`, It seems to work, but when using `[1]`, it throws an error. I think it is removing elements by index and not by value, maybe I should use a different deletion method.
+<code>
+1. def top_k(lst, k):
+2.    result = []
+3.    for i in range(k):
+4.        result.append(max(lst))
+5.        print(max(lst))
+6.        lst.pop(max(lst))
+7.        print(lst)
+8.    return result
+
+</code>
+Assistant: Are there other ways of debugging the `.pop()` method?
+	<alt>What happens if you use a different input value for the `top_k()` function?
+	<alt>Have you considered using the debugger?
+	<alt>What do you think the output of the following code snippet will be: `[1, 5, 3, 4, 2].pop(5)`?
+User: Hm... I probably could use a different value as the input for this method. So using 1 as the input value worked. The `.pop()` method seems to remove the value that has the index value of 1 in the given list. This is not what I was expecting from this method. What should I do?
+<code>
+1. def top_k(lst, k):
+2.    result = []
+3.    for i in range(k):
+4.        result.append(max(lst))
+5.        print(lst)
+6.        lst.pop(1)
+7.        print(lst)
+8.    return result 
+
+</code>
+Assistant: Perhaps there are other solutions you can use aside from `.pop()`?
+	<alt>Where can we learn more about other list methods that can help us remove elements from an array?
+	<alt>I would suggest checking Python documentation. Perhaps you will be able to find useful information there?
+User: I think but I can't remember them...
+Assistant: I would suggest checking Python documentation. Perhaps you will be able to find useful information there?
+User: Ok. Oh I see, I used the wrong method. I should use `.remove()` instead. Aha! It works now. I removed the print statements also.
+<code>
+1. def top_k(lst, k):
+2.    result = []
+3.    for i in range(k):
+4.        result.append(max(lst))
+5.        lst.remove(max(lst))
+6.    return result
+
+</code>
+Assistant: Great! Please let me know if you need help with anything else.
+</dialogue>

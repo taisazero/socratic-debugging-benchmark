@@ -1,0 +1,114 @@
+<problem>
+Write a function `spellchecker(words: List[str], words_to_check: List[str]) -> Iterable[str]` that takes in a list of words and a list of words to check. The function should return an iterable of strings that indicate whether or not each word in `words_to_check` are spelled properly. A word is spelled properly if it is in the `words` list. If a word is spelled properly, the string should say "[word] is spelled properly!". If a word is misspelled, the string should say "[word] is misspelled!". The order of the strings in the returned list should be the same as the order of the words in `words_to_check`.
+## Example Cases:
+```
+list(spellchecker(["dog", "cat", "giraffe", "horse", "dragon"], ["dogz", "cet", "giraffe", "horsee", "dragon"])) => ["dogz is misspelled!", "cet is misspelled!", "giraffe is spelled properly!", "horsee is misspelled!", "dragon is spelled properly!"]
+list(spellchecker(["apple", "banana", "orange", "pear", "grape"], ["apple", "baana", "orange", "pier", "grayp"])) => ["apple is spelled properly!", "baana is misspelled!", "orange is spelled properly!", "pier is misspelled!", "grayp is misspelled!"]
+list(spellchecker(['bubbles', 'cup', 'food'], ['bubbles', 'cup', 'food', 'bubbles', 'cup', 'food'])) => ['bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!', 'bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!']
+list(spellchecker([], ['bubbles', 'cup', 'food'])) => ['bubbles is misspelled!', 'cup is misspelled!', 'food is misspelled!']
+```
+</problem>
+<bug_code>
+1. def spellchecker(words, words_to_check):
+2.    result = []
+3.    for word in words_to_check:
+4.        if word in words:
+5.            result.append(word + " is spelled properly!")
+6.        else:
+7.            result.append(word + " is misspelled!")
+</bug_code>
+<bug_desc>
+The function returns `None` instead of an iterable of strings.
+</bug_desc>
+<bug_fixes>
+After line 7, insert `return result` with one indentation level.
+</bug_fixes>
+<unit_tests>
+assert list(spellchecker(["dog", "cat", "giraffe", "horse", "dragon"], ["dogz", "cet", "giraffe", "horsee", "dragon"])) == ["dogz is misspelled!", "cet is misspelled!", "giraffe is spelled properly!", "horsee is misspelled!", "dragon is spelled properly!"]
+assert list(spellchecker(["apple", "banana", "orange", "pear", "grape"], ["apple", "baana", "orange", "pier", "grayp"])) == ["apple is spelled properly!", "baana is misspelled!", "orange is spelled properly!", "pier is misspelled!", "grayp is misspelled!"]
+assert list(spellchecker(['bubbles', 'cup', 'food'], ['bubbles', 'cup', 'food', 'bubbles', 'cup', 'food'])) == ['bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!', 'bubbles is spelled properly!', 'cup is spelled properly!', 'food is spelled properly!']
+assert list(spellchecker([], ['bubbles', 'cup', 'food'])) == ['bubbles is misspelled!', 'cup is misspelled!', 'food is misspelled!']
+
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Help! I'm really stuck.
+Assistant: Okay, where do you think the problem is?
+	<alt>Are any of the test cases passing?
+	<alt>Have you completed all the steps in the instructions?
+	<alt>Let's look at your function, can you explain what it is supposed to do?
+User: I don't know.
+Assistant: Can you explain what your function is supposed to do?
+	<alt>Do any of the test cases pass?
+	<alt>Have you skipped any steps in the instructions?
+User: My function takes in one list of words and compares it to another list.
+	<alt>My function compares two lists of words and then returns information about them.
+	<alt>I followed the prompt.
+Assistant: Okay, on what line of code does it take in those lists of words?
+	<alt>Does it do anything else?
+	<alt>Is that everything it is supposed to do according to the prompt?
+	<alt>Let's look at the first line of the function on line 1, does it take in two lists of words?
+User: On line 1.
+Assistant: Does that line take in those lists?
+	<alt>Do you see any problems on that line?
+	<alt>What should your function do after taking in those lines?
+User: Yes, it does.
+Assistant: Okay, so what is the next thing your function is supposed to do?
+	<alt>Let's check the loops where we compare the lists, what line do those start on?
+	<alt>How does your function compare the lists?
+User: It's supposed to compare the two lists and say if the word is spelled wrong.
+Assistant: Where is it supposed to put the information about the spelling?
+	<alt>How does it determine if the word is spelled wrong?
+	<alt>Let's examine the loop, what line does it start on?
+User: In a list called result.
+Assistant: Let's examine that list, where is it created?
+	<alt>Let's examine that list, what happens to it after it is made?
+	<alt>Let's examine that list, what lines is it modified on?
+User: On line 2.
+Assistant: What happens to that list next?
+	<alt>Let's examine that list, what happens to it after it is made?
+	<alt>Let's examine that list, what lines is it modified on?
+	<alt>Do we do anything with that list after we finish adding to it?
+User: We add strings to it for if the word is spelled right.
+Assistant: Do we do anything else to it after we've finished with the loop?
+	<alt>How would that information be sent out of the function?
+	<alt>What information is supposed to be returned from the function?
+User: No, we don't.
+	<alt>I forgot to return result!
+Assistant: How can that information be used outside of this function?
+	<alt>What information is supposed to be returned from the function?
+User: I need to return result.
+<code>
+1. def spellchecker(words, words_to_check):
+2.    result = []
+3.    for word in words_to_check:
+4.        if word in words:
+5.            result.append(word + " is spelled properly!")
+6.        else:
+7.            result.append(word + " is misspelled!")
+8.        return result
+</code>
+Assistant: Does it work now?
+User: No, it doesn't. 
+Assistant: Is it passing any of the test cases?
+	<alt>Look at what you added, why did you put it there?
+	<alt>Look at what you added, when should this happen?
+User: No, but the message changed to Assertion error.
+Assistant: Okay, let's look back at what you added. When should that code run?
+	<alt>Let's look at what you added. Should it be inside or outside the for-loop?
+User: Oh! I put it inside the loop!
+<code>
+1. def spellchecker(words, words_to_check):
+2.    result = []
+3.    for word in words_to_check:
+4.        if word in words:
+5.            result.append(word + " is spelled properly!")
+6.        else:
+7.            result.append(word + " is misspelled!")
+8.    return result
+</code>
+Assistant: Does it run correctly now?
+User: Yes! Thank you!
+</dialogue>

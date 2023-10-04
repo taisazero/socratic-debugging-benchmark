@@ -1,0 +1,72 @@
+<problem>
+Write a function `substr_len(s: str, t: str) -> int` that takes as input a string `s` and a non-empty string `t` and returns the length of the longest substring of `s` that does not contain `t`. For example, if `s = "abracadabra"` and `t = "ca"`, then the longest substring of `s` that does not contain `t` is `"dabra"`, so the function should return 5.
+## Example Cases:
+```
+substr_len("abracadabra", "ca") => 5
+substr_len("I love Python", "Py") => 7
+substr_len("contest", "test") => 3
+substr_len("icey ice", "ice") => 2
+substr_len("icey ice cream", "ice") => 6
+substr_len("abracadabra", "abba") => 11
+```
+</problem>
+<bug_code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        max_len = max(len(crt_str), max_len)        
+8.
+9.        pos = s.find(t, start)
+10.    
+11.    last_str = s[start:]
+12.    max_len = max(len(last_str), max_len)
+13.
+14.    return max_len
+</bug_code>
+<bug_desc>
+The value of `start` never changes inside the while loop, thus `pos` which is computed based on `start` never changes either. Consequently, the while loop on line 5 never stops.
+</bug_desc>
+<bug_fixes>
+On line 8 insert the code `start = pos + len(t)`.
+</bug_fixes>
+On line 11 insert a new line with `ind += len(t)`.
+</bug_fixes>
+<unit_tests>
+assert substr_len("abracadabra", "ca") == 5
+assert substr_len("I love Python", "Py") == 7
+assert substr_len("contest", "test") == 3
+assert substr_len("icey ice", "ice") == 2
+assert substr_len("icey ice cream", "ice") == 6
+assert substr_len("abracadabra", "abba") == 11
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My code does not stop and I do not understand why, can you help?
+Assistant: Sure. Let's assume the code runs on the first test example, can you run it manually for me line by line and show the value of each variable until you are done with one iteration of the while loop?
+	<alt>Sure. Can you explain to me what your code is supposed to do, line by line? Explain the role of each variable.
+	<alt>Sure. Can you tell me the role of the variable `start`?
+User: In lines 2 and 3, we initialize the variables `max_len` and `start` with 0. The variable `pos` will be calculated as `s.find(t, 0) = 4`, which is the position of the first occurrence of `ca` (string `t`) in `abracadabra` (string `s`). Then, because `pos` is not -1, the variable `crt_str` is assigned the substring `s[0:4]`, which is `abra`. On line 7, `max_len` is calculated as `max(4, 0) = 4`. Then on line 9, `pos` is recalculated as `s.find(t, 0)`... Ah, I see the problem, I forgot to update the variable `start`, let me do that. It works now, thank you!
+<code>
+1. def substr_len(s, t):
+2.    max_len = 0
+3.    start = 0
+4.    pos = s.find(t, start)
+5.    while pos != -1:
+6.        crt_str = s[start:pos]
+7.        max_len = max(len(crt_str), max_len)        
+8.        start = pos + len(t)
+9.        pos = s.find(t, start)
+10.    
+11.    last_str = s[start:]
+12.    max_len = max(len(last_str), max_len)
+13.
+14.    return max_len
+
+</code>
+Assistant: You're welcome!
+</dialogue>

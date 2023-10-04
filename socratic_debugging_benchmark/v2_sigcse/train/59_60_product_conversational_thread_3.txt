@@ -1,0 +1,54 @@
+<problem>
+Define a function called `Product(a:int, b:int) -> int` which takes two integer inputs: a and b. The function should return the product of these two values (i.e. a * b).
+
+## Example Cases: 
+```
+Product(1,2) => 2
+Product(2,4) => 8
+Product(4,4) => 16
+Product(5,5) => 25
+```
+</problem>
+<bug_code>
+1. def Product(a, b):
+2.	a * b
+</bug_code>
+<bug_desc>
+The function does not return anything, thus when evaluated it computes the value `None` instead of returning the product.
+</bug_desc>
+<bug_fixes>
+Add `return` before `a * b`.
+</bug_fixes>
+<unit_tests>
+assert Product(1,2) == 2
+assert Product(2,4) == 8
+assert Product(4,4) == 16
+assert Product(5,5) == 25
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello, I'm having trouble with `Product()` function. I swear that I have done it correctly, but I'm failing even the first assertion and I can't figure out why.
+Assistant: Okay, can you explain your `Product()` function in detail?
+	<alt>How familiar are you with functions in Python?
+User: I take in two inputs, which I have named `a` and `b`, and then I multiply the two numbers together.
+Assistant: Okay, can you modify your code such that on line 3, you execute the line `print(Product(1,2))`?
+	<alt>Are you familiar with a way to output the value of `Product(1,2)` to the user through the console?
+User: Oh! I made the change and now it prints out `None`.  I realized I just forgot to put a `return` statement and I've now fixed it. Thanks for the help!
+<code>
+1. def Product(a, b):
+2.	a * b
+3. print(Product(1,2))
+</code>
+Assistant: A function will only take on a value when the keyword `return` is used followed by a value. Otherwise, it will return a special value referred to by `None`, stating that the function did not return any value. Do you know where to put `return` in your code?
+User: Oh! That makes a lot more sense. So I would place the `return` statement on line 2 like this?
+<code>
+1. def Product(a, b):
+2.	return a * b
+3. print(Product(1,2))
+</code>
+Assistant: You're welcome! Any other ways I can help you today?
+	<alt>It is likely a good decision to remove the `print` statement on line 3 before using this, as it would lead to confusion with a user running this program without knowing your reasoning behind it being there.
+User: That makes sense. Thanks for the help!
+</dialogue>

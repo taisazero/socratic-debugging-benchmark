@@ -1,0 +1,98 @@
+<problem>
+Write a function `my_func(len: int) -> List[int]` that generates a list of `len` integers. The element at each position 'i' in the list should be computed as `i * 6 + rand.randint(1, len)`. Before calling the function, use 42 as the seed for the random number generator by calling `rand.seed(42)`. Assume that `len` is a non-negative integer.
+
+## Example Cases:
+```
+my_func(10) => [2, 7, 17, 22, 28, 33, 38, 51, 50, 64]
+my_func(7) => [4, 7, 13, 19, 26, 32, 41]
+my_func(5) => [5, 7, 17, 20, 29]
+my_func(3) => [2, 7, 14]
+my_func(1) => [1]
+```
+</problem>
+<bug_code>
+1. import random as rand
+2. rand.seed(42)
+3.
+4. def my_func(len):
+5.    y = list(map(def yOf(x):  x * 6 + rand.randint(1, len),  range(len)))
+6.    return y
+</bug_code>
+<bug_desc>
+The function has a syntax error on line 4. Defining a function inside of the built-in function `map` using `def` is invalid.
+</bug_desc>
+<bug_fixes>
+Replace `def yOf(x):` with `lambda x:` on line 4.
+After line 2 insert the following:
+```py
+def yOf(x, len):
+    return  x * 6 + rand.randint(1, len)
+```
+Replace `map(def yOf(x):  x * 6 + rand.randint(1, len),  range(len))` with `map(yOf, range(len), [len] * len)` on line 4.
+After line 4 insert the following:
+```py
+def yOf(x):
+    return  x * 6 + rand.randint(1, len)
+```
+Replace `map(def yOf(x):  x * 6 + rand.randint(1, len),  range(len))` with `map(yOf, range(len))`.
+</bug_fixes>
+<unit_tests>
+assert my_func(10) == [2, 7, 17, 22, 28, 33, 38, 51, 50, 64]
+assert my_func(7) == [4, 7, 13, 19, 26, 32, 41]
+assert my_func(5) == [5, 7, 17, 20, 29]
+assert my_func(3) == [2, 7, 14]
+assert my_func(1) == [1]
+</unit_tests>
+<stu_desc>
+The student is very familiar with basic programming concepts and wants to go above and beyond by solving a problem using the `map` function which the student is still learning how to use.
+</stu_desc>
+<dialogue>
+User: Hey, I learned recently about the use of `map` in Python and I'm trying to use it to solve this problem. I am stuck though. Can you help me out?
+Assistant: Certainly. Can you describe what you know about the `map` function so far with an example if possible?
+	<alt>Certainly. Can you describe what your code does on line 5?
+	<alt>Certainly. Do you know what the `map` function takes in as parameters?
+User: So I learned that the `map` function takes in a function and an iterable. The `map` function applies the function to each element in the iterable provided and returns an iterable. In this case, I am passing `def yOf(x):  x * 6 + rand.randint(1, len)` as the function and `range(len)` as the iterable. I really think I can solve this problem with `map`.
+Assistant: Ah good explanation. When you try to run your code what do you observe in the terminal?
+	<alt>Good explanation. So what is the specific issue that you have?
+	<alt>Good explanation. Where can you learn more about the `map` function and its use?
+User: So when I try to run my code, it throws a syntax error on line 5.
+Assistant: Can you explain to me what the `def` reserved word in Python does?
+	<alt>Can you describe what `def yOf(x):   x * 6  + rand.randint(1, len)` does?
+	<alt>It looks like you are trying to define the function `yOf(x)` inside of the `map` function call. Do you think that's supported by Python syntax?
+User: `def` stands for define and it creates a function in Python to be used later on in the code.
+Assistant: It looks like you are trying to define the function `yOf(x)` inside of the `map` function call. Do you think that's supported by Python syntax?
+User: I guess not from the looks of it. Maybe I should define my function outside of the `map` call?
+	<alt>It seems to be the case. Not really sure though what to do though.
+Assistant: Let's try defining the function `yOf(x)` before using it in `map`. Where do you think it is best to define your function?
+User: Maybe after line 4? Inside of `my_func` so that it is within scope?
+	<alt>Probably before `my_func` so on line 3 I can insert my function definition for `yOf(x)`.
+	<alt>Not really sure.
+Assistant: Sounds good. Let's try it. Are you planning to declare a function inside of another function?
+User: Yes. It's called a nested function! Let me edit my code. Ah I see that `x` is not defined, but I do define it on line 5.
+<code>
+1. import random as rand
+2. rand.seed(42)
+3. def my_func(len):
+4.    def yOf(x):
+5.        return  x * 6 + rand.randint(1, len)
+6.    y = list(map(yOf, range(len)))
+7.    return y 
+
+</code>
+Assistant: What is the scope of the parameters declared for the function `yOf`?
+	<alt>Where can `x` be used?
+User: Oh the scope is only line 6. I see it. I don't need `x` on line 6 since I am the `map` function takes care of passing each element in `range(len)` to `yOf` as the parameter `x`. Let me edit my code.
+<code>
+1. import random as rand
+2.rand.seed(42)
+3. def my_func(len):
+4.    def yOf(x):
+5.        return  x * 6 + rand.randint(1, len)
+6.    y = list(map(yOf, range(len)))
+7.    return y 
+
+</code>
+Assistant: Good. Have you tried your code for all examples?
+User: Yes it does! Thank you for your help today!
+Assistant: You're welcome! Let me know if you have any other questions!
+</dialogue>

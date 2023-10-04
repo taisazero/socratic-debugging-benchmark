@@ -1,0 +1,61 @@
+<problem>
+Write a method `split_apples(apples:int, children:int) ->int` that takes in an amount of apples and a number of children. The function should distribute `apples` evenly across all `children`. The function should return the whole number of apples each child will get after distributing the apples evenly. Assume that both `apples` and `children` are positive whole numbers.
+
+## Example Cases:
+```
+split_apples(10, 2) => 5
+split_apples(7, 2) => 3
+split_apples(100, 100) => 1
+split_apples(1, 2) => 0
+```
+</problem>
+<bug_code>
+1. def split_apples(apples, children):
+2.    i = 0
+3.    while apples > 0 and apples > children:
+4.        apples = apples - children
+5.        i += 1
+6.    return i
+</bug_code>
+<bug_desc>
+The while loop exits early when `apples` are divisible by `children`. Consequently, the function has an off-by-one error when `apples` is divisible by `children`.
+</bug_desc>
+<bug_fixes>
+Replace `apples > children` with `apples >= children` on line 3.
+</bug_fixes>
+<unit_tests>
+assert split_apples(10, 2) == 5
+assert split_apples(7, 2) == 3
+assert split_apples(100, 100) == 1
+assert split_apples(1, 2) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My function fails two test cases and I do not understand why, can you help?
+Assistant: Sure. Do you see anything special about the test cases it fails, compared to the ones where it works well?
+	<alt>Sure, I can help. Let's consider the third test case where `apples = 100` and `children = 100`. Can you manually run through the code and explain what happens, line by line?
+	<alt>Sure. Let's consider the third test case where `apples = 100` and `children = 100`. What is the number returned by your function?
+	<alt>Sure. Can you explain to me what you are trying to do with the while loop?
+	<alt>Sure. Can you tell me what the loop condition `apples > children` is there for?
+	<alt>Sure. Can you explain your code to me, what is supposed to do, line by line?
+User: It fails on test cases 1 and 3 and works well for cases 2 and 4. One thing that is different between them is that when it fails the number of apples is divisible by the number of children.
+	<alt>It fails on test cases 1 and 3 and works well for cases 2 and 4, but I don't see what is different between them.
+Assistant: Exactly. Now, in these cases, how is the number computed by your function, when compared to the correct output?
+	<alt>Exactly. Now, looking at your code, can you figure out why it returns the wrong number when `apples` is divisible by `children`? You might want to consider an actual example, such as test case number 3.
+	<alt>Exactly. Now, let's say that `apples = k * children`, which means that the function should return the value `k`. How many times does the while loop iterate in your code?
+User: It is 1 less than the correct number.
+Assistant: Correct. Looking at your code, this means that the while loop needs to iterate one more time in order to produce the correct value for `i`. Can you see what condition makes it stop iterating too early?
+	<alt>Correct. Looking at your code, can you figure out why when `apples` is divisible by `children` the function outputs 1 less than the correct number?
+User: Ah, I see, it stops when `apples` is equal to `children`, but it should iterate for that too. Let me fix that ... it works now, thank you!
+<code>
+1. def split_apples(apples, children):
+2.    i = 0
+3.    while apples > 0 and apples >= children:
+4.        apples = apples - children
+5.        i += 1
+6.    return i
+</code>
+Assistant: You're welcome, glad I could be of help!
+</dialogue>

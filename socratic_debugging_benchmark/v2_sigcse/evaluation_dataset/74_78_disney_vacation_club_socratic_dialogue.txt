@@ -1,0 +1,95 @@
+<problem>
+The CS110Z course director, unfortunately, was tricked into purchasing a Disney Vacation Club timeshare. The good news about DVC is that it lets you reserve a room at any Disney Resort for one week! The downside, however, is that members have to pay an annual "maintenance fee" so that the mouse can keep the property looking good (EVEN when Disney World was closed due to COVID-19 . . . yay).
+
+This year, the maintenance was $623.00. If that isn't bad enough, your course director discovered that maintenance fees aren't fixed! On the contrary, it accues each year at a rate of approximately 1.5%.
+
+Write a Python function called `get_years_until(target_value: float) -> int` that takes a target value as a parameter, and returns the number of years (assuming a fixed interest rate) before the maintenance fee exceeds this value.
+
+## Example Cases:
+```
+get_years_until(624) => 1
+get_years_until(1000) => 32
+```
+
+</problem>
+<bug_code>
+1. def get_years_until(target_amount):
+2.
+3.    current_fee = 623.00
+4.    years = 0
+5.    total_fee = current_fee
+6.
+7.    while total_fee < target_amount:
+8.        total_fee = current_fee*(1.015**years)
+9.        years += 1
+10.
+11.    return years
+</bug_code>
+<bug_desc>
+On line 8, the new total fee is calculated before the number of years is incremented, so the final result will be 1 greater than the correct answer.
+</bug_desc>
+<bug_fixes>
+Move line 9 to be above line 8 and within the while loop.
+</bug_fixes>
+<unit_tests>
+assert get_years_until(624) == 1
+assert get_years_until(1000) == 32
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: I'm really stuck!
+Assistant: Let me help, do you have any idea what's wrong?
+	<alt>What test cases are passing?
+	<alt>Have you read the instructions and made sure you are doing everything?
+	<alt>Where do you think the problem is?
+User: I don't know. None of the test cases are passing.
+Assistant: Okay, let's start with the first part of your function. What happens on lines 3, 4, and 5?
+	<alt>Let's start by checking the math, what numbers do we start with?
+	<alt>How should the calculation work?
+	<alt>Could we add some print statements to check the math?
+User: That's where I set up the variables.
+Assistant: Okay, let's check the loop now, what is it for?
+User: That's where we calculate the change over all the years.
+Assistant: So what happens on line 7?
+	<alt>How do we decide when we want to stop looping?
+	<alt>Can you explain the calculation on line 8?
+	<alt>What is the purpose of line 9?
+User: Line 7 starts the loop, and sets it to run until the fee goes over the target.
+Assistant: Okay, so now let's check on line 8, what does that line do?
+	<alt>What is the purpose of line 9?
+	<alt>Does anything look incorrect with line 7?
+User: That's where we do the calculation.
+Assistant: What is the purpose of line 9?
+	<alt>What is the role of "years" in line 8?
+	<alt>Where does "current_fee" come from in line 8?
+	<alt>Could we add a print statement here to check the figures?
+User: It increments the number of years.
+Assistant: So what value would years have the first time the loop iterates?
+	<alt>What is the value of years in the calculation on line 8 the first time the loop is run?
+	<alt>Should we be incrementing years after we do the calculation?
+User: Years would start at 0.
+	<alt>I need to change that, we would calculate at the end of year 1, not year 0!
+Assistant: When would we calculate interest?
+	<alt>Should we be incrementing years before or after we do our calculation?
+User: At the end of a year.
+Assistant: When would we want to calculate the number of years?
+	<alt>Should we be incrementing years before or after we do our calculation?
+User: It's off by 1, I should be incrementing first!
+Assistant: Make that change and try running it. What happens?
+<code>
+1. def get_years_until(target_amount):
+2.
+3.    current_fee = 623.00
+4.    years = 0
+5.    total_fee = current_fee
+6.
+7.    while total_fee < target_amount:
+8.        years += 1
+9.        total_fee = current_fee*(1.015**years)
+10.
+11.    return years
+</code>
+User: It works! Thanks!
+</dialogue>

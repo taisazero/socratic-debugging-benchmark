@@ -1,0 +1,65 @@
+<problem>
+Write a method `limitFinder(lst: List[int], limit: int) -> List[int]` that takes a list of numbers and a limit and returns a list of all the numbers in the list that are less than the limit.
+## Example Cases:
+```
+limitFinder([1, 2, 3, 4, 5], 3) => [1, 2]
+limitFinder([1, 5, 4, 3, 5], 6) => [1, 2, 3, 4, 5]
+limitFinder([100, 2, 145, 3,8], 0) => []
+limitFinder([-1, -3, -4, -2, -5], -3) => [-4, -5]
+limitFinder([], 0) => []
+```
+</problem>
+<bug_code>
+1. def limitFinder(lst, limit):
+2.  lst2 = []
+3.  for i in lst2:
+4.    if i < limit:
+5.      lst2.append(i)
+6.  return lst2
+</bug_code>
+<bug_desc>
+On line 3, the for loop attempts iterating through `lst2` which is empty. Consequently, the for loop does not iterate and the function returns an empty list.
+</bug_desc>
+<bug_fixes>
+Replace `lst2` with `lst` on line 3.
+</bug_fixes>
+<unit_tests>
+assert limitFinder([1, 2, 3, 4, 5], 3) == [1, 2]
+assert limitFinder([1, 5, 4, 3, 5], 6) == [1, 2, 3, 4, 5]
+assert limitFinder([100, 2, 145, 3,8], 0) == []
+assert limitFinder([-1, -3, -4, -2, -5], -3) == [-4, -5]
+assert limitFinder([], 0) == []
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My program seems to always return an empty list instead of a list of numbers, can you help?
+Assistant: Sure. Can you walk me through what each line does?
+	<alt>Sure. Can you tell me which list are you supposed to find the numbers from?
+	<alt>Sure, can you explain what line 3 does?
+	<alt>Sure. It looks like your for-loop is never executed. Do you know why?
+User: Line 2 - creates an empty list `lst2`, which will eventually store all the numbers that are less than the limit.
+Assistant: Ok, what about the next line?
+User: Line 3 - loops through all the numbers in `lst2`
+	<alt>It looks like line 3 loops through the wrong list! Is that the issue here?
+Assistant: How many numbers are in `lst2`?
+	<alt>Will the for loop ever be executed?
+	<alt>Is `lst2` empty?
+	<alt>How many times will the for loop execute?
+	<alt>Is that the list that you want to loop through?
+User: `Oh I see, `lst2` is empty, so the for loop is never executed.
+Assistant: Correct, how would you fix your for loop now?
+User: Should I be looping over `lst` instead?
+Assistant: Yes, what does the new code look like?
+User: This code works, thank you!
+<code>
+1. def limitFinder(lst, limit):
+2.  lst2 = []
+3.  for i in lst:
+4.    if i < limit:
+5.      lst2.append(i)
+6.  return lst2
+</code>
+Assistant: You are welcome!
+</dialogue>

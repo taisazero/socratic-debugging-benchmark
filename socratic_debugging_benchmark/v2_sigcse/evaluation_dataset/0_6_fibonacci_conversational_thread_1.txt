@@ -1,0 +1,82 @@
+<problem>
+Create a function `fibonacci(n:int)` that takes in a parameter `n`, an integer representing the number of terms in the Fibonacci sequence to generate, and returns:
+-  'OOPS', if `n` is less than or equal to 0 
+- `1`  if `n` is equal to `1`
+- `1` if `n` is equal to `2`
+- Otherwise, return the nth term of the Fibonacci sequence. A Fibonacci sequence is a sequence in which every number is the sum of the previous two numbers in the sequence. Example Fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ....
+## Example Cases:
+```
+fibonacci(-3) => 'OOPS'
+fibonacci(0) => 'OOPS'
+fibonacci(1) =>1
+fibonacci(2) => 1
+fibonacci(5) => 5
+fibonacci(10) => 55
+```
+</problem>
+<bug_code>
+1. def fibonacci(n):
+2.    if n <= 0:
+3.        return "OOPS"
+4.    elif n == 1 and n == 2:
+5.        return 1
+6.    elif n > 2:
+7.        a = 1
+8.        b = 1
+9.        for i in range(3, n+1):
+10.            c = a + b
+11.            a = b
+12.            b = c
+13.        return b
+</bug_code>
+<bug_desc>
+On line 4, the function checks whether `n` is equal to `1` and `2` at the same time, which is not possible. Consequently, the function will never return `1` as specified by the instructions.
+</bug_desc>
+<bug_fixes>
+Replace `and` with `or` on line 4.
+</bug_fixes>
+<unit_tests>
+assert fibonacci(0) == 'OOPS'
+assert fibonacci(1) == 1
+assert fibonacci(2) == 1
+assert fibonacci(5) == 5
+assert fibonacci(-3) == 'OOPS'
+assert fibonacci(10) == 55
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi, my program passes all test cases except the second and third. Can you help?
+Assistant: Hi! Sure, what does the problem description say about these two cases?
+	<alt>Hi! Sure, what is the value of `n` in these two cases?
+	<alt>Hi! Sure, these two cases are exception cases according to the problem description. Where have you handled this exception?
+	<alt>Hi! Sure, what is the output supposed to be for each of these cases?
+User: It says to return 1 when `n` is equal to `1` and when `n` is equal to `2`
+Assistant: So will it return `1` when `n` is only equal to `1`?
+	<alt>Will `n` ever be `1` and `2` at the same time?
+User: No, it looks like it will return `1` only when `n` is `1` and `2`.
+Assistant: Will that ever happen?
+	<alt>Is that what you are supposed to do according to the instructions?
+User: No, `n` can be either `1` or `2`, but never both `1` and `2`.
+Assistant: Correct! How do you check if `n` is `1` or `2` instead of both `1` and `2`?
+User: Will it look like this?
+<code>
+1. def fibonacci(n):
+2.    if n <= 0:
+3.        return "OOPS"
+4.    elif n == 1 or n == 2:
+5.        return 1
+6.    elif n > 2:
+7.        a = 1
+8.        b = 1
+9.        for i in range(3, n+1):
+10.            c = a + b
+11.            a = b
+12.            b = c
+13.        return b
+</code>
+Assistant: Correct, do you now see the difference between `or` and `and`?
+User: I see it now, `and` evaluates to true only when both cases are correct. But `or` evaluates to true if either of the cases are correct. Thank you for your help!
+Assistant: That is right, you are welcome!
+</dialogue>

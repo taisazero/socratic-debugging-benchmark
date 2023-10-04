@@ -1,0 +1,61 @@
+<problem>
+Write a function `search(x: int, seq: List[int]) -> int` that returns the index of the first occurrence of `x` in `seq`. If `x` is not in `seq`, return the index where `x` should be inserted to keep `seq` sorted. Assume that `seq` is sorted in ascending order.
+## Example Cases:
+```
+search(5, [-1, 5, 8, 10, 12]) => 1
+search(-2, [-1, 57, 65]) => 0
+search(0, [-120, 60, 78, 100]) => 1
+search(77, [-100, -50, 5, 44, 66, 76, 99]) => 6
+search(55, [-99, -2, 0]) => 3
+```
+</problem>
+<bug_code>
+1. def search(x, seq):
+2.  for i in range(len(seq)):
+3.    if x <= seq[i]:
+4.      return i
+</bug_code>
+<bug_desc>
+The function returns `None` when `x` is greater than all of the elements in `seq` instead of returning the index indicating that `x` should be inserted at the end of the array.
+</bug_desc>
+<bug_fixes>
+Insert a line following line 4, with one indentation containing `return len(seq)` 
+</bug_fixes>
+<unit_tests>
+assert search(5, [-1, 5, 8, 10, 12]) == 1
+assert search(-2, [-1, 57, 65]) == 0
+assert search(0, [-120, 60, 78, 100]) == 1
+assert search(77, [-100, -50, 5, 44, 66, 76, 99] ) == 6
+assert search(55, [-99, -2, 0]) == 3
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I seem to be having some issues with this function I am trying to implement. It sometimes returns `None` instead of an output. 
+Assistant: What inputs have you tried? When do you get `None`?
+	<alt>Do you notice a pattern with the cases that produce `None`?
+	<alt>When do you notice `None` as the output?
+	<alt>What inputs have you tried? When do you get `None`?
+	<alt>It seems that your function may be returning nothing in certain cases. Can you think of a case where this might happen?
+User: I tried a lot of examples. One that worked correctly was `search(-2, [-1, 57, 65])`, but I got `None` when I tried `search(80, [-1, 57, 65])`.
+	<alt>I tried a few different ones. It looks like answers are only incorrect when `x` is really big relative to the numbers in the list
+	<alt>It seems like I get the wrong answer when `x` is bigger than all the existing list elements
+Assistant: Interesting. Can you walk me through what `search(80, [-1, 57, 65])` looks like at each line of your code? What would you expect as the output?
+	<alt>Compare and contrast the successful example `search(-2, [-1, 57, 65])` with the failing example `search(80, [-1, 57, 65])` where your function returns None. Does anything about `x` and `seq` in these examples stand out to you?
+	<alt>What do you expect your code to return when `x` is bigger than the `seq` elements?
+User: Sure! So, first, we iterate through the list elements. At each element, we check if `x` is less than or equal to it. In that case, we would want to insert at that index, so we return the index.
+Assistant: What happens if `x` is not less than or equal to any element?
+	<alt>What does your code do if `x` is greater than all of the elements in `seq`?
+User: I guess it doesn't return anything. I should add a case for that. Now that I've modified it, it seems to work!
+<code>
+ def search(x, seq):    
+  for i in range(len(seq)):
+    if x <= seq[i]:
+      return i
+  return len(seq)
+
+</code>
+Assistant: Good work. Let me know if you have any other questions.
+User: Thanks!
+</dialogue>

@@ -1,0 +1,55 @@
+<problem>
+Write a function called `CountOnes(integers:list) -> int` which is passed one input a list of integers. This function should count how many elements in the array are equal to 1, and it should return this number.
+
+## Example Cases:
+```
+CountOnes([1,1,1,0,0]) => 3
+CountOnes([1,0,0]) => 1
+CountOnes([]) => 0
+CountOnes([3]) => 0
+```
+</problem>
+<bug_code>
+1. def CountOnes(integers):
+2.	count = 0
+3.	for i in range(1, len(integers)):
+4.		if(integers[i] == 1):
+5.			count++
+6.	return count
+</bug_code>
+<bug_desc>
+On line 3, the loop iterates `integers - 1` times instead of `integers` times. Consequently, the function does not access all elements in the `integers` list and always skips the first element in `integers`.
+</bug_desc>
+<bug_fixes>
+Replace `1` with `0` in the `range` call on line 3.
+</bug_fixes>
+<unit_tests>
+assert CountOnes([1,1,1,0,0]) == 3
+assert CountOnes([1,0,0]) == 1
+assert CountOnes([]) == 0
+assert CountOnes([3]) == 0
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I was working on my `CountOnes()` function and I keep getting the wrong count but I don't know what I'm doing wrong.
+Assistant: Hello! Can you explain what your `for` loop does?
+User: It is a loop over `range(1, len(integers))` and then checks if the element of `integers` at index `i` is 1, and if it is, increments the count.
+Assistant: When you loop with `i in range(1, len(integers))` you put into `i` every value in the list `range(1, len(integers))`. Do you think there is a better way to loop over a list using this paradigm?
+User: Oh, is it possible to do `for integer in integers:`?
+Assistant: That is entirely correct! Can you explain the functional difference between your previous solution and this one?
+User: Oh, I think my previous loop only iterated `len(integers)-1` times, while this loop iterates `len(integers)` times. Was I supposed to use `range(0, len(integers))` in the initial solution?
+Assistant: That is entirely correct. Python lists start their indices at 0, not 1.
+User: Thank you for your help! I plugged the new solution into my code and it works now.
+<code>
+1. def CountOnes(integers):
+2.	count = 0
+3.	for integer in integers:
+4.		if(integer == 1):
+5.			count += 1
+6.	return count
+</code>
+Assistant: I'm glad that I could clear up the concepts for you. Is there anything else you would want to ask?
+User: No, that's all for now. Thank you!
+</dialogue>

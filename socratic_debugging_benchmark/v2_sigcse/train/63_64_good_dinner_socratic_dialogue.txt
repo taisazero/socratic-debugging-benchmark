@@ -1,0 +1,69 @@
+<problem>
+You like to eat pizzas for dinner. A good dinner is a dinner where you eat between 10 and 20 pizzas (inclusive). Unless it is a weekend, in which case there is no upper bound on the number of pizzas. Write a function called `GoodDinner(pizzas_int, weekend:bool) -> bool` which takes two inputs: the number of pizzas you eat, and a boolean which is true if it is the weekend and false otherwise. Your function should return true if you had a good dinner, and false if you didn't.
+
+## Example Cases:
+```
+GoodDinner(10, False) => True
+GoodDinner(20, False) => True
+GoodDinner(5, False) => False
+GoodDinner(21, False) => False
+GoodDinner(10, True) => True
+GoodDinner(21, True) => True
+GoodDinner(5, True) => False
+```
+</problem>
+<bug_code>
+1. def GoodDinner(pizzas, weekend):
+2.        if(pizzas >= 10 and weekend):
+3.                return True
+4.        elif(pizzas <= 20 and not(weekend)):
+5.                return True
+6.        return False
+</bug_code>
+<bug_desc>
+The function incorrectly returns True instead of False when it is a weekday and `pizzas` is less than 10. 
+</bug_desc>
+<bug_fixes>
+Insert `pizzas >= 10 and` before `pizzas <= 20 and not(weekend)` in the elif condition on line 4.
+</bug_fixes>
+<unit_tests>
+assert GoodDinner(10, False) == True
+assert GoodDinner(20, False) == True
+assert GoodDinner(5, False) == False
+assert GoodDinner(21, False) == False
+assert GoodDinner(10, True) == True
+assert GoodDinner(21, True) == True
+assert GoodDinner(5, True) == False
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I was working on my `GoodDinner()` function and I'm running into a roadblock. I just can't see where the issue in my code is.
+Assistant: Okay let's start with the simpler case. When `weekend` is `True`, how many pizzas would turn a dinner into a good dinner?
+	<alt>When `weekend` is `False` and `pizzas` is between 0 and 10, what is the expected behavior?
+User: It would be 10 or more pizzas.
+Assistant: And how would you produce a boolean that is `True` when the `pizzas` fits that condition?
+User: It would be `pizzas >= 10`.
+Assistant: Okay, and making an `and` between these two makes your first condition. Now let's move to the more complex condition. When `weekend` is `False`, how many pizzas would make a dinner into a good dinner?
+User: That's where I'm confused. It's between 10 and 20, inclusively, right?
+Assistant: That is correct, what about that condition is confusing you?
+User: I'm not sure how to convert a number between two other numbers into Python.
+Assistant: Let's break it into two parts. How would you check if `pizzas` is 10 or over and how would you check if `pizzas` is 20 or under?
+User: That would be `pizzas >= 10` and `pizzas <= 20`.
+Assistant: And what logical operator would we use to connect those operations to create a boolean that is only `True` if pizzas is between 10 and 20, inclusively?
+	<alt>And would you use `and`, `or`, or `xor` to produce your desired outcome?
+User: That would be `and` right?
+Assistant: Correct. Do you see now how you would implement a condition for when `weekend` is `False`?
+User: Oh, now I see where I went wrong. I added another `and` statement and it works now. Thank you for your help!
+<code>
+1. def GoodDinner(pizzas, weekend):
+2.        if(pizzas >= 10 and weekend):
+3.                return True
+4.        elif(pizzas >= 10 and pizzas <= 20 and not(weekend)):
+5.                return True
+6.        return False
+</code>
+Assistant: I'm glad to be of assistance. Is there anything else I can help you with today?
+User: No, that's all for now. Thank you!
+</dialogue>

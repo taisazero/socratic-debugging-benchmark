@@ -1,0 +1,64 @@
+<problem>
+Write a function called `Range(array:list) -> int` which is passed one input, a list of integers. This function should return the difference between the largest value in the array and the smallest value in the array.
+
+## Example Cases:
+```
+Range([1,2]) => 1
+Range([1,1,1,1,1,1,5])  => 4
+Range([2,2,1,3])  => 2
+Range([-10,-3,-1])  => 9
+Range([-10,3,1])  => 13
+```
+</problem>
+<bug_code>
+1. def Range(array):
+2.        smallest = 0
+3.        largest = 0
+4.        for element in array:
+5.                if(element > largest):
+6.                        largest = element
+7.                if(element < smallest):
+8.                        smallest = element
+9.        return largest - smallest
+</bug_code>
+<bug_desc>
+On lines 2 and 3, `smallest` and `largest` are initialized to 0 if the largest element in the array is a negative number `largest` will remain 0 and consequently the range will be computed incorrectly.
+</bug_desc>
+<bug_fixes>
+Initialize `smallest` and `largest` to the first element of array `array[0]`.
+</bug_fixes>
+<unit_tests>
+assert Range([1,2]) == 1
+assert Range([1,1,1,1,1,1,5]) == 4
+assert Range([2,2,1,3]) == 2
+assert Range([-10,-3,-1]) == 9
+assert Range([-10,3,1]) == 13
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello! I am working on the `Range()` function and I am getting unexpected results.
+Assistant: Hello! Of course, I can be of assistance.  With the return value of your program, let's look at the values of smallest and largest throughout your program. Can you walk through how you expect your code to operate?
+User: The values of `largest` and `smallest` start out at 0, and the `for` loop iterates over every element in the array, and if an element larger than the current value of `largest`or smaller than the current value of `smallest`, the respective variable is set equal to that value. After every element is checked,  it returns the difference between `largest` and `smallest`, which is the range of the list.
+Assistant: This is how the program is intended to run, however, what if there is not a value smaller than 0 or larger than 0 in the list?
+User: Oh. So I should choose a really big number for smallest and a really small number for largest?
+Assistant: Would you be able to guarantee that the list you are given is only of values that are within the arbitrary constraints you set? There is a better way to ensure that the values of `largest` and `smallest` are always within the list.
+	<alt>Let's say you picked -1000 for your initial value of `largest`, can you think of a list where your initial value is larger than every element of the list?
+User: Would it work to just set them to start as an element of the array?
+Assistant: And which element of the array would you set it to?
+	<alt>That is correct. Why would that be the case?
+User: I set it to the first element of the array and it works now! Thank you!
+<code>
+1. def Range(array):
+2.	smallest = array[0]
+3.	largest = array[0]
+4.	for element in array:
+5.		if(element > largest):
+6.			largest = element
+7.		if(element < smallest):
+8.			smallest = element
+9.	return largest - smallest
+</code>
+Assistant: I'm glad I could help you! Is there anything else I can help you with today?
+</dialogue>
