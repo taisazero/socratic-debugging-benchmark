@@ -4,7 +4,7 @@
   <img src="annotation_tool/img/socratic_debugging.png" height="400">
 </p>
 
-The repository contains the source code, data contribution too, and dataset for the Socratic Debugging Benchmark accompanying the papers [Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations"](https://aclanthology.org/2023.bea-1.57/) in proceedings of the 18th Workshop on Innovative Use of NLP for Building Educational Application at ACL 2023 and SIGCSE'24 (TBD).
+The repository contains the source code, data contribution too, and dataset for the Socratic Debugging Benchmark accompanying the papers ["Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations"](https://aclanthology.org/2023.bea-1.57/) in proceedings of the 18th Workshop on Innovative Use of NLP for Building Educational Application at ACL 2023 and ["Can Language Models Employ the Socratic Method? Experiments with Code Debugging"](https://arxiv.org/abs/2310.03210) to appear in the proceedings of SIGCSE'24.
 
 There are 2 versions of the dataset available in this repository version 1 was submitted to BEA@ACL'24 and version 2 was submitted to SIGCSE'24. The main difference between the two versions is that version 2 contains more dialogues. The dataset is available in the `final_dataset` folder. The `evaluation_dataset` folder contains the dialogues used for evaluations in the paper. The only difference between the `final_dataset` and `evaluation_dataset` is that the `evaluation_dataset` excludes any dialogues with analogies that were not used for evaluations. The `manual_evaluation_dialogues` folder contains the dialogues used for manual evaluation of the dataset. `train` was used in the fine-tuning experiments while `test` was used for automatically evaluating the fine-tuned model.
 
@@ -44,7 +44,7 @@ The results will be saved in the `results` folder.
 ## Citation
 If you use this dataset, please cite our papers: 
 * [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/):
-* SIGCSE'24 (TBD)
+* [SIGCSE'24 (To appear)](https://arxiv.org/abs/2310.03210)
 ```
 @inproceedings{al-hossami-etal-2023-socratic,
     title = "Socratic Questioning of Novice Debuggers: A Benchmark Dataset and Preliminary Evaluations",
