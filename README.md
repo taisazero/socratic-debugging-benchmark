@@ -64,3 +64,13 @@ If you use this dataset, please cite our papers:
     abstract = "Socratic questioning is a teaching strategy where the student is guided towards solving a problem on their own, instead of being given the solution directly. In this paper, we introduce a dataset of Socratic conversations where an instructor helps a novice programmer fix buggy solutions to simple computational problems. The dataset is then used for benchmarking the Socratic debugging abilities of GPT-based language models. While GPT-4 is observed to perform much better than GPT-3.5, its precision, and recall still fall short of human expert abilities, motivating further work in this area.",
 }
 ```
+```
+@misc{alhossami2023language,
+      title={Can Language Models Employ the Socratic Method? Experiments with Code Debugging}, 
+      author={Erfan Al-Hossami and Razvan Bunescu and Justin Smith and Ryan Teehan},
+      year={2023},
+      eprint={2310.03210},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
