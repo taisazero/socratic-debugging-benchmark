@@ -40,10 +40,11 @@ The results will be saved in the `results` folder.
 - [x] Add version 2 of the dataset
 - [ ] Add code for fine-tuning FLAN-T5.
 - [ ] Add code for CoT experiments.
+- [ ] Add the benchmark and metrics to huggingface.
 - [ ] Update with SIGCSE paper link and citation.
 ## Citation
 If you use this dataset, please cite our papers: 
-* [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/):
+* [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/)
 * [SIGCSE'24 (To appear)](https://arxiv.org/abs/2310.03210)
 ```
 @inproceedings{al-hossami-etal-2023-socratic,
