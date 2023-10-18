@@ -44,7 +44,7 @@ The results will be saved in the `results` folder.
 - [ ] Update with SIGCSE paper link and citation.
 ## Citation
 If you use this dataset, please cite our papers: 
-* [BEA@ACL'24](https://aclanthology.org/2023.bea-1.57/)
+* [BEA@ACL'23](https://aclanthology.org/2023.bea-1.57/)
 * [SIGCSE'24 (To appear)](https://arxiv.org/abs/2310.03210)
 ```
 @inproceedings{al-hossami-etal-2023-socratic,
