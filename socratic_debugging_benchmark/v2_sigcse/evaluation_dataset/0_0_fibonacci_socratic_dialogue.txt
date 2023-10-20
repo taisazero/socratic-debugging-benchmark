@@ -52,7 +52,7 @@ The student is a beginner to an intermediate programmer who is familiar with bas
 </stu_desc>
 <dialogue>
 User: Hey, I really need help. This function is not returning the correct number.
-Assistant: I'll be happy to help you. What happens when you pass 5 as `count` to the function `fibonacci(5)`?
+Assistant: I'll be happy to help you. What happens when you call `fibonacci(5)`?
 	<alt>Happy to help. Can you give me an example of your function returning an incorrect number?
 	<alt>Sure. Can you list the first 5 numbers in the Fibonacci sequence?
 	<alt>Can you describe what your code does line by line?
