@@ -79,7 +79,7 @@ Assistant: Can you describe how many times the for loop iterates on line 11?
 User: The for loop loops from 1 until value of `n` for `n - 1` times
 Assistant: Let's verify that.  How can we monitor the value of  `i` during the loop?
 	<alt>How can we verify that?
-	<alt>Let's add a print statement to print the values of `a`, `b`, and `i` at each iteration to verify that. After executing the code what do you notice?
+	<alt>Let's add a print statement to print the values of `a`, `b`, and `i` after each iteration to verify that. After executing the code what do you notice?
 	<alt>To verify let's step through the function using the debugger and track `a`, `b`, and `i` at each iteration. What do you notice?
 	<alt>Let's verify that.  How can we monitor the values of `a`, `b`, and `i` during the loop?
 User: I can use the debugger perhaps.

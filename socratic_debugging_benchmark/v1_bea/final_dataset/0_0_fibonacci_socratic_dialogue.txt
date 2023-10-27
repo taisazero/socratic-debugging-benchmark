@@ -78,7 +78,7 @@ Assistant: Good, let's examine the loop together. How can we monitor the values 
 	<alt>What are the values of `a` and `b` in each iteration?
 	<alt>What variables used in the for loop on line 11 should we pay attention to identify the issue?
 	<alt>Let's step through the function using the debugger and track `a`, `b`, and `i` at each iteration. What do you notice?
-	<alt>Let's add a print statement to print the values of `a`, `b`, and `i` at each iteration. After executing the code what do you notice?
+	<alt>Let's add a print statement to print the values of `a`, `b`, and `i` after each iteration. After executing the code what do you notice?
 User: I'm not really sure can you suggest a way?
 	<alt>I can use the debugger!
 	<alt>I can add print statements.
