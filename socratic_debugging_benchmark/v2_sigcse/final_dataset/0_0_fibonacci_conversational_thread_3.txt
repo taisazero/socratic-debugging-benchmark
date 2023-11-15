@@ -72,7 +72,7 @@ Assistant: Let's focus on the loop. Can you describe what your for loop is doing
 User: The loop iterates depending on the value of `n`. Not really sure what else to say here.
 	<alt>Not really sure how to describe it.
 	<alt>It loops `n` times
-	<alt>The for loop loops from 0 until value of `n - 1`. In each iterator of the for loop, it assigns the value of `b` to the sum of `a` which is the previous value of `b` and the current value of `b`.
+	<alt>The for loop loops from 0 until value of `n - 1`. In each iteration of the for loop, the loop computes a new Fibonacci number by adding the last two Fibonacci numbers together. This newly computed Fibonacci number is stored in `b` while the previous Fibonacci number (which was stored in `b` before the computation) is now stored in `a`.
 Assistant: Can you describe how many times the for loop iterates on line 11?
 	<alt>How many iterations does the for loop go through and what are the values of `a` and `b` in each iteration?
 	<alt>Can you take a closer look at the range of your for loop and think about how it might be affecting the result?
