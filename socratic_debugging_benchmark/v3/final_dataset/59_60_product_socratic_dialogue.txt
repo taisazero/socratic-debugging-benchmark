@@ -1,0 +1,63 @@
+<problem>
+Define a function called `Product(a:int, b:int) -> int` which takes two integer inputs: a and b. The function should return the product of these two values (i.e. a * b).
+
+## Example Cases: 
+```
+Product(1,2) => 2
+Product(2,4) => 8
+Product(4,4) => 16
+Product(5,5) => 25
+```
+</problem>
+<bug_code>
+1. def Product(a, b):
+2.	a * b
+</bug_code>
+<bug_desc>
+The function does not return anything, thus when evaluated it computes the value `None` instead of returning the product.
+</bug_desc>
+<bug_fixes>
+Add `return` before `a * b`.
+</bug_fixes>
+<unit_tests>
+assert Product(1,2) == 2
+assert Product(2,4) == 8
+assert Product(4,4) == 16
+assert Product(5,5) == 25
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hello, I'm having trouble with `Product()` function. I swear that I have done it correctly, but I'm failing even the first assertion and I can't figure out why.
+Assistant: Okay, can you explain your `Product()` function in detail?
+	<alt>Could you tell me what functions are and how are they used in Python?
+	<alt>Upon running your code against the test cases, do you observe any errors?
+	<alt>Can you describe what happens after the function finishes multiplying `a` and `b`?
+	<alt>Suppose we run `store = Product(1,2)`, what do you think the value of `store` will be after execution?
+	<alt>Let's run `store = Product(1,2)` and then print `store` and observe the output in the terminal. What do you see?
+User: I take in two inputs, which I have named `a` and `b`, and then I multiply the two numbers together.
+Assistant: Okay, can you modify your code such that on line 3, you execute the line `print(Product(1,2))`?
+	<alt>How can we output the value of `Product(1,2)` to the user through the console?
+	<alt>Upon running your code against the test cases, do you observe any errors?
+	<alt>Can you describe what happens after the function finishes multiplying `a` and `b`?
+	<alt>Suppose we run `store = Product(1,2)`, what do you think the value of `store` will be after execution?
+User: Okay, I've made that change, but when I run it, it just prints out "None" and still fails the assertion. Shouldn't it be printing out a number?
+<code>
+1. def Product(a, b):
+2.	a * b
+3. print(Product(1,2))
+</code>
+Assistant: What could cause your function to return `None`?
+	<alt>Check the Python documentation, why do functions return `None`?
+	<alt>What do you expect your function to return instead?
+	<alt>A function will only take on a value when the keyword `return` is used followed by a value. Otherwise, it will return a special value referred to as `None`, stating that the function did not return any value. Do you know where to put `return` in your code?
+User: When the function does not return anything! Let me add a `return` statement on line 2. It passes all the unit tests now!
+<code>
+1. def Product(a, b):
+2.        return a * b
+3. print(Product(1,2))
+</code>
+Assistant: You're welcome. Is there anything else that I can help you with today?
+User: No, that's all. Thank you!
+</dialogue>
