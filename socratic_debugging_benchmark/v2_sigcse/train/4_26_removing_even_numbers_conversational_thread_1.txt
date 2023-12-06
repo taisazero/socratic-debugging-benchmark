@@ -1,16 +1,16 @@
 <problem>
-Create a method `removeEven(nums:List[int]) -> List[int]` that accepts a list `nums`. Remove all even numbers from `nums` and return a list without any even numbers.
+Create a method `returnOdd(nums:List[int]) -> List[int]` that accepts a list `nums`. It should filter out all the even integers from the list `nums` and return a new list that contains only the odd integers from the original list.
 
 ## Example Cases:
 ```
-removeEven([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) => [1, 3, 5, 7, 9]
-removeEven([2, 4, 6, 8, 10]) => []
-removeEven([1, 3, 5, 7, 9]) => [1, 3, 5, 7, 9]
-removeEven([-76, -92, 9, -1, 7, 10]) => [9, -1, 7]
+returnOdd([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) => [1, 3, 5, 7, 9]
+returnOdd([2, 4, 6, 8, 10]) => []
+returnOdd([1, 3, 5, 7, 9]) => [1, 3, 5, 7, 9]
+returnOdd([-76, -92, 9, -1, 7, 10]) => [9, -1, 7]
 ```
 </problem>
 <bug_code>
-1. def removeEven(nums):
+1. def returnOdd(nums):
 2.    newNums = []
 3.    for i in nums:
 4.        if i % 2 != 0:
@@ -24,10 +24,10 @@ On line 6, the function returns the array `newNums` after the first iteration of
 Remove a tab indentation before `return newNums` on line 6.
 </bug_fixes>
 <unit_tests>
-assert removeEven([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == [1, 3, 5, 7, 9]
-assert removeEven([2, 4, 6, 8, 10]) == []
-assert removeEven([1, 3, 5, 7, 9]) == [1, 3, 5, 7, 9]
-assert removeEven([-76, -92, 9, -1, 7, 10]) == [9, -1, 7]
+assert returnOdd([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == [1, 3, 5, 7, 9]
+assert returnOdd([2, 4, 6, 8, 10]) == []
+assert returnOdd([1, 3, 5, 7, 9]) == [1, 3, 5, 7, 9]
+assert returnOdd([-76, -92, 9, -1, 7, 10]) == [9, -1, 7]
 </unit_tests>
 <stu_desc>
 
@@ -60,7 +60,7 @@ User: I don't see any break statements. Perhaps it might be the return statement
 Assistant: Good. When is that return statement getting executed? Is it before or after the for loop completes iterating?
 User: I get it! It's returning after one iteration! Let me unindent the return statement so that it returns after the for loop is completed.
 <code>
-1. def removeEven(nums):
+1. def returnOdd(nums):
 2.    newNums = []
 3.    for i in nums:
 4.        if i % 2 != 0:
