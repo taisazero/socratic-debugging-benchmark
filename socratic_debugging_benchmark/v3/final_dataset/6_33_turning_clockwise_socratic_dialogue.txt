@@ -1,0 +1,114 @@
+﻿<problem>
+The four compass points can be abbreviated by single-letter strings as “N”, “E”, “S”, and “W”. Write a function `turn_clockwise (compass_point:str)` that takes one of these four compass points as its parameter, and returns the next compass point in the clockwise direction. If `compass_point` has another value that's distinct from the four compass points listed earlier, return the value `None`.
+
+
+## Example Cases:
+```
+turn_clockwise("N") => "E"
+turn_clockwise("W") => "N"
+turn_clockwise("S") => "W"
+turn_clockwise("E") => "S"
+turn_clockwise(42) => None
+turn_clockwise("rubbish") => None
+```
+</problem>
+<bug_code>
+1. def turn_clockwise(compass_point):
+2.    if compass_point == "N":
+3.        print ("E")
+4.    elif compass_point == "E":
+5.        print ("S")
+6.    elif compass_point == "S":
+7.        print ("W")
+8.    elif compass_point == "W":
+9.        print ("N")
+10.    else:
+11.        print ("None")
+</bug_code>
+<bug_desc>
+The function prints the strings "N", "E", "S", "W", and "None". Consequently, the function returns `None` for all cases of `compass_point` instead of returning the appropriate strings.
+</bug_desc>
+<bug_fixes>
+Replace all the print statements `print ("E")`, `print ("S")`, `print ("W")`, `print ("N")`, `print("None")` with the return statements `return "E"`, `return "S"`, `return "W"`, `return "N"`, `return "None"` on lines 3, 5, 7, 9, and 11 respectively.
+</bug_fixes>
+<unit_tests>
+assert turn_clockwise("N") == "E"
+assert turn_clockwise("W") == "N" 
+assert turn_clockwise("S") == "W"
+assert turn_clockwise("E") == "S"
+assert turn_clockwise(42) == None
+assert turn_clockwise("rubbish") == None
+</unit_tests>
+<stu_desc>
+
+
+</stu_desc>
+<dialogue>
+User: Hi! I have a problem. My code is not producing the correct result and I cannot figure why.
+Assistant: Hi! Let's take a look at your code. Could you explain how your code works?
+    <alt>Hi! What makes you think that your program is not working properly?
+    <alt>Can you give me an example where your code does not return the correct result?
+    <alt>I see. Let's run your code with the function call `store = turn_clockwise("N")` then print `store` and observe the output in the terminal. What do you see?
+    <alt>I see. Suppose we run your code with the function call `store = turn_clockwise("N")`. What do you think the value of `store` will be after execution?
+User: Ok. My code gets the current `compass_point` and outputs the next one.
+Assistant: Can you give me an example specifying what you are passing as `compass_point` and what you observe as your output in the terminal?
+    <alt>Can you describe what makes the result incorrect?
+    <alt>Can you describe how you determine the next `compass_point` value, and what your program does with it?
+User: When I pass in `"N"` as `compass_point`. I see `"E"` printed in the terminal. That's strange since my output is printed correctly, but my program does not pass any of the tests.
+Assistant: What do the unit tests need from your function to ensure that it is implemented properly?
+   <alt>I see. Suppose we run your code with the function call `store = turn_clockwise("N")`. What do you think the value of `store` will be after execution?
+   <alt>Is printing the same as returning a value?
+   <alt>Say you want to store the output of your function into a variable, what would you need to do?
+   <alt>Let's look at the problem description together. Does it say anywhere that the function needs to print the output in the terminal?
+User: It probably needs the value outputted by the function. My function outputs `"E"` in the terminal when I pass in `"N"` to it. The output is correct, so I am really confused.
+	<alt>I don't understand the question. Can you tell me more about unit tests?
+Assistant: Would you be able to store the value outputted by the function into a variable?
+	<alt>Suppose we run your code with the function call `store = turn_clockwise("N")`. What do you think the value of `store` will be after execution?
+	<alt>Is printing the same as returning a value?
+User: Hypothetically yes. I should be able to store it in a variable. I have not tried though.
+Assistant: Suppose we run your code with the function call `store = turn_clockwise("N")`. What do you think the value of `store` will be after execution?
+	<alt>Let's run your code with the function call `store = turn_clockwise("N")` then print `store` and observe the output in the terminal. What do you see?
+User: Ah I think, it would be `"E"` in `store`. 
+Assistant: Let's try it and then print `store`. What do you observe in your terminal?
+User: Hmm... I see `None`. That's really strange.
+
+<code>
+1. def turn_clockwise(compass_point):
+2.    if compass_point == "N":
+3.        print ("E")
+4.    elif compass_point == "E":
+5.        print ("S")
+6.    elif compass_point == "S":
+7.        print ("W")
+8.    elif compass_point == "W":
+9.        print ("N")
+10.    else:
+11.        print ("None")
+12. store = turn_clockwise("N")
+13. print(store)
+
+</code>
+
+Assistant: What do you believe the function requires to assign its output to a variable?
+	<alt>Do you recall, which reserved word in Python is used to return the output for a function back to a variable?
+User: Ah! I think it might be `return`. Let me try that.
+<code>
+def turn_clockwise(compass_point):
+    if compass_point == "N":
+        return "E"
+    elif compass_point == "E":
+        return "S"
+    elif compass_point == "S":
+        return "W"
+    elif compass_point == "W":
+        return "N"
+    else:
+        return None
+		
+</code>
+	<alt>I'm not really sure.
+Assistant: Very good.
+	<alt>Very good. Is there a way for you to simplify your code?
+User: Thank you so much!
+Assistant: You're welcome! Let me know if I can be of any further help.
+</dialogue>

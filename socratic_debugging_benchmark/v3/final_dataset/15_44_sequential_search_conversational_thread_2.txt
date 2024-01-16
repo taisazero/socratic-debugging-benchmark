@@ -1,0 +1,54 @@
+<problem>
+Write a function `search(x: int, seq: List[int]) -> int` that returns the index of the first occurrence of `x` in `seq`. If `x` is not in `seq`, return the index where `x` should be inserted to keep `seq` sorted. Assume that `seq` is sorted in ascending order.
+## Example Cases:
+```
+search(5, [-1, 5, 8, 10, 12]) => 1
+search(-2, [-1, 57, 65]) => 0
+search(0, [-120, 60, 78, 100]) => 1
+search(77, [-100, -50, 5, 44, 66, 76, 99]) => 6
+search(55, [-99, -2, 0]) => 3
+```
+</problem>
+<bug_code>
+1. def search(x, seq):
+2.  for i in range(len(seq)):
+3.    if x < seq[i]:
+4.      return i
+5.  return len(seq)
+</bug_code>
+<bug_desc>
+On line 3, the function only checks if `x` is less than `seq[i]` and then returns the index `i` where `x` should be inserted. When `x` is in `seq` at position `i`, the function returns the next index `i + 1` instead of the current index `i`.
+</bug_desc>
+<bug_fixes>
+Replace `<` with `<=` on line 3
+</bug_fixes>
+<unit_tests>
+assert search(5, [-1, 5, 8, 10, 12]) == 1
+assert search(-2, [-1, 57, 65]) == 0
+assert search(0, [-120, 60, 78, 100]) == 1
+assert search(77, [-100, -50, 5, 44, 66, 76, 99] ) == 6
+assert search(55, [-99, -2, 0]) == 3
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! My code passes all tests but the first one, and I cannot figure out what's wrong. Can you help?
+Assistant: Sure. In the first test case, the input `x` is an element in the list `seq`. According to the problem description, what needs to be returned when `x` is an element of `seq`?
+	<alt>Sure. Can you tell me if you notice any difference between the first test case and the other test cases?
+	<alt>Sure. In the first test case, can you explain why the correct return value should be 1?
+	<alt>Sure. Let's consider the first test case, when the input `x` is 5 and the list `seq` has the value `[-1, 5, 8, 10, 12]`. When `i` takes the value 1 in line 2, what is the value of `seq[i],` and what happens when we run through the if on line 3?
+User: We should return the index of `x` in `seq`.
+Assistant: Good. Now, looking at your code, does it ever return an index `i` such that the element at that index is equal to `x`?
+	<alt>Good. How do you find the index of `x` in a list `seq`?
+	<alt>Good. If the current index is `i`, how do you determine if the element at position `i` in the list `seq` is equal to `x`?
+User: Oh, it always returns a position where `seq[i] > x`. I think I need to also test for equality, let me do that... It works now, thank you!
+<code>
+1. def search(x, seq):
+2.  for i in range(len(seq)):
+3.    if x <= seq[i]:
+4.      return i
+5.  return len(seq)
+
+</code>
+</dialogue>

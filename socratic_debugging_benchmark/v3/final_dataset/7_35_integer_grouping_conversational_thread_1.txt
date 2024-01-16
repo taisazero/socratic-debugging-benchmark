@@ -1,0 +1,95 @@
+<problem>
+Implement a function `my_func(valList:List[Tuple[int,int]])->Dict[int,List[int]]` where
+`valList` is a list of `n` tuples where each tuple contains two integers `a,b` `(1<=a,b)`.
+Return a dictionary where the:
+* key: first elements of `valList`
+* value: list containing all the second elements of the tuples in `valList` that have the same first element as the key.
+
+```py
+my_func([(6, 5),(2, 7),(2, 5),(8, 7),(8, 9),(2, 7)]) => {6: [5], 2: [7, 5, 7], 8: [7, 9]}
+```
+In the example above:
+
+* Tuples with 6 as the first element are `(6, 5)` so the value for key 6 is `[5]`
+* Tuples with 2 as the first element are `(2, 7)`, `(2, 5)`, and `(2, 7)` so the value for key 2 is `[7, 5, 7]`
+* Tuples with 8 as the first element are `(8, 7)` and `(8, 9)` so the value for key 8 is `[7, 9]`
+
+## Example Cases:
+```
+my_func([(1, 1),(2, 2),(3, 3)]) => {1: [1], 2: [2], 3: [3]}
+my_func([(6, 5),(2, 7),(2, 5),(8, 7),(8, 9),(2, 7)]) => {6: [5], 2: [7, 5, 7], 8: [7, 9]}
+my_func([(-78, 13),(-9, 2),(10, 2), (-78, 45), (-9, 2), (10, -78), (-9, 22)]) => {-78: [13, 45], -9: [2, 2, 22], 10: [2, -78]}
+```
+</problem>
+<bug_code>
+1. def my_func(valList):
+2.    result = {}
+3.    for key, value in valList:
+4.         result[key] = [value]
+5.    return result
+</bug_code>
+<bug_desc>
+The function assigns a list of one element to each key in the dictionary `result` on line 4. Consequently, each list in the dictionary contains exactly one element instead of all the second elements of the tuples in `valList` that have the same first element as the key.  
+</bug_desc>
+<bug_fixes>
+Replace line 4 with the following lines:
+```py
+if key in result.keys():
+      result[key].append(value)
+else:
+      result[key] = [value]
+```
+Replace line 4 with: `result[key] = [value] if key not in result else result[key] + [value]`
+</bug_fixes>
+<unit_tests>
+assert my_func([(1, 1),(2, 2),(3, 3)]) == {1: [1], 2: [2], 3: [3]}
+assert my_func([(6, 5),(2, 7),(2, 5),(8, 7),(8, 9),(2, 7)]) == {6: [5], 2: [7, 5, 7], 8: [7, 9]}
+assert my_func([(-78, 13),(-9, 2),(10,2), (-78, 45), (-9, 2), (10, -78), (-9, 22)]) == {-78: [13, 45], -9: [2, 2, 22], 10: [2, -78]}
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hi! I need help, my code seems to always create dictionary values that contain only one element, which works for the first test case, but not for the rest. Can you help?
+Assistant: Sure. Can you go through your code line by line and explain to me what each line is supposed to do?
+	<alt>Sure. Can you evaluate the function twice, once on the list `[(1, 2), (1, 3)]`, and once on `[(1, 3), (1, 2)]`? Then see if you notice anything interesting.
+	<alt>Sure. Looking at the second test case, your code does not work well for keys that appear multiple times as the first elements in the input tuples. Can you say what happens on line 4 in your code the second time it sees 6 as a key? What is already stored in `result[key]` before line 4 is executed, and what will be stored in `result[key]` after line 4 is executed?
+	<alt>Sure. Looking at the second test case, let's say that the variable `results` already maps the key 2 to value `[7]`. What happens in line 4 when the variable `key` is 2 and the variable `value` is 5? To what value will the `result` map the key 2 after executing line 4?
+	<alt>Sure. Let's try to see what happens with your dictionary values during the execution of the program. Inside the for loop, after line 4, can you add code that prints the key and the value stored in `results[key]`? Then evaluate the function on the list `[(1, 2), (1, 3)]` and tell me what you notice.
+	<alt>Sure. Do you notice anything different about the second and third test cases that makes your code output the wrong result, when compared with the first test case?
+	<alt>Sure. Looking at the second test case and your code output for it, what is the value that it includes for key 2 in the result and what are the values that it ignores for the same key?
+	<alt>Sure. Let me ask you a warm-up question first. If you have a variable `a` that is initially assigned the value `[1]`, e.g., `a = [1]`, what value will it have after you evaluate the new assignment statement `a = [2]`?
+	<alt>Sure. Let me ask you a warm-up question first. If you have a variable `a` that is initially assigned the value `1`, e.g., `a = 1`, what value will it have after you evaluate the new assignment statement `a = 2`?
+User: In line 2, `result` is initialized as an empty dictionary. Then for every (key, value) pair in the input list, line 4 adds the value to the list stored for that key in the dictionary. Finally, line 5 returns the result.
+Assistant: Are you sure that line 4 adds the `value` to the list for that key? Can you try running `d = {1: [7]}` then `d[1] = [5]` in the interpreter and observing what happens?
+	<alt>What exactly in line 4 makes you think that `[value]` is appended to `results[key]`?
+	<alt>Are you sure the value is added to the list? Line 4 shows an assignment statement. According to the Python documentation: https://docs.python.org/3/library/stdtypes.html#dict, if `d` is a dictionary, then the assignment `d[k] = v` only sets `d[k] to have the value `v`.			
+User: Ah, now I see. The old value `[7]` stored in the dictionary is overwritten by the new value `[5]`. Let me fix that so that it is appended to the current value... I did that, but now I get a `KeyError` message on line 4.
+<code>
+1. def my_func(valList):
+2.    result = {}
+3.    for key, value in valList:
+4.        result[key] += [value]
+5.    return result
+
+</code>
+Assistant: I will give you a hint. Can you try running `d = {}` then `d[2] += [7]` in your interpreter window and tell me what happens?
+	<alt>Do you know what happens when you try to get a value using a key that does not exist in the dictionary?
+	<alt>Can you run your code on the input list `[(1, 1)]` and see what happens, then change your current code and in line 2 initialize `result = {1: 0}`, run it on the same list and see if you notice anything different?
+User: Ah, I see now. It raises a `KeyError` in the beginning when the dictionary does not have the key yet. I need to check first if `key` is in the dictionary. How do I do that?
+Assistant: Can you look at the documentation using: https://docs.python.org/3/library/stdtypes.html#dict. It also shows some nice examples. Let me know if you cannot find it.
+	<alt>Sure, to determine if a key `k` is in a dictionary `d`, you use the in operator as in `k in d`, which returns True if the key `k` is in the dictionary, False otherwise.
+User: I found it. Let me change my code to do that... It works now, thank you!
+<code>
+1. def my_func(valList):
+2.    result = {}
+3.    for key, value in valList:
+4.        if key in result:
+5.            result[key] += [value]
+6.        else:
+7.            result[key] = [value]
+8.    return result
+
+</code>
+Assistant: You are welcome, glad I could help!
+</dialogue>
