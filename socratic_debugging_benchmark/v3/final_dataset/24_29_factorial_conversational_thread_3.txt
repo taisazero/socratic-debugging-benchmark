@@ -139,10 +139,6 @@ Assistant: Let's see if that works. Can you try it against the test cases?
 	<alt>Ok! Let's run the code for `n>=2` and see what happens.
 	<alt>Is there a simpler way to fix this issue?
 	<alt>What happens to `i` in the second iteration of the for loop now?
-User: It works! Thank you for your help!
-Assistant: Are you sure that you tried it for `n = 2` and `n = 3` as well?
-	<alt>Ok! Let's run the code for `n = 3` and see what happens.
-	<alt>Did you try it for `n >=2`?
 User: Hm... it's incorrect for both `n = 2` and `n = 3`. I think I need to multiply `fact` starting from 1, then 2, then 3 instead of what I'm doing now 1, then 1, then 2.
 Assistant: Good. How can you change the for loop so that the iterator variable `i` is not equal to 0 in the first iteration of the for loop?
 	<alt>How can you edit the code so that `fact` is multiplied with 1, then 2, then 3?
@@ -163,7 +159,7 @@ User: I think I am going to change `range` to `range(1, n + 1)` so that it start
 </code>
 	<alt>I think I am going to change `range` to `range(1, n)` so that it starts iterating at 1.
 	<alt>I think I am going to change `range` to `range(n) + 1` so that the first value is 0 + 1.
-Assistant: Sounds good, let's try it on all the test cases especially for `n = 2` and `n = 3` again.
+Assistant: Sounds good. Let's try it on all the test cases especially for `n = 2` and `n = 3` again.
 	<alt>Did you try it again for `n >=2`?
 User: It works! Thank you for your help!
 Assistant: Awesome. Don't forget to remove the print statement before you submit your code.

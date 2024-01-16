@@ -73,7 +73,7 @@ User: Ah, now I see. The old value `[7]` stored in the dictionary is overwritten
 5.    return result
 
 </code>
-Assistant: I will give you a hint. Can you try running `d = {}` then `d[2] = {7}` in your interpreter window and tell me what happens?
+Assistant: I will give you a hint. Can you try running `d = {}` then `d[2] += [7]` in your interpreter window and tell me what happens?
 	<alt>Do you know what happens when you try to get a value using a key that does not exist in the dictionary?
 	<alt>Can you run your code on the input list `[(1, 1)]` and see what happens, then change your current code and in line 2 initialize `result = {1: 0}`, run it on the same list and see if you notice anything different?
 User: Ah, I see now. It raises a `KeyError` in the beginning when the dictionary does not have the key yet. I need to check first if `key` is in the dictionary. How do I do that?

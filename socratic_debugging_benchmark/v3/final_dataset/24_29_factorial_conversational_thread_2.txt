@@ -53,7 +53,7 @@ Assistant: Sure. Can you tell me for what values of `n` it fails and what values
 	<alt>Try running the function against the test cases. Do you observe any patterns?
 User: For n = 1 or larger it returns the same value, 0.
 Assistant: Let's see what happens when `n` is 1. What is the first value that is assigned to variable `i` in line 5?
-		<alt>Let's see what happens when `n` is 1. Before line 6 is evaluated in the first iteration of the for loop, what are the values of the variables `fact` and `i`?
+	<alt>Let's see what happens when `n` is 1. Before line 6 is evaluated in the first iteration of the for loop, what are the values of the variables `fact` and `i`?
 	<alt>Let's see what happens when `n` is 1. Can you insert a new line between lines 5 and 6 that prints the values of the variables `fact` and `i`?
 	<alt>Let's see what happens when `n` is 1. What does `range(n)` do when `n` is 1?
 	<alt>Can you tell me what `range(n)` does?

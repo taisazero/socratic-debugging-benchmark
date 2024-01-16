@@ -1,0 +1,141 @@
+<problem>
+Create a function `fibonacci(n:int)` that takes in a parameter `n`, an integer representing the number of terms in the Fibonacci sequence to generate, and returns:
+-  'OOPS', if `n` is less than or equal to 0 
+- `1`  if `n` is equal to `1`
+- `1` if `n` is equal to `2`
+- Otherwise, return the nth term of the Fibonacci sequence. A Fibonacci sequence is a sequence in which every number is the sum of the previous two numbers in the sequence. Example Fibonacci sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ....
+## Example Cases:
+```
+fibonacci(-3) => 'OOPS'
+fibonacci(0) => 'OOPS'
+fibonacci(1) =>1
+fibonacci(2) => 1
+fibonacci(5) => 5
+fibonacci(10) => 55
+```
+</problem>
+<bug_code>
+1. def fibonacci(n):
+2.  if n <= 0:
+3.    return "OOPS"
+4.  elif n == 1:
+5.    return 1
+6.  elif n == 2:
+7.    return 1
+8.  else:
+9.     a = 0
+10.    b = 1
+11.    for i in range(0, n):
+12.      temp = b
+13.      b = a + b
+14.      a = temp
+15.    return b
+</bug_code>
+<bug_desc>
+On line 11, the for loop iterates `n` times. Consequently, the function returns the (n+1)th term of the Fibonacci sequence instead of the nth term, as the loop generates one additional term beyond the desired nth term.
+</bug_desc>
+<bug_fixes>
+Replace `range(0, n)` with `range(1, n)` on line 11.
+Replace `range(0, n)` with `range(0, n - 1)` on line 11.
+Replace `range(0, n)` with `range(2, n + 1)` on line 11.
+</bug_fixes>
+<unit_tests>
+assert fibonacci(0) == 'OOPS'
+assert fibonacci(1) == 1
+assert fibonacci(2) == 1
+assert fibonacci(5) == 5
+assert fibonacci(-3) == 'OOPS'
+assert fibonacci(10) == 55
+</unit_tests>
+<stu_desc>
+
+</stu_desc>
+<dialogue>
+User: Hey, I really need help. This function is not returning the correct number.
+Assistant: I'll be happy to help you. What happens when you pass 5 as `count` to the function `fibonacci(5)`?
+	<alt>Happy to help. Can you give me an example of your function returning an incorrect number?
+	<alt>Sure. Can you list the first 5 numbers in the Fibonacci sequence?
+	<alt>Can you describe what your code does line by line?
+User: When I run the function with `n` as 5 the output is 8 instead of 5.
+Assistant: I see. What do you think might be the cause of this?
+	<alt>Can you describe your for loop on line 11?
+	<alt>Can you walk me through the steps your function takes to generate the Fibonacci sequence?
+	<alt>Can you identify any issues with the loop that generates the Fibonacci sequence?
+	<alt>Which part of your code do you suspect of causing this issue?
+User: I guess maybe the problem is that `a` is set to `0` not `1`? I am not really sure.
+	<alt>I am not sure. Can you help?
+	<alt>I think the cause of this is probably the for loop since that's the only place where I compute `b`, the value that I return.
+Assistant: Let's focus on the loop. Can you describe what your for loop is doing on line 11?
+	<alt>Can you describe how many times the for loop iterates on line 11?
+	<alt>Can you take a closer look at the range of your for loop and think about how it might be affecting the result?
+	<alt>How many iterations does the for loop go through and what are the values of `a` and `b` in each iteration?
+User: The loop iterates depending on the value of `n`. Not really sure what else to say here.
+	<alt>Not really sure how to describe it.
+	<alt>It loops `n` times
+	<alt>The for loop loops from 0 until value of `n - 1`. In each iteration of the for loop, the loop computes a new Fibonacci number by adding the last two Fibonacci numbers together. This newly computed Fibonacci number is stored in `b` while the previous Fibonacci number (which was stored in `b` before the computation) is now stored in `a`.
+Assistant: Can you describe how many times the for loop iterates on line 11?
+	<alt>How many iterations does the for loop go through and what are the values of `a` and `b` in each iteration?
+	<alt>Can you take a closer look at the range of your for loop and think about how it might be affecting the result?
+User: The for loop loops from 1 until value of `n` for `n - 1` times
+Assistant: Let's verify that.  How can we monitor the value of  `i` during the loop?
+	<alt>How can we verify that?
+	<alt>Let's add a print statement to print the values of `a`, `b`, and `i` after each iteration to verify that. After executing the code what do you notice?
+	<alt>To verify let's step through the function using the debugger and track `a`, `b`, and `i` at each iteration. What do you notice?
+	<alt>Let's verify that.  How can we monitor the values of `a`, `b`, and `i` during the loop?
+User: I'm not really sure can you suggest a way?
+	<alt>I can add print statements.
+	<alt>I can use the debugger perhaps.
+Assistant: Have you thought about adding a print statement to print the value of `i` at each iteration?
+	<alt>Have you considered using the debugger to track the value of `i` at each iteration?
+User: Ah yes good idea. Let me do that.
+<code>
+1. def fibonacci(n):
+2.  if n <= 0:
+3.    return "OOPS"
+4.  elif n == 1:
+5.    return 1
+6.  elif n == 2:
+7.    return 1
+8.  else:
+9.     a = 0
+10.    b = 1
+11.    for i in range(0, n):
+12.      print(i)
+13.      temp = b
+14.      b = a + b
+15.      a = temp
+16.    return b
+
+</code>
+Assistant: Let's examine the values of `i`. How many times in total does the for loop iterate?
+User: Observing the terminal output, I notice that the for loop iterates 5 times when `n` is  5 and the values of `n` range from 0 to 4 or `n - 1`. I thought it loops from 1 to `n`.
+Assistant: If your for loop is iterating more than you expected how might that impact the returned value?
+	<alt>Good. Let's go through the debugger again and track `a`, `b`, and `i` at each iteration. What do you notice?
+User: If it iterates one more time than I expected then it might be going to the next Fibonacci term in the sequence. So in our case 8 as opposed to 5!
+	<alt>Not really sure, maybe need to step through it to see how it affects the returned term.
+Assistant: Good observation. Can you think of a way to modify your for loop so that it returns the correct Fibonacci term?
+	<alt>Good. What should you do now to return the correct Fibonacci number?
+User: I think I should edit the range of the loop to iterate one less time and remove the print statement. Let me edit my code.
+<code>
+1. def fibonacci(n):
+2.  if n <= 0:
+3.    return "OOPS"
+4.  elif n == 1:
+5.    return 1
+6.  elif n == 2:
+7.    return 1
+8.  else:
+9.     a = 0
+10.    b = 1
+11.    for i in range(0, n - 1):
+12.      temp = b
+13.      b = a + b
+14.      a = temp
+15.    return b
+
+</code>
+Assistant: Good work. Have you tried your code on all the example cases to make sure it works properly?
+User: Yes all looks correct! Thank you so much!
+Assistant: You are welcome. Let me know if I can be of any further assistance.
+User: Thank you!
+</dialogue>
