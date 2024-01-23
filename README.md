@@ -40,7 +40,7 @@ The results will be saved in the `results` folder.
 - [x] Add version 2 of the dataset
 - [ ] Add code for fine-tuning FLAN-T5.
 - [ ] Add code for CoT experiments.
-- [ ] Add the benchmark and metrics to huggingface.
+- [ ] Add the benchmark and metrics to Hugging Face.
 - [ ] Update with SIGCSE paper link and citation.
 - [ ] Add version 3 of the dataset
 - [ ] Add LM outputs
